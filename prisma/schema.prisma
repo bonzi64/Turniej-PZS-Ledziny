@@ -1,0 +1,158 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// --- ENUMY ---
+
+enum Game {
+  CS2
+  VALORANT
+  LOL
+}
+
+enum TeamStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum StaffRole {
+  ADMIN
+  ORGANIZER
+}
+
+enum MatchFormat {
+  BO1
+  BO3
+}
+
+enum Side {
+  A
+  B
+}
+
+enum VetoAction {
+  BAN
+  PICK
+  DECIDER
+}
+
+// --- KADRA / SESJE ---
+
+model Staff {
+  id           String    @id @default(cuid())
+  login        String    @unique
+  displayName  String
+  passwordHash String
+  role         StaffRole @default(ORGANIZER)
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+}
+
+model Session {
+  // sha256 tokenu z ciasteczka, sam token nigdy nie trafia do bazy
+  id        String   @id
+  staffId   String
+  staff     Staff    @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([staffId])
+}
+
+// --- ZGŁOSZENIA ---
+
+model Team {
+  id             String     @id @default(cuid())
+  game           Game
+  name           String
+  tag            String?
+  status         TeamStatus @default(PENDING)
+  captainEmail   String
+  captainDiscord String?
+  reviewNote     String?
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  rulesSeconds   Int
+  consentAt      DateTime
+  anonymizedAt   DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  players        Player[]
+
+  @@index([game, name])
+  @@index([game, status])
+}
+
+model Player {
+  id          String  @id @default(cuid())
+  teamId      String
+  team        Team    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  slot        Int
+  nickname    String
+  firstName   String
+  lastName    String
+  schoolClass String
+  isCaptain   Boolean @default(false)
+  isReserve   Boolean @default(false)
+
+  @@unique([teamId, slot])
+}
+
+// --- DRABINKA ---
+
+model Match {
+  id         String      @id @default(cuid())
+  game       Game
+  // 1 = ćwierćfinał, 2 = półfinał, 3 = finał
+  round      Int
+  slot       Int
+  teamAId    String?
+  teamBId    String?
+  scoreA     Int?
+  scoreB     Int?
+  winnerSide Side?
+  format     MatchFormat @default(BO1)
+  startsAt   DateTime?
+
+  pinA          String?
+  pinB          String?
+  readyA        DateTime?
+  readyB        DateTime?
+  turnStartedAt DateTime?
+  vetoDoneAt    DateTime?
+  vetoSteps     VetoStep[]
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([game, round, slot])
+}
+
+model VetoStep {
+  id        String     @id @default(cuid())
+  matchId   String
+  match     Match      @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  order     Int
+  map       String
+  action    VetoAction
+  side      Side?
+  auto      Boolean    @default(false)
+  createdAt DateTime   @default(now())
+
+  @@unique([matchId, order])
+  @@unique([matchId, map])
+}
+
+// --- ANTY-SPAM ---
+
+model RateLimit {
+  key     String   @id
+  hits    Int
+  resetAt DateTime
+}

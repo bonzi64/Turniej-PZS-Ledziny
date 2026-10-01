@@ -1,0 +1,26 @@
+Wszelkie prawa zastrzeżone
+
+Copyright (c) 2026 autor repozytorium PZS E-SPORTS 2026
+
+Kod źródłowy w tym repozytorium jest udostępniony publicznie wyłącznie do wglądu.
+Udostępnienie kodu nie oznacza udzielenia licencji ani przeniesienia jakichkolwiek praw.
+
+Bez uprzedniej pisemnej zgody autora zabronione jest:
+
+1. kopiowanie i powielanie kodu w całości lub w części,
+2. modyfikowanie kodu i tworzenie na jego podstawie utworów zależnych,
+3. rozpowszechnianie, publikowanie, udostępnianie, sprzedaż i sublicencjonowanie kodu,
+4. uruchamianie, wdrażanie i wykorzystywanie kodu lub jego części w jakimkolwiek celu,
+   w tym w innych projektach, komercyjnych i niekomercyjnych.
+
+Powyższe zastrzeżenia nie dotyczą:
+
+- logo Powiatowego Zespołu Szkół w Lędzinach, które jest własnością szkoły,
+- fontu DejaVu Sans w katalogu src/assets/og, objętego własną licencją
+  (plik src/assets/og/LICENSE-DejaVu.txt),
+- bibliotek instalowanych przez npm, objętych licencjami ich autorów.
+
+Kod jest dostarczany w stanie, w jakim jest, bez jakichkolwiek gwarancji.
+Autor nie odpowiada za szkody wynikające z jego użycia.
+
+W sprawie zgody na wykorzystanie kodu skontaktuj się z autorem przez GitHub.
