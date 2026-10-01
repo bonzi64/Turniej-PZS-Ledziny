@@ -17,7 +17,7 @@
 
 Strona prowadzi turniej od zapisów aż do finału. Uczniowie zgłaszają drużyny przez formularz, nauczyciele sprawdzają zgłoszenia w zabezpieczonym panelu, a w dniu turnieju na stronie widać drabinkę i wybór map na żywo. Wygląd nawiązuje do klasycznego Counter-Strike 1.6 i Steama.
 
-Grę wybrali uczniowie w głosowaniu. Pod uwagę brane były też Valorant i League of Legends, ale wygrało CS2.
+Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w głosowaniu. Żeby strona była gotowa niezależnie od wyniku, powstała w trzech wersjach: dla Counter-Strike 2, Valoranta i League of Legends. Głosowanie wygrało CS2, więc dwie pozostałe wersje zostały usunięte.
 
 ## Co potrafi strona
 
@@ -212,7 +212,7 @@ src/assets/og/          font DejaVu Sans do generowania miniaturek
 ```
 
 > [!NOTE]
-> Enum `Game` w bazie nadal zawiera wartości `VALORANT` i `LOL` z czasów, gdy turniej miał obejmować trzy gry. Zostały, żeby nie trzeba było migrować bazy. Aplikacja ich nie używa.
+> Enum `Game` w bazie nadal zawiera wartości `VALORANT` i `LOL`, bo przed głosowaniem strona była przygotowana na każdy z trzech możliwych wyników. Zostały, żeby nie trzeba było migrować bazy. Aplikacja ich nie używa.
 
 ## Licencja
 
