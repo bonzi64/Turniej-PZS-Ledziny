@@ -144,28 +144,6 @@ Wzór jest w [.env.example](.env.example). Plik `.env` z prawdziwymi danymi jest
 | `VETO_TURN_SECONDS` | Czas na ruch przy wyborze map w sekundach (domyślnie 45, `0` = bez limitu) |
 | `REGISTRATION_OPEN` | `false` natychmiast wstrzymuje zapisy |
 
-### Wdrożenie na własnej domenie
-
-**Vercel**
-
-1. Zaimportuj repozytorium i ustaw zmienne z `.env.example`, w tym `NEXT_PUBLIC_SITE_URL` z docelową domeną.
-2. Zostaw domyślne polecenie budowania. `npm run build` samo uruchamia `prisma generate`.
-3. Przed pierwszym uruchomieniem wykonaj lokalnie `npm run db:deploy` i `npm run db:seed` z produkcyjnym `DATABASE_URL`.
-4. W Settings → Domains dodaj domenę i ustaw rekordy DNS zgodnie z instrukcją.
-
-**VPS lub hosting z Node.js 20.9+**
-
-```bash
-npm ci
-npm run db:deploy
-npm run build
-npm start -- -p 3000
-```
-
-Przed aplikacją postaw reverse proxy (nginx albo Caddy) z HTTPS. Proxy musi przekazywać nagłówek `X-Forwarded-For`, bo z niego liczone są limity prób.
-
-Po wdrożeniu sprawdź podgląd linku w [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) albo wklej link na Discordzie.
-
 ### Jak to działa od środka
 
 **Zapisy i regulamin**
