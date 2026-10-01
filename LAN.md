@@ -6,31 +6,49 @@ Plan na 4 grudnia: strona turnieju służy do veto map, drabinki i wyników, a m
 
 - pracownia ma internet, bo klient CS2 wymaga zalogowania do Steama,
 - każdy gra na własnym koncie Steam, zgodnie z regulaminem,
-- dwa mecze idą naraz, czyli 20 stanowisk plus komputer sędziego z dwoma serwerami CS2.
+- jeden mecz to 10 stanowisk plus komputer sędziego z serwerem CS2, a drugi serwer jest opcjonalny.
 
 ## Harmonogram
 
 Turniej musi skończyć się najpóźniej o 14:00–14:30, dlatego wszystkie mecze, łącznie z finałem, są w BO1. Drabinka ma 7 meczów: 4 ćwierćfinały, 2 półfinały i finał.
 
-Mecz BO1 na MR12 trwa razem z veto i przygotowaniem serwera około godziny. Dogrywka może go wydłużyć o kilkanaście minut.
+Czas meczu BO1 na MR12 zależy od tego, jak wyrównane są drużyny:
 
-| Wariant | Stanowiska | Koniec przy starcie 8:30 |
+| Mecz | Przykładowy wynik | Razem z veto i rundą nożową |
 | --- | --- | --- |
-| jeden mecz naraz | 10 + serwer | ok. 15:30–16:00, za późno |
-| dwa mecze naraz | 20 + serwer | ok. 12:30–13:00 |
+| jednostronny | 13:2 | ok. 30 min |
+| wyrównany | 13:8 | ok. 45 min |
+| na styk | 13:11 | ok. 55 min |
+| z dogrywką | 16:14 | ok. 65 min i więcej |
 
-Żeby zmieścić się w czasie, potrzebne są dwa mecze naraz. Przykładowy plan:
+Szacunek przyjmuje ok. 1:45 na rundę i 5–10 minut na veto, połączenie i rundę nożową.
 
-| Godzina | Serwer 1, port 27015 | Serwer 2, port 27016 |
-| --- | --- | --- |
-| 8:00 | zbiórka i sprawdzenie składów | |
-| 8:30 | ćwierćfinał 1 | ćwierćfinał 2 |
-| 9:30 | ćwierćfinał 3 | ćwierćfinał 4 |
-| 10:30 | półfinał 1 | półfinał 2 |
-| 11:45 | finał | |
-| ok. 12:45 | koniec | |
+Koniec turnieju przy starcie o 8:30:
 
-Do 14:00 zostaje ponad godzina zapasu na dogrywki i opóźnienia. Oba serwery CS2 mogą chodzić na jednym mocnym komputerze. Godziny wpisz w panelu, wtedy pokażą się w drabince na stronie.
+| Wariant | Same jednostronne mecze | Typowo | Same mecze na styk |
+| --- | --- | --- | --- |
+| jeden mecz naraz | ok. 12:00 | ok. 13:15 | ok. 15:00 |
+| dwa mecze naraz | ok. 10:30 | ok. 11:30 | ok. 12:30 |
+
+„Typowo” oznacza jednostronne ćwierćfinały, wyrównane półfinały i finał na styk. W szkolnym turnieju różnice poziomu są duże, więc to realny scenariusz.
+
+Jeden serwer wystarcza i w typowym scenariuszu zostaje ponad godzina zapasu do 14:30. Ryzyko pojawia się dopiero wtedy, gdy kilka meczów pójdzie na styk albo do dogrywki. Drugi serwer na porcie 27016 jest opcjonalnym zabezpieczeniem.
+
+Przykładowy plan na jednym serwerze, do wpisania w panelu:
+
+| Mecz | Start |
+| --- | --- |
+| zbiórka i sprawdzenie składów | 8:00 |
+| ćwierćfinał 1 | 8:30 |
+| ćwierćfinał 2 | 9:05 |
+| ćwierćfinał 3 | 9:40 |
+| ćwierćfinał 4 | 10:15 |
+| półfinał 1 | 10:50 |
+| półfinał 2 | 11:35 |
+| finał | 12:20 |
+| koniec | ok. 13:15 |
+
+Godziny są orientacyjne, bo kolejny mecz zaczyna się zaraz po poprzednim. Niech wszystkie drużyny czekają na sali od rana. Walkower liczy się od godziny wpisanej w panelu, więc przy wcześniejszym starcie nie karz drużyny, która jeszcze nie dotarła.
 
 ## Strona turnieju w dniu meczów
 
@@ -187,7 +205,7 @@ mp_restartgame 1
 **Rano w dniu turnieju**
 
 - [ ] Zaktualizować serwer, czyli powtórzyć `app_update 730`, i klienty CS2. Różne wersje nie połączą się ze sobą.
-- [ ] Uruchomić oba serwery, na portach 27015 i 27016, i sprawdzić `connect` do każdego z nich.
+- [ ] Uruchomić serwer, a przy dwóch meczach naraz także drugi, na porcie 27016. Sprawdzić `connect` z jednego stanowiska.
 - [ ] Włączyć rzutnik z drabinką.
 - [ ] Przygotować kartki na PIN-y.
 
