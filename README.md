@@ -69,6 +69,8 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 3. Kapitanowie otwierają pokój meczu, wpisują PIN-y i na zmianę odrzucają mapy. Jeśli kapitan nie zdąży w wyznaczonym czasie, domyślnie 45 sekund, system wybierze za niego.
 4. Po meczu wpisz wynik. Zwycięzca automatycznie trafia do następnej rundy.
 
+Szczegółowy przebieg meczu na LANie, z rundą nożową i konfiguracją serwera CS2, jest w pliku [LAN.md](LAN.md).
+
 **Po turnieju**
 
 1. Po 31.12.2026 administrator klika **Anonimizuj dane** na pulpicie panelu.
