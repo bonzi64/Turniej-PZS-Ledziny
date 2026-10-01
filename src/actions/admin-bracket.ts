@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import type { Game, MatchFormat, Side } from "@/generated/prisma/enums";
+import type { Game, Side } from "@/generated/prisma/enums";
 import { type ActionResult, done, explain, fail, UserFacingError } from "@/lib/action-result";
 import { requireStaff } from "@/lib/auth/session";
 import { clearResult, ensureBracket, placeTeam, recordResult, shuffleSeeds, updateSchedule } from "@/lib/bracket";
@@ -91,17 +91,15 @@ export async function saveSchedule(_prev: ActionResult | null, form: FormData): 
   await requireStaff();
   try {
     const match = await matchFrom(form);
-    const format = text(form, "format") as MatchFormat;
-    if (format !== "BO1" && format !== "BO3") return fail("Nieznany format.");
 
     // datetime-local nie niesie strefy – turniej jest w Polsce, grudzień = CET
     const raw = text(form, "startsAt");
     const startsAt = raw ? new Date(`${raw}:00+01:00`) : null;
     if (startsAt && Number.isNaN(startsAt.getTime())) return fail("Błędna godzina.");
 
-    await updateSchedule(match.id, format, startsAt);
+    await updateSchedule(match.id, startsAt);
     refresh(match.game, match.id);
-    return done("Zapisano format i godzinę.");
+    return done("Zapisano godzinę meczu.");
   } catch (error) {
     return explain(error);
   }

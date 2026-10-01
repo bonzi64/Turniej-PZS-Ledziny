@@ -1,6 +1,6 @@
 import "server-only";
 import type { Match } from "@/generated/prisma/client";
-import type { Game, MatchFormat, Side } from "@/generated/prisma/enums";
+import type { Game, Side } from "@/generated/prisma/enums";
 import { UserFacingError } from "@/lib/action-result";
 import { shuffled } from "@/lib/crypto";
 import { db } from "@/lib/db";
@@ -15,7 +15,8 @@ export async function ensureBracket(game: Game) {
         game,
         round: meta.round,
         slot,
-        format: (meta.round === FINAL_ROUND ? "BO3" : "BO1") as MatchFormat,
+        // turniej musi skończyć się do 14:30 – wszystkie mecze, także finał, w BO1
+        format: "BO1",
       })),
     ),
     skipDuplicates: true,
@@ -152,10 +153,7 @@ export async function clearResult(matchId: string) {
   ]);
 }
 
-export async function updateSchedule(matchId: string, format: MatchFormat, startsAt: Date | null) {
+export async function updateSchedule(matchId: string, startsAt: Date | null) {
   const match = await mustFind(matchId);
-  if (match.format !== format && (await vetoTouched(match))) {
-    throw new UserFacingError("Format można zmienić tylko przed rozpoczęciem veto.");
-  }
-  await db.match.update({ where: { id: match.id }, data: { format, startsAt } });
+  await db.match.update({ where: { id: match.id }, data: { startsAt } });
 }

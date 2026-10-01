@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <b>Counter-Strike 2</b> · 8 drużyn · <b>piątek, 4 grudnia 2026</b> · zbiórka 8:00, start 8:30
+  <b>Counter-Strike 2</b> · 8 drużyn · <b>piątek, 4 grudnia 2026</b> · zbiórka 8:00, start 8:30, koniec do 14:30
 </p>
 
 ---

@@ -26,7 +26,7 @@ export const GAMES: readonly GameModule[] = [
     short: "CS2",
     accent: "#ffae00",
     onAccent: "#0b0b0e",
-    mode: ["5v5", "MR12", "BO1 / finał BO3", "Map veto online"],
+    mode: ["5v5", "MR12", "Wszystkie mecze BO1", "Map veto online"],
     blurb: "Bomba, ekonomia i zero miejsca na błąd. Mapy wybieracie w panelu veto na żywo – jak na FACEIT.",
     nickLabel: "Nick Steam",
     nickPlaceholder: "np. zeus_z_3ti",

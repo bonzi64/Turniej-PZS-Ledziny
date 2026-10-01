@@ -111,11 +111,7 @@ function MatchPanel({ match, board, cs2 }: { match: BoardMatch; board: Board; cs
 
         <ActionForm action={saveSchedule} className="flex flex-wrap items-center gap-1.5">
           <input type="hidden" name="matchId" value={match.id} />
-          <span className="w-12 text-vg-muted">Plan</span>
-          <select name="format" defaultValue={match.format} className="vg-field w-20" aria-label="Format">
-            <option value="BO1">BO1</option>
-            <option value="BO3">BO3</option>
-          </select>
+          <span className="w-12 text-vg-muted">Godzina</span>
           <input name="startsAt" type="datetime-local" defaultValue={localInput(match.startsAt)} className="vg-field min-w-0 flex-1" aria-label="Godzina meczu" />
           <Submit>Zapisz</Submit>
         </ActionForm>

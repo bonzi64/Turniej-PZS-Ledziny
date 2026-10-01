@@ -142,7 +142,7 @@ export async function getPublicBracket(game: Game): Promise<BracketMatch[][]> {
           id: null,
           round: meta.round,
           slot,
-          format: meta.round === ROUNDS.length ? "BO3" : "BO1",
+          format: "BO1",
           startsAt: null,
           teamA: null,
           teamB: null,

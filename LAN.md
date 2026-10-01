@@ -6,25 +6,31 @@ Plan na 4 grudnia: strona turnieju służy do veto map, drabinki i wyników, a m
 
 - pracownia ma internet, bo klient CS2 wymaga zalogowania do Steama,
 - każdy gra na własnym koncie Steam, zgodnie z regulaminem,
-- jeden mecz to 10 stanowisk plus komputer sędziego z serwerem CS2.
+- dwa mecze idą naraz, czyli 20 stanowisk plus komputer sędziego z dwoma serwerami CS2.
 
-## Harmonogram i liczba serwerów
+## Harmonogram
 
-Szacunek czasu na mecz, razem z veto i przygotowaniem serwera:
+Turniej musi skończyć się najpóźniej o 14:00–14:30, dlatego wszystkie mecze, łącznie z finałem, są w BO1. Drabinka ma 7 meczów: 4 ćwierćfinały, 2 półfinały i finał.
 
-| Mecz | Czas |
-| --- | --- |
-| BO1, MR12 | ok. 1 godz. |
-| BO3, MR12 | 2–3 godz. |
-
-Drabinka ma 7 meczów: 4 ćwierćfinały BO1, 2 półfinały BO1 i finał BO3.
+Mecz BO1 na MR12 trwa razem z veto i przygotowaniem serwera około godziny. Dogrywka może go wydłużyć o kilkanaście minut.
 
 | Wariant | Stanowiska | Koniec przy starcie 8:30 |
 | --- | --- | --- |
-| jeden mecz naraz | 10 + serwer | ok. 17:00–17:30 |
-| dwa mecze naraz | 20 + serwer | ok. 14:30–15:00 |
+| jeden mecz naraz | 10 + serwer | ok. 15:30–16:00, za późno |
+| dwa mecze naraz | 20 + serwer | ok. 12:30–13:00 |
 
-Dwa serwery CS2 mogą chodzić na jednym mocnym komputerze, na portach 27015 i 27016. Jeśli czasu będzie za mało, finał można przestawić na BO1 w panelu, ale tylko przed rozpoczęciem veto.
+Żeby zmieścić się w czasie, potrzebne są dwa mecze naraz. Przykładowy plan:
+
+| Godzina | Serwer 1, port 27015 | Serwer 2, port 27016 |
+| --- | --- | --- |
+| 8:00 | zbiórka i sprawdzenie składów | |
+| 8:30 | ćwierćfinał 1 | ćwierćfinał 2 |
+| 9:30 | ćwierćfinał 3 | ćwierćfinał 4 |
+| 10:30 | półfinał 1 | półfinał 2 |
+| 11:45 | finał | |
+| ok. 12:45 | koniec | |
+
+Do 14:00 zostaje ponad godzina zapasu na dogrywki i opóźnienia. Oba serwery CS2 mogą chodzić na jednym mocnym komputerze. Godziny wpisz w panelu, wtedy pokażą się w drabince na stronie.
 
 ## Strona turnieju w dniu meczów
 
@@ -62,7 +68,7 @@ W `.env` ustaw `NEXT_PUBLIC_SITE_URL` na adres komputera w sieci, np. `http://19
 
 **Przed meczem**
 
-1. W panelu, w zakładce **Drabinka i PIN-y**, ustaw godzinę meczu i format. Finał jest domyślnie BO3, reszta BO1. Formatu nie da się zmienić po rozpoczęciu veto.
+1. W panelu, w zakładce **Drabinka i PIN-y**, ustaw godzinę meczu. Wszystkie mecze są BO1.
 2. Drużyny siadają przy stanowiskach. Drużyna nieobecna 10 minut po wyznaczonej godzinie przegrywa walkowerem.
 3. Sprawdź składy z listą w panelu. W grze muszą być te same nicki co w zgłoszeniu.
 
@@ -72,36 +78,25 @@ W `.env` ustaw `NEXT_PUBLIC_SITE_URL` na adres komputera w sieci, np. `http://19
 2. Kapitanowie otwierają `/cs2`, zakładkę **Map veto**, pokój swojego meczu, i wpisują PIN. Zegar tury rusza, gdy obaj są w pokoju.
 3. Na każdy ruch jest 45 sekund. Po tym czasie system sam banuje albo wybiera losową mapę.
 
-| Format | Kolejność |
-| --- | --- |
-| BO1 | A ban, B ban, A ban, B ban, A ban, B ban, ostatnia mapa to decider |
-| BO3 | A ban, B ban, A pick, B pick, A ban, B ban, ostatnia mapa to decider |
+Kolejność banów: A, B, A, B, A, B. Z 7 map zostaje jedna, decider, i na niej gracie.
 
 Gdy PIN wycieknie, kliknij **Nowe PIN-y**. Unieważnia to stare sesje kapitanów. Gdy veto pójdzie źle, **Reset veto** czyści wszystkie ruchy.
 
 **Strony CT i T**
 
-Strona nie rozstrzyga stron, robi to sędzia na serwerze:
-
-| Mapa | Kto wybiera stronę |
-| --- | --- |
-| BO1, decider | runda nożowa |
-| BO3, mapa 1, pick drużyny A | drużyna B |
-| BO3, mapa 2, pick drużyny B | drużyna A |
-| BO3, mapa 3, decider | runda nożowa |
+Na każdym meczu stronę startową wyłania runda nożowa. Strona turnieju tego nie rozstrzyga, robi to sędzia na serwerze.
 
 **Mecz na serwerze**
 
 1. W konsoli serwera zmień mapę, np. `changelevel de_mirage`, a potem wpisz `exec turniej`.
 2. Gracze łączą się przez konsolę gry: `connect 192.168.1.10:27015; password HASLO`.
 3. Ustaw nazwy drużyn. `mp_teamname_1` to drużyna, która zaczyna jako CT, a `mp_teamname_2` jako T.
-4. Na mapie z rundą nożową wpisz `exec noze`. Zwycięzcy wybierają stronę. Jeśli chcą ją zmienić, obie drużyny przechodzą na drugą stronę klawiszem M. Potem wpisz `exec live`.
-5. Na mapie bez noża drużyny od razu ustawiają się po wybranych stronach i wpisujesz `exec live`.
-6. Pauza techniczna, maks. 10 minut na mecz: `mp_pause_match` i `mp_unpause_match`. Pauza zaczyna się od najbliższego freezetime. Każda drużyna ma też 4 pauzy taktyczne po 30 sekund, które bierze sama przez głosowanie w grze.
+4. Wpisz `exec noze`, żeby zacząć rundę nożową. Zwycięzcy wybierają stronę. Jeśli chcą ją zmienić, obie drużyny przechodzą na drugą stronę klawiszem M. Potem wpisz `exec live`.
+5. Pauza techniczna, maks. 10 minut na mecz: `mp_pause_match` i `mp_unpause_match`. Pauza zaczyna się od najbliższego freezetime. Każda drużyna ma też 4 pauzy taktyczne po 30 sekund, które bierze sama przez głosowanie w grze.
 
 **Po meczu**
 
-Wpisz wynik w panelu. W BO1 wpisz wynik w rundach, np. 13:9, a w BO3 wynik w mapach, np. 2:1. Remisów nie ma, a zwycięzca sam przechodzi do następnej rundy.
+Wpisz wynik w panelu w rundach, np. 13:9. Remisów nie ma, a zwycięzca sam przechodzi do następnej rundy.
 
 ## Serwer CS2
 
@@ -192,7 +187,7 @@ mp_restartgame 1
 **Rano w dniu turnieju**
 
 - [ ] Zaktualizować serwer, czyli powtórzyć `app_update 730`, i klienty CS2. Różne wersje nie połączą się ze sobą.
-- [ ] Uruchomić serwer lub serwery i sprawdzić `connect` z jednego stanowiska.
+- [ ] Uruchomić oba serwery, na portach 27015 i 27016, i sprawdzić `connect` do każdego z nich.
 - [ ] Włączyć rzutnik z drabinką.
 - [ ] Przygotować kartki na PIN-y.
 
