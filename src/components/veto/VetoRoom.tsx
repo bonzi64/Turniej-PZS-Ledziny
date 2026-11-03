@@ -219,7 +219,7 @@ export function VetoRoom({ initial }: { initial: VetoSnapshot }) {
               <span className="text-[10px] text-vg-muted">
                 ruch {snap.turn.order + 1}/{moves}
               </span>
-              <span className={secondsLeft !== null && secondsLeft <= 10 ? "animate-blink text-vg-red" : "text-vg-gold"}>
+              <span className={secondsLeft !== null && secondsLeft <= 10 ? "animate-blink-tick text-vg-red" : "text-vg-gold"}>
                 <PixelText text={secondsLeft === null ? "--" : String(secondsLeft).padStart(2, "0")} dot={7} ghost label={`${secondsLeft ?? 0} sekund`} />
               </span>
               <Tag tone={snap.turn.action === "BAN" ? "red" : "gold"}>{snap.turn.action}</Tag>
@@ -242,7 +242,7 @@ export function VetoRoom({ initial }: { initial: VetoSnapshot }) {
           {snap.steps.filter((s) => s.action !== "DECIDER").length}/{moves}
         </span>
       </div>
-      {snap.phase === "LIVE" && secondsLeft !== null && <Progress value={secondsLeft} max={snap.turnSeconds} blocks={45} />}
+      {snap.phase === "LIVE" && secondsLeft !== null && <Progress value={secondsLeft} max={snap.turnSeconds} />}
 
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
         {ACTIVE_DUTY.map((map) => {

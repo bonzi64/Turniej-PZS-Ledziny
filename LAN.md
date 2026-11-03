@@ -201,6 +201,7 @@ mp_restartgame 1
 - [ ] Sprawdzić, czy szkolna sieć nie blokuje Steama.
 - [ ] Rozegrać mecz testowy na serwerze z configami.
 - [ ] Rozstawić drabinkę i ustawić godziny meczów.
+- [ ] Przypomnieć kapitanom, że zawodnicy poniżej 18 lat muszą przynieść podpisaną zgodę rodzica (wzór: `/zgoda-rodzica-cs2.pdf`).
 
 **Rano w dniu turnieju**
 
@@ -208,6 +209,7 @@ mp_restartgame 1
 - [ ] Uruchomić serwer, a przy dwóch meczach naraz także drugi, na porcie 27016. Sprawdzić `connect` z jednego stanowiska.
 - [ ] Włączyć rzutnik z drabinką.
 - [ ] Przygotować kartki na PIN-y.
+- [ ] Zebrać zgody rodziców od zawodników poniżej 18 lat przed pierwszym meczem ich drużyny. Kto nie ma zgody, nie gra.
 
 **Po turnieju**
 

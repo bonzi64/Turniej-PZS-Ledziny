@@ -53,7 +53,7 @@ export function ModuleOverview({
           <TabLink tab="regulamin" className="vg-btn min-w-32">
             Czytaj regulamin
           </TabLink>
-          <TabLink tab="zapisy" className="vg-btn min-w-32" data-default="">
+          <TabLink tab="zapisy" className="vg-btn min-w-32" data-default="" data-tone={closedReason ? undefined : "gold"}>
             {closedReason ? "Zapisy zamknięte" : "Zapisz drużynę"}
           </TabLink>
           <TabLink tab="druzyny" className="vg-btn">

@@ -55,7 +55,7 @@ export function Readout({ text, size = "md", label }: { text: string; size?: "sm
 // --- PASEK ---
 
 export function Meter({ value, max, className = "" }: { value: number; max: number; className?: string }) {
-  return <Progress value={value} max={max} blocks={max * 3} className={className} />;
+  return <Progress value={value} max={max} className={className} />;
 }
 
 // --- AWATAR ---

@@ -69,10 +69,10 @@ export function MapTile({ map, state = "open", mark, order, auto, selectable, se
   return (
     <Tag
       {...(selectable ? { type: "button" as const, onClick: onSelect, "data-sfx": "tick", "aria-pressed": Boolean(selected) } : {})}
-      className={`group block w-full p-1 text-left ${selected ? "bg-vg-select" : "vg-panel"} ${selectable ? "cursor-default hover:bg-[#56644d]" : ""}`}
+      className={`group block w-full p-1 text-left ${selected ? "bg-vg-select" : "vg-panel"} ${selectable ? "cur-aim hover:bg-[#56644d]" : ""}`}
     >
       <div className="vg-deep relative aspect-[4/3] overflow-hidden">
-        <div className={`absolute inset-0 ${state === "ban" ? "opacity-35 grayscale" : ""}`}>
+        <div className={`absolute inset-0 transition-[opacity,filter] duration-300 ease-snap ${state === "ban" ? "opacity-35 grayscale" : ""}`}>
           <Radar id={map.id} tone={map.tone} />
         </div>
         <span className="absolute top-0 left-0 bg-vg-ink/85 px-1.5 text-[10px] text-vg-muted">{map.code}</span>

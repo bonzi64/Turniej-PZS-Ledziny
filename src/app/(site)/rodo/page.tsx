@@ -1,6 +1,6 @@
 import { Group, Tag, Window } from "@/components/vgui/Window";
 import { EVENT } from "@/content/event";
-import { COMMON_RULES } from "@/content/rules";
+import { PRIVACY_POINTS } from "@/content/rules";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
@@ -16,17 +16,16 @@ const DATA_MAP = [
   { field: "Imię i nazwisko", public: false, why: "Weryfikacja z listą uczniów" },
   { field: "E-mail kapitana", public: false, why: "Kontakt w sprawie zgłoszenia i meczów" },
   { field: "Discord kapitana", public: false, why: "Szybki kontakt w dniu turnieju (opcjonalnie)" },
+  { field: "Zgoda rodzica (papierowa)", public: false, why: "Dopuszczenie zawodnika poniżej 18 lat" },
 ];
 
 export default function PrivacyPage() {
-  const rodo = COMMON_RULES.find((c) => c.id === "rodo");
-
   return (
     <Window title="Klauzula informacyjna RODO" closeHref="/" status={<span>Art. 13 RODO · {EVENT.school}</span>}>
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_17rem]">
         <div className="space-y-5">
           <ol className="vg-deep">
-            {rodo?.points.map((point, i) => (
+            {PRIVACY_POINTS.map((point, i) => (
               <li key={point} className="grid grid-cols-[2rem_1fr] border-b border-vg-ink/70 px-3 py-2 last:border-b-0">
                 <span className="font-bold text-vg-gold tabular">{i + 1}.</span>
                 <span>{point}</span>

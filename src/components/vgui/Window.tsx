@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Emblem } from "@/components/vgui/pixel";
 
 type WindowProps = {
@@ -48,13 +48,12 @@ export function Group({ legend, children, className = "" }: { legend?: string; c
   );
 }
 
-export function Progress({ value, max, blocks = 24, className = "" }: { value: number; max: number; blocks?: number; className?: string }) {
-  const filled = max > 0 ? Math.round((Math.min(value, max) / max) * blocks) : 0;
+// wypełnienie liczone od szerokości paska – pełny pasek dokładnie przy value = max, na każdym ekranie
+export function Progress({ value, max, className = "" }: { value: number; max: number; className?: string }) {
+  const fill = max > 0 ? Math.max(0, Math.min(value, max)) / max : 0;
   return (
     <div className={`vg-progress overflow-hidden ${className}`} role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={max}>
-      {Array.from({ length: filled }, (_, i) => (
-        <span key={i} />
-      ))}
+      <span className="vg-progress-fill" style={{ "--fill": fill } as CSSProperties} />
     </div>
   );
 }

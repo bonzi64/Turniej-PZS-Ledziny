@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { enterFullscreen } from "@/components/shell/fullscreen";
 import { useSound } from "@/components/sound/SoundProvider";
 
 const KEY = "pzs.boot";
@@ -55,13 +56,16 @@ export function useBoot({ ticks, leaveMs }: { ticks: number; leaveMs: number }) 
   const proceed = useCallback(() => {
     if (leaving) return;
     unlock();
+    // pierwsze kliknięcie lub klawisz w intro to gest użytkownika – jedyny moment, w którym wolno włączyć pełny ekran
+    enterFullscreen();
     if (!ready) {
       setTick(total);
       return;
     }
     play("boot");
     setLeaving(true);
-    setTimeout(store.finish, leaveMs);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(store.finish, reduce ? 0 : leaveMs);
   }, [leaveMs, leaving, play, ready, total, unlock]);
 
   const skip = useCallback(() => {

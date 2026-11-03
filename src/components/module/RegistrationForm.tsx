@@ -7,6 +7,7 @@ import { formatClock, useRulesGate } from "@/components/module/RulesGate";
 import { TabLink } from "@/components/module/TabLink";
 import { Chip, Dialog, Panel, Readout } from "@/components/skin/parts";
 import { useSound } from "@/components/sound/SoundProvider";
+import { EVENT } from "@/content/event";
 import { RESERVE_SLOT } from "@/lib/tournament";
 
 type Props = {
@@ -74,14 +75,22 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
       <Dialog
         title="Zgłoszenie wysłane"
         actions={
-          <TabLink tab="druzyny" className="ui-btn min-w-20" data-tone="gold" data-default="">
-            OK
-          </TabLink>
+          <>
+            <a href={EVENT.consentForm} download className="ui-btn">
+              Pobierz zgodę (PDF)
+            </a>
+            <TabLink tab="druzyny" className="ui-btn min-w-20" data-tone="gold" data-default="">
+              OK
+            </TabLink>
+          </>
         }
       >
         <p className="ui-name text-[18px]">{state.teamName}</p>
         <p className="mt-2">
           Drużyna czeka na weryfikację przez organizatora ({gameName}). Po zatwierdzeniu pojawi się na liście drużyn.
+        </p>
+        <p className="mt-2">
+          Zawodnicy, którzy nie mają 18 lat, muszą przynieść w dniu turnieju wydrukowaną zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zagrają.
         </p>
         <p className="mt-2 text-[12px] text-ui-faint">Publicznie widoczne będą wyłącznie nicki, nazwa drużyny i klasa.</p>
       </Dialog>
@@ -148,7 +157,8 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
         </Panel>
 
         <Panel title="Skład">
-          <div className="ui-scroll ui-inset overflow-x-auto">
+          {/* relative: ukryte radia kapitana (sr-only, absolute) muszą być przycinane przez ten scroll, inaczej rozpychają stronę na telefonie */}
+          <div className="ui-scroll ui-inset relative overflow-x-auto">
             <table className="w-full min-w-[42rem] border-collapse text-[12px]">
               <thead>
                 <tr className="ui-subhead text-left">
@@ -237,8 +247,19 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
                 ),
               },
               {
+                name: "ageConfirm",
+                text: <>Oświadczam, że wszyscy zgłoszeni zawodnicy ukończyli 17 lat i wiedzą o zgłoszeniu.</>,
+              },
+              {
                 name: "guardianConsent",
-                text: <>Wszyscy zgłoszeni zawodnicy wiedzą o zgłoszeniu, a rodzice lub opiekunowie osób niepełnoletnich wyrazili zgodę na udział.</>,
+                text: (
+                  <>
+                    Zawodnicy, którzy nie mają 18 lat, przyniosą w dniu turnieju zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zostaną dopuszczeni do gry.{" "}
+                    <a href={EVENT.consentForm} download className="whitespace-nowrap text-ui-accent underline">
+                      Pobierz wzór zgody (PDF)
+                    </a>
+                  </>
+                ),
               },
             ].map((item) => (
               <div key={item.name}>

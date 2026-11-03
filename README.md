@@ -50,7 +50,8 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 | nicki graczy | e-mail kapitana |
 | klasa | Discord kapitana |
 
-- Klauzula informacyjna jest na stronie `/rodo`. Przy zgłoszeniu kapitan akceptuje regulamin, zgodę na przetwarzanie danych i oświadczenie, że rodzice osób niepełnoletnich zgodzili się na udział.
+- Klauzula informacyjna jest na stronie `/rodo`. Przy zgłoszeniu kapitan akceptuje regulamin i zgodę na przetwarzanie danych, oświadcza, że wszyscy zawodnicy ukończyli 17 lat, i potwierdza, że zawodnicy poniżej 18 lat przyniosą podpisaną zgodę rodzica.
+- Wzór zgody rodzica leży w `public/zgoda-rodzica-cs2.pdf`. Strona daje go do pobrania w regulaminie, w formularzu i po wysłaniu zgłoszenia.
 - Publiczna część strony korzysta z osobnych zapytań do bazy, które w ogóle nie pobierają imion, nazwisk ani kontaktów.
 - Dane są przechowywane do 31.12.2026. Potem administrator anonimizuje je w panelu. Imiona, nazwiska, e-maile i Discordy znikają, a nicki, klasy, nazwy drużyn i wyniki zostają w archiwum turnieju.
 

@@ -18,6 +18,8 @@ export const EVENT = {
   contactEmail: "[e-mail organizatora]",
   dpoContact: "[dane kontaktowe Inspektora Ochrony Danych szkoły]",
   dataRetention: "31.12.2026",
+  consentForm: "/zgoda-rodzica-cs2.pdf",
+  author: { name: "bonzi64", url: "https://github.com/bonzi64" },
 } as const;
 
 export const TAGLINE = "Zapisy na Turniej PZS Lędziny 2026";

@@ -27,8 +27,11 @@ function TeamCard({ team, seat }: { team: PublicTeam; seat: number }) {
             <span className="min-w-0 flex-1 truncate" title={player.nickname}>
               {player.nickname}
             </span>
-            <span className="text-[12px] text-ui-muted">{player.schoolClass}</span>
-            {player.captain ? <Chip tone="orange">Kapitan</Chip> : player.reserve ? <Chip tone="dark">Rezerwa</Chip> : <Chip tone="gold">Gracz</Chip>}
+            <span className="text-[12px] text-ui-muted tabular">{player.schoolClass}</span>
+            {/* stała szerokość roli – klasy układają się w równą kolumnę */}
+            <span className="grid w-18 shrink-0 *:justify-center">
+              {player.captain ? <Chip tone="orange">Kapitan</Chip> : player.reserve ? <Chip tone="dark">Rezerwa</Chip> : <Chip tone="gold">Gracz</Chip>}
+            </span>
           </li>
         ))}
       </ul>
@@ -38,9 +41,9 @@ function TeamCard({ team, seat }: { team: PublicTeam; seat: number }) {
 
 function EmptySlot({ seat, pending }: { seat: number; pending: boolean }) {
   return (
-    <div className="ui-card flex min-h-40 flex-col items-center justify-center gap-1 p-4 text-center opacity-75">
-      <p className="text-[12px] text-ui-faint">Slot {seat}</p>
-      <p className={pending ? "ui-name text-[16px]" : "text-ui-muted"}>{pending ? "Zgłoszenie w weryfikacji" : "Wolny slot"}</p>
+    <div className="ui-inset flex min-h-24 flex-col items-center justify-center gap-0.5 p-3 text-center">
+      <p className="text-[12px] text-ui-faint tabular">Slot {seat}</p>
+      <p className={pending ? "ui-name text-[15px]" : "text-ui-muted"}>{pending ? "Zgłoszenie w weryfikacji" : "Wolny slot"}</p>
       <p className="text-[12px] text-ui-faint">{pending ? "czeka na decyzję organizatora" : "czeka na Waszą drużynę"}</p>
     </div>
   );

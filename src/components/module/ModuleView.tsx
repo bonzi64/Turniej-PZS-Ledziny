@@ -32,7 +32,7 @@ export async function ModuleView({ slug }: { slug: GameSlug }) {
       label: "Regulamin",
       content: (
         <RulesGate>
-          <RulesText slug={slug} />
+          <RulesText />
         </RulesGate>
       ),
     },

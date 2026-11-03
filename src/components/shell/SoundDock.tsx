@@ -1,12 +1,19 @@
 "use client";
 
+import { toggleFullscreen, useFullscreen } from "@/components/shell/fullscreen";
 import { useSound } from "@/components/sound/SoundProvider";
 
 export function SoundDock({ compact = false }: { compact?: boolean }) {
   const { sfx, music, sfxVolume, musicVolume, toggleSfx, toggleMusic, setVolume, play } = useSound();
+  const fullscreen = useFullscreen();
 
   return (
-    <div className="flex items-center gap-1" role="group" aria-label="Dźwięk">
+    <div className="flex items-center gap-1" role="group" aria-label="Dźwięk i ekran">
+      {!compact && fullscreen !== null && (
+        <button type="button" data-sfx="" aria-pressed={fullscreen} onClick={toggleFullscreen} className="vg-btn min-w-30 text-[11px]">
+          FULLSCREEN: {fullscreen ? "ON" : "OFF"}
+        </button>
+      )}
       <button
         type="button"
         data-sfx="mute"

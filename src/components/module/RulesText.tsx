@@ -1,15 +1,12 @@
 import Link from "next/link";
-import { COMMON_RULES, GAME_RULES } from "@/content/rules";
-import type { GameSlug } from "@/lib/games";
+import { RULES } from "@/content/rules";
 
-export function RulesText({ slug }: { slug: GameSlug }) {
-  const chapters = [...COMMON_RULES.slice(0, 4), GAME_RULES[slug], COMMON_RULES[4]];
-
+export function RulesText() {
   return (
     <article className="leading-relaxed">
       <p className="mb-4 text-[12px] text-ui-muted">Regulamin Turnieju E-sportowego PZS Lędziny 2026. Obowiązuje wszystkich uczestników.</p>
-      {chapters.map((chapter, index) => (
-        <section key={`${chapter.id}-${index}`} className="mb-6">
+      {RULES.map((chapter, index) => (
+        <section key={chapter.id} className="mb-6">
           <h3 className="ui-rule-head mb-2.5">
             <span>§{index + 1}.</span> {chapter.title}
           </h3>
@@ -21,6 +18,11 @@ export function RulesText({ slug }: { slug: GameSlug }) {
               </li>
             ))}
           </ol>
+          {chapter.attachment && (
+            <a href={chapter.attachment.href} download className="ui-btn mt-3 ml-[1.8rem] inline-flex" data-tone="gold">
+              {chapter.attachment.label}
+            </a>
+          )}
         </section>
       ))}
       <p className="border-t border-ui-line pt-3 text-[12px] text-ui-muted">

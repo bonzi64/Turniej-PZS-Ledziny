@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useRef } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import { openTab, useHash } from "@/components/vgui/tab-store";
 import { CloseBox } from "@/components/vgui/Window";
 import { Emblem } from "@/components/vgui/pixel";
@@ -23,6 +23,18 @@ export function TabbedWindow({
   const hash = useHash();
   const active = tabs.some((t) => t.id === hash) ? hash : fallback;
   const frame = useRef<HTMLElement>(null);
+  const strip = useRef<HTMLDivElement>(null);
+
+  // na telefonie pasek zakładek przewija się w bok – aktywna musi być widoczna
+  useEffect(() => {
+    const row = strip.current;
+    const tab = row?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!row || !tab) return;
+    const left = tab.offsetLeft - 8;
+    const right = tab.offsetLeft + tab.offsetWidth + 8;
+    if (left < row.scrollLeft) row.scrollLeft = left;
+    else if (right > row.scrollLeft + row.clientWidth) row.scrollLeft = right - row.clientWidth;
+  }, [active]);
 
   const select = (id: string) => {
     openTab(id);
@@ -38,7 +50,7 @@ export function TabbedWindow({
         {closeHref && <CloseBox href={closeHref} />}
       </header>
 
-      <div role="tablist" aria-label={title} className="vg-tabs mt-1">
+      <div ref={strip} role="tablist" aria-label={title} className="vg-tabs vg-tabs-scroll mt-0.5">
         {tabs.map((tab) => (
           <button
             key={tab.id}

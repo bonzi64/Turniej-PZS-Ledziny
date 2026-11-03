@@ -164,6 +164,7 @@ export function parseRegistration(form: FormData): { data: ParsedRegistration; e
 
   if (text(form, "acceptRules") !== "on") errors.acceptRules = "Wymagana akceptacja regulaminu";
   if (text(form, "acceptPrivacy") !== "on") errors.acceptPrivacy = "Wymagana zgoda na przetwarzanie danych";
+  if (text(form, "ageConfirm") !== "on") errors.ageConfirm = "Wszyscy zawodnicy muszą mieć ukończone 17 lat";
   if (text(form, "guardianConsent") !== "on") errors.guardianConsent = "Wymagane oświadczenie";
 
   if (Object.keys(errors).length > 0 || !team.success) return { data: null, errors };
