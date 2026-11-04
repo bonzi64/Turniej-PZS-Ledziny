@@ -66,8 +66,14 @@ export default function PrivacyPage() {
             <p className="text-vg-muted">{EVENT.dpoContact}</p>
           </Group>
           <Group legend="Organizatorzy">
-            <p className="text-vg-muted">{EVENT.organizers}</p>
-            <p className="text-vg-muted">{EVENT.contactEmail}</p>
+            <ul className="text-vg-muted">
+              {EVENT.organizers.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+            <a href={`mailto:${EVENT.contactEmail}`} className="mt-1 inline-block text-vg-gold underline">
+              {EVENT.contactEmail}
+            </a>
           </Group>
           <p className="text-[11px] text-vg-faint">
             Po {EVENT.dataRetention} organizator anonimizuje imiona, nazwiska i dane kontaktowe jednym poleceniem w panelu.

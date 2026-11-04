@@ -195,7 +195,7 @@ mp_restartgame 1
 
 **Kilka dni wcześniej**
 
-- [ ] Uzupełnić pola w `src/content/event.ts`: salę, opiekunów, e-mail i IOD.
+- [ ] Uzupełnić pola w `src/content/event.ts`: salę i IOD.
 - [ ] Założyć konta nauczycielom w panelu.
 - [ ] Zainstalować i zaktualizować CS2 na wszystkich stanowiskach.
 - [ ] Sprawdzić, czy szkolna sieć nie blokuje Steama.
