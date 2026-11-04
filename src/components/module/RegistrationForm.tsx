@@ -90,7 +90,7 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
           Drużyna czeka na weryfikację przez organizatora ({gameName}). Po zatwierdzeniu pojawi się na liście drużyn.
         </p>
         <p className="mt-2">
-          Zawodnicy, którzy nie mają 18 lat, muszą przynieść w dniu turnieju wydrukowaną zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zagrają.
+          Zawodnicy, którzy nie mają 18 lat, muszą najpóźniej dzień przed turniejem złożyć na portierni szkoły wydrukowaną zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zagrają. Pełnoletni przychodzą na turniej z dowodem osobistym.
         </p>
         <p className="mt-2 text-[12px] text-ui-faint">Publicznie widoczne będą wyłącznie nicki, nazwa drużyny i klasa.</p>
       </Dialog>
@@ -254,7 +254,7 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
                 name: "guardianConsent",
                 text: (
                   <>
-                    Zawodnicy, którzy nie mają 18 lat, przyniosą w dniu turnieju zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zostaną dopuszczeni do gry.{" "}
+                    Zawodnicy, którzy nie mają 18 lat, złożą najpóźniej dzień przed turniejem na portierni szkoły zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zostaną dopuszczeni do gry. Pełnoletni przyjdą na turniej z dowodem osobistym.{" "}
                     <a href={EVENT.consentForm} download className="whitespace-nowrap text-ui-accent underline">
                       Pobierz wzór zgody (PDF)
                     </a>

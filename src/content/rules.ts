@@ -25,8 +25,9 @@ export const RULES: RuleChapter[] = [
     points: [
       "W turnieju mogą uczestniczyć wyłącznie uczniowie PZS Lędziny, którzy ukończyli 17 lat.",
       "Uczestnicy w wieku 17 lat muszą przedstawić pisemną zgodę rodzica lub opiekuna prawnego na udział w turnieju.",
-      "Każdy uczestnik, który nie ukończył 18 lat, musi przynieść wydrukowaną i podpisaną zgodę rodzica lub opiekuna prawnego i oddać ją organizatorowi najpóźniej w dniu turnieju, przed pierwszym meczem. Wzór zgody można pobrać poniżej oraz w formularzu zapisów.",
+      "Każdy uczestnik, który nie ukończył 18 lat, musi wcześniej, najpóźniej dzień przed turniejem, złożyć na portierni szkoły wydrukowaną i podpisaną zgodę rodzica lub opiekuna prawnego. Wzór zgody można pobrać poniżej oraz w formularzu zapisów.",
       "Uczestnicy, którzy ukończyli 18 lat, mogą brać udział w turnieju bez zgody rodzica lub opiekuna prawnego.",
+      "Uczestnicy, którzy ukończyli 18 lat, przychodzą na turniej z dowodem osobistym i okazują go przy wejściu.",
       "Osoby poniżej 17. roku życia nie mogą uczestniczyć w turnieju.",
       "Brak wymaganej zgody rodzica lub opiekuna prawnego skutkuje niedopuszczeniem niepełnoletniego uczestnika do rozgrywek.",
       "Organizatorzy mają prawo zweryfikować wiek uczestników na podstawie dokumentacji szkolnej.",
@@ -121,7 +122,7 @@ export const PRIVACY_POINTS: string[] = [
   "Publicznie na stronie pokazujemy tylko: nazwę drużyny, nicki zawodników i klasę. Imiona, nazwiska i dane kontaktowe widzą wyłącznie organizatorzy w zabezpieczonym panelu.",
   `Dane przechowujemy do ${EVENT.dataRetention}, a następnie je usuwamy. Wyniki (nazwa drużyny, nicki, klasa) mogą pozostać w archiwum turnieju.`,
   "Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz cofnięcia zgody w dowolnym momencie (bez wpływu na wcześniejsze przetwarzanie), a także prawo skargi do Prezesa UODO.",
-  "Zawodnicy, którzy nie ukończyli 18 lat, oddają organizatorowi papierową zgodę rodzica lub opiekuna prawnego z jego imieniem i nazwiskiem. Zgody widzą wyłącznie organizatorzy i przechowujemy je do tego samego terminu co pozostałe dane.",
+  "Zawodnicy, którzy nie ukończyli 18 lat, składają na portierni szkoły papierową zgodę rodzica lub opiekuna prawnego z jego imieniem i nazwiskiem. Portiernia przekazuje zgody organizatorom, którzy przechowują je do tego samego terminu co pozostałe dane.",
   "Publikacja wizerunku (zdjęcia, transmisja) wymaga odrębnej zgody zbieranej przez szkołę.",
   `Kontakt w sprawie danych: ${EVENT.dpoContact}.`,
 ];
