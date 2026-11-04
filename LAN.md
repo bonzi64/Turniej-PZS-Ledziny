@@ -214,4 +214,5 @@ mp_restartgame 1
 
 **Po turnieju**
 
+- [ ] Dodać zdjęcia w panelu (zakładka **Zdjęcia**) – tylko osób ze zgodą na publikację wizerunku.
 - [ ] Po 31.12.2026 kliknąć **Anonimizuj dane** na pulpicie panelu.

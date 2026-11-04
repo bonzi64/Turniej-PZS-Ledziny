@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    serverActions: {
+      // zdjęcie (maks. 3 MB po zmniejszeniu w przeglądarce) + miniatura + narzut multipart
+      bodySizeLimit: "4mb",
+    },
+  },
   async headers() {
     return [
       {

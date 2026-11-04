@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LiveSlots } from "@/components/module/LiveSlots";
 import { TabLink } from "@/components/module/TabLink";
 import { PixelText } from "@/components/vgui/pixel";
@@ -62,6 +63,9 @@ export function ModuleOverview({
           <TabLink tab="drabinka" className="vg-btn">
             Drabinka
           </TabLink>
+          <Link href="/zdjecia" data-sfx="" className="vg-btn">
+            Zdjęcia
+          </Link>
         </div>
       </div>
 

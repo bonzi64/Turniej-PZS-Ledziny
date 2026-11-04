@@ -149,6 +149,26 @@ model VetoStep {
   @@unique([matchId, map])
 }
 
+// --- ZDJĘCIA ---
+// Pliki trzymamy w bazie: strona działa tak samo na każdym hostingu, bez osobnego magazynu plików.
+// Przeglądarka organizatora zmniejsza zdjęcie do JPEG przed wysłaniem – bez danych z aparatu (EXIF, GPS).
+
+model Photo {
+  id          String   @id @default(cuid())
+  caption     String?
+  width       Int
+  height      Int
+  thumbWidth  Int
+  thumbHeight Int
+  size        Int
+  data        Bytes
+  thumb       Bytes
+  uploadedBy  String
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+}
+
 // --- ANTY-SPAM ---
 
 model RateLimit {

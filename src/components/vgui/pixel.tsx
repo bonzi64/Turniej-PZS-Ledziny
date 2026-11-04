@@ -137,7 +137,30 @@ export function LockGlyph({ size = 11, className = "" }: { size?: number; classN
 
 // --- AWATAR Z NICKU ---
 
-const AVATAR_TONES = ["#c4b550", "#d58c2a", "#9dbb6a", "#7fb0a6", "#c9785a", "#b7a2d0", "#dedfd6"];
+const CAMERA = [
+  "....####.....",
+  "#############",
+  "#...........#",
+  "#...#####...#",
+  "#..#.....#..#",
+  "#..#..#..#..#",
+  "#..#.....#..#",
+  "#...#####...#",
+  "#...........#",
+  "#############",
+];
+
+export function CameraGlyph({ size = 52, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg viewBox="0 0 13 10" width={size} height={(size * 10) / 13} shapeRendering="crispEdges" aria-hidden className={className}>
+      {CAMERA.flatMap((row, y) =>
+        [...row].map((cell, x) => (cell === "#" ? <rect key={`${x}-${y}`} x={x} y={y} width="1" height="1" fill="currentColor" /> : null)),
+      )}
+    </svg>
+  );
+}
+
+const AVATAR_TONES =["#c4b550", "#d58c2a", "#9dbb6a", "#7fb0a6", "#c9785a", "#b7a2d0", "#dedfd6"];
 
 function hashOf(seed: string) {
   let h = 2166136261;

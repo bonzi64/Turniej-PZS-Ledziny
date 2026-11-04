@@ -74,11 +74,12 @@ Szczegółowy przebieg meczu na LANie, z rundą nożową i konfiguracją serwera
 
 **Po turnieju**
 
-1. Po 31.12.2026 administrator klika **Anonimizuj dane** na pulpicie panelu.
+1. W zakładce **Zdjęcia** dodajesz zdjęcia z turnieju. Pojawiają się na publicznej stronie `/zdjecia`. Dopóki nie ma żadnego, strona pokazuje „Zdjęcia pojawią się po zakończeniu turnieju”. Przeglądarka zmniejsza zdjęcia i usuwa z nich dane z aparatu, np. lokalizację GPS. Publikuj tylko osoby, które mają zgodę szkoły na publikację wizerunku.
+2. Po 31.12.2026 administrator klika **Anonimizuj dane** na pulpicie panelu.
 
 | Rola | Uprawnienia |
 | --- | --- |
-| Organizator | zgłoszenia, eksport CSV, drabinka, wyniki, PIN-y, zmiana własnego hasła |
+| Organizator | zgłoszenia, eksport CSV, drabinka, wyniki, PIN-y, zdjęcia, zmiana własnego hasła |
 | Administrator | wszystko powyżej oraz konta nauczycieli, trwałe usuwanie zgłoszeń i anonimizacja danych |
 
 ## Do uzupełnienia przed startem zapisów

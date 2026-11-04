@@ -53,6 +53,9 @@
   @keyframes boot-rise {
     from { opacity: 0; transform: translateY(8px); }
   }
+  @keyframes lightbox-in {
+    from { opacity: 0; transform: scale(0.96); }
+  }
   @keyframes dot-on {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -141,7 +144,8 @@
     display: none;
   }
 
-  html[data-lock-scroll] {
+  html[data-lock-scroll],
+  html:has(dialog[open]) {
     overflow: hidden;
   }
 }
@@ -641,6 +645,22 @@
 
   .boot-rise {
     animation: boot-rise 0.5s var(--ease-snap) both;
+  }
+
+  /* --- GALERIA --- */
+
+  /* podgląd zdjęcia: okno modalne, wyśrodkowane – rośnie ze środka */
+  .vg-lightbox[open] {
+    animation: lightbox-in 0.2s var(--ease-snap);
+  }
+
+  /* fokus trafia na samo okno – przyciski w środku mają własne ramki */
+  .vg-lightbox:focus-visible {
+    outline: none;
+  }
+
+  .vg-lightbox::backdrop {
+    background: rgb(0 0 0 / 0.82);
   }
 }
 

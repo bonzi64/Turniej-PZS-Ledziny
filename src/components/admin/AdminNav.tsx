@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/admin", label: "Pulpit" },
   { href: "/admin/druzyny", label: "Zgłoszenia" },
   { href: "/admin/drabinka", label: "Drabinka i PIN-y" },
+  { href: "/admin/zdjecia", label: "Zdjęcia" },
   { href: "/admin/konta", label: "Konta" },
   { href: "/", label: "Strona turnieju" },
 ];

@@ -42,6 +42,7 @@ function useEntries(games: MenuGame[]): Entry[][] {
       tabs.map(([id, label]) => ({ key: id, label, href: `/${game.slug}#${id}`, tab: id, current: id === active })),
       [
         ...(games.length > 1 ? [{ key: "switch", label: "Zmień grę", href: "/" }] : []),
+        { key: "photos", label: "Zdjęcia", href: "/zdjecia" },
         { key: "rodo", label: "Dane osobowe", href: "/rodo", current: pathname === "/rodo" },
       ],
     ];
@@ -50,6 +51,7 @@ function useEntries(games: MenuGame[]): Entry[][] {
   return [
     games.map((g) => ({ key: g.slug, label: g.name, href: `/${g.slug}` })),
     [
+      { key: "photos", label: "Zdjęcia", href: "/zdjecia", current: pathname === "/zdjecia" },
       { key: "rodo", label: "Dane osobowe", href: "/rodo", current: pathname === "/rodo" },
       { key: "admin", label: "Panel organizatora", href: "/admin" },
     ],

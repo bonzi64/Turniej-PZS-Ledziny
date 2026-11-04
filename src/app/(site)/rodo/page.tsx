@@ -17,6 +17,7 @@ const DATA_MAP = [
   { field: "E-mail kapitana", public: false, why: "Kontakt w sprawie zgłoszenia i meczów" },
   { field: "Discord kapitana", public: false, why: "Szybki kontakt w dniu turnieju (opcjonalnie)" },
   { field: "Zgoda rodzica (papierowa)", public: false, why: "Dopuszczenie zawodnika poniżej 18 lat" },
+  { field: "Zdjęcia z turnieju (wizerunek)", public: true, why: "Galeria po turnieju – tylko za zgodą na publikację wizerunku" },
 ];
 
 export default function PrivacyPage() {
