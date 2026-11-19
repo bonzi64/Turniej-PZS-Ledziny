@@ -1,15 +1,21 @@
+import { CrownIcon } from "@/components/hx/icons";
+import { TabLink } from "@/components/module/TabLink";
 import { Avatar, Chip } from "@/components/skin/parts";
 import type { PublicTeam } from "@/lib/queries";
 
 function TeamCard({ team, seat }: { team: PublicTeam; seat: number }) {
   return (
-    <article className="ui-card p-2.5">
-      <header className="flex items-center gap-3 border-b border-ui-line pb-2.5">
-        <Avatar seed={team.name} size={34} />
+    <article className="hx-frame p-4">
+      <header className="flex items-center gap-3.5">
+        <span className="hx-ring size-12">
+          <Avatar seed={team.name} size={40} />
+        </span>
         <div className="min-w-0 flex-1">
-          <h3 className="ui-name truncate text-[16px] leading-tight">{team.name}</h3>
-          <p className="text-[12px] text-ui-muted">
-            Slot {seat}
+          <h3 className="ui-name truncate text-[17px] leading-tight" title={team.name}>
+            {team.name}
+          </h3>
+          <p className="mt-0.5 text-[13px] text-ui-muted">
+            Miejsce {seat}
             {team.tag && ` · [${team.tag}]`}
           </p>
         </div>
@@ -19,18 +25,27 @@ function TeamCard({ team, seat }: { team: PublicTeam; seat: number }) {
           ))}
         </div>
       </header>
+      <div className="hx-divider my-3.5" aria-hidden />
 
-      <ul className="mt-2.5 space-y-1">
+      <ul className="space-y-1">
         {team.roster.map((player, i) => (
-          <li key={`${player.nickname}-${i}`} className="ui-inset ui-row flex items-center gap-2.5 px-2 py-1.5 text-[12px]">
-            <Avatar seed={player.nickname} size={20} />
-            <span className="min-w-0 flex-1 truncate" title={player.nickname}>
+          <li key={`${player.nickname}-${i}`} className="ui-row flex items-center gap-3 px-2 py-1.5 text-[14px]">
+            <Avatar seed={player.nickname} size={26} />
+            <span className="min-w-0 flex-1 truncate text-parchment" title={player.nickname}>
               {player.nickname}
             </span>
-            <span className="text-[12px] text-ui-muted tabular">{player.schoolClass}</span>
-            {/* stała szerokość roli – klasy układają się w równą kolumnę */}
-            <span className="grid w-18 shrink-0 *:justify-center">
-              {player.captain ? <Chip tone="orange">Kapitan</Chip> : player.reserve ? <Chip tone="dark">Rezerwa</Chip> : <Chip tone="gold">Gracz</Chip>}
+            <span className="text-[13px] text-ui-muted tabular">{player.schoolClass}</span>
+            <span className="flex w-20 shrink-0 justify-end">
+              {player.captain ? (
+                <span className="inline-flex items-center gap-1.5 text-[12px] font-bold tracking-[0.1em] text-gold uppercase">
+                  <CrownIcon size={14} />
+                  Kapitan
+                </span>
+              ) : player.reserve ? (
+                <Chip tone="dark">Rezerwa</Chip>
+              ) : (
+                <span className="text-[12px] font-bold tracking-[0.1em] text-sand uppercase">Gracz</span>
+              )}
             </span>
           </li>
         ))}
@@ -40,12 +55,24 @@ function TeamCard({ team, seat }: { team: PublicTeam; seat: number }) {
 }
 
 function EmptySlot({ seat, pending }: { seat: number; pending: boolean }) {
+  const body = (
+    <>
+      <span aria-hidden className={`grid size-10 rotate-45 place-items-center border ${pending ? "border-gold" : "border-umber border-dashed"}`}>
+        <span className="-rotate-45 font-display text-[15px] text-gold tabular">{seat}</span>
+      </span>
+      <p className={`mt-4 font-display text-[17px] tracking-[0.06em] ${pending ? "text-parchment" : "text-ui-muted"}`}>
+        {pending ? "W weryfikacji" : "Wolne miejsce"}
+      </p>
+      <p className="mt-1 text-[13px] text-ui-faint">{pending ? "czeka na decyzję organizatora" : "czeka na Waszą drużynę"}</p>
+    </>
+  );
+
+  if (pending) return <div className="ui-inset flex min-h-44 flex-col items-center justify-center p-4 text-center">{body}</div>;
+
   return (
-    <div className="ui-inset flex min-h-24 flex-col items-center justify-center gap-0.5 p-3 text-center">
-      <p className="text-[12px] text-ui-faint tabular">Slot {seat}</p>
-      <p className={pending ? "ui-name text-[15px]" : "text-ui-muted"}>{pending ? "Zgłoszenie w weryfikacji" : "Wolny slot"}</p>
-      <p className="text-[12px] text-ui-faint">{pending ? "czeka na decyzję organizatora" : "czeka na Waszą drużynę"}</p>
-    </div>
+    <TabLink tab="zapisy" className="group ui-inset flex min-h-44 flex-col items-center justify-center p-4 text-center transition-colors hover:border-umber hover:bg-navy/60" aria-label={`Wolne miejsce ${seat} – zapisz drużynę`}>
+      {body}
+    </TabLink>
   );
 }
 
@@ -53,16 +80,13 @@ export function TeamBoard({ teams, pending, max }: { teams: PublicTeam[]; pendin
   const empty = Math.max(0, max - teams.length);
 
   return (
-    <div>
-      <p className="mb-3 text-[13px] text-ui-muted">Zatwierdzone składy. Publicznie pokazujemy tylko nicki, nazwę drużyny i klasę.</p>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        {teams.map((team, i) => (
-          <TeamCard key={team.id} team={team} seat={i + 1} />
-        ))}
-        {Array.from({ length: empty }, (_, i) => (
-          <EmptySlot key={i} seat={teams.length + i + 1} pending={i < pending} />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      {teams.map((team, i) => (
+        <TeamCard key={team.id} team={team} seat={i + 1} />
+      ))}
+      {Array.from({ length: empty }, (_, i) => (
+        <EmptySlot key={i} seat={teams.length + i + 1} pending={i < pending} />
+      ))}
     </div>
   );
 }

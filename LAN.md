@@ -1,52 +1,49 @@
-# Turniej na LANie – ściąga
+# Turniej w pracowni – ściąga
 
-Plan na 4 grudnia: strona turnieju służy do veto map, drabinki i wyników, a mecze idą na własnym serwerze CS2 w szkolnej pracowni.
+Plan na 4 grudnia: strona turnieju służy do drabinki i wyników, a mecze League of Legends idą w szkolnej pracowni jako gry niestandardowe.
 
 **Założenia**, na których opiera się ta ściąga:
 
-- pracownia ma internet, bo klient CS2 wymaga zalogowania do Steama,
-- każdy gra na własnym koncie Steam, zgodnie z regulaminem,
-- jeden mecz to 10 stanowisk plus komputer sędziego z serwerem CS2, a drugi serwer jest opcjonalny.
+- pracownia ma internet, bo klient LoL łączy się z serwerami Riot (gra nie działa w trybie offline),
+- każdy gra na własnym koncie Riot, zgodnie z regulaminem,
+- jeden mecz to 10 stanowisk, plus komputer sędziego, który może oglądać grę jako widz.
 
 ## Harmonogram
 
 Turniej musi skończyć się najpóźniej o 14:00–14:30, dlatego wszystkie mecze, łącznie z finałem, są w BO1. Drabinka ma 7 meczów: 4 ćwierćfinały, 2 półfinały i finał.
 
-Czas meczu BO1 na MR12 zależy od tego, jak wyrównane są drużyny:
+Czas meczu zależy od tego, jak wyrównane są drużyny:
 
-| Mecz | Przykładowy wynik | Razem z veto i rundą nożową |
+| Mecz | Czas gry | Razem z lobby i draftem |
 | --- | --- | --- |
-| jednostronny | 13:2 | ok. 30 min |
-| wyrównany | 13:8 | ok. 45 min |
-| na styk | 13:11 | ok. 55 min |
-| z dogrywką | 16:14 | ok. 65 min i więcej |
+| jednostronny | ok. 22 min | ok. 35 min |
+| wyrównany | ok. 30 min | ok. 45 min |
+| długi | 38 min i więcej | ok. 55 min i więcej |
 
-Szacunek przyjmuje ok. 1:45 na rundę i 5–10 minut na veto, połączenie i rundę nożową.
+Szacunek przyjmuje ok. 10 minut na zebranie drużyn w lobby i Tournament Draft (10 banów i 10 wyborów).
 
 Koniec turnieju przy starcie o 8:30:
 
-| Wariant | Same jednostronne mecze | Typowo | Same mecze na styk |
+| Wariant | Same jednostronne mecze | Typowo | Same długie mecze |
 | --- | --- | --- | --- |
-| jeden mecz naraz | ok. 12:00 | ok. 13:15 | ok. 15:00 |
-| dwa mecze naraz | ok. 10:30 | ok. 11:30 | ok. 12:30 |
+| jeden mecz naraz | ok. 12:35 | ok. 13:55 | ok. 14:55 |
+| dwa mecze naraz | ok. 10:50 | ok. 11:40 | ok. 12:10 |
 
-„Typowo” oznacza jednostronne ćwierćfinały, wyrównane półfinały i finał na styk. W szkolnym turnieju różnice poziomu są duże, więc to realny scenariusz.
+„Typowo” oznacza wyrównane ćwierćfinały i półfinały oraz długi finał. Jeden mecz naraz mieści się w planie, ale zostawia mało zapasu. Jeśli pracownia ma 20 stanowisk, ćwierćfinały i półfinały warto grać po dwa naraz.
 
-Jeden serwer wystarcza i w typowym scenariuszu zostaje ponad godzina zapasu do 14:30. Ryzyko pojawia się dopiero wtedy, gdy kilka meczów pójdzie na styk albo do dogrywki. Drugi serwer na porcie 27016 jest opcjonalnym zabezpieczeniem.
-
-Przykładowy plan na jednym serwerze, do wpisania w panelu:
+Przykładowy plan przy jednym meczu naraz, do wpisania w panelu:
 
 | Mecz | Start |
 | --- | --- |
 | zbiórka i sprawdzenie składów | 8:00 |
 | ćwierćfinał 1 | 8:30 |
-| ćwierćfinał 2 | 9:05 |
-| ćwierćfinał 3 | 9:40 |
-| ćwierćfinał 4 | 10:15 |
-| półfinał 1 | 10:50 |
-| półfinał 2 | 11:35 |
-| finał | 12:20 |
-| koniec | ok. 13:15 |
+| ćwierćfinał 2 | 9:15 |
+| ćwierćfinał 3 | 10:00 |
+| ćwierćfinał 4 | 10:45 |
+| półfinał 1 | 11:30 |
+| półfinał 2 | 12:15 |
+| finał | 13:00 |
+| koniec | ok. 13:45 |
 
 Godziny są orientacyjne, bo kolejny mecz zaczyna się zaraz po poprzednim. Niech wszystkie drużyny czekają na sali od rana. Walkower liczy się od godziny wpisanej w panelu, więc przy wcześniejszym starcie nie karz drużyny, która jeszcze nie dotarła.
 
@@ -54,142 +51,44 @@ Godziny są orientacyjne, bo kolejny mecz zaczyna się zaraz po poprzednim. Niec
 
 Najprościej zostawić stronę tam, gdzie działa przez cały okres zapisów, czyli w internecie. Zgłoszenia, konta i drabinka są w bazie w chmurze, więc nic nie trzeba przenosić.
 
-- Na rzutniku warto wyświetlić drabinkę, czyli `/cs2#drabinka`, a w trakcie veto pokój meczu. Widzowie oglądają go bez logowania.
-- Kapitanowie wpisują PIN-y na telefonie albo na stanowisku, zanim uruchomią CS2.
+- Na rzutniku warto wyświetlić drabinkę, czyli `/#drabinka`. Wyniki pojawiają się tam po wpisaniu w panelu.
+- Panel organizatora działa na telefonie, więc sędzia może wpisywać wyniki od razu po meczu.
 
 > [!WARNING]
-> Limity prób są liczone na adres IP. Szkolna sieć zwykle wychodzi do internetu przez jeden publiczny adres, więc wszystkie komputery w pracowni dzielą jeden limit.
->
-> - Po 8 błędnych PIN-ach do jednego meczu wpisywanie PIN-u do tego meczu jest zablokowane do 10 minut od pierwszej błędnej próby. Dotyczy to wszystkich w sieci, także kapitanów. Poprawny PIN zeruje licznik.
-> - Po 8 nieudanych logowaniach do panelu logowanie jest zablokowane do 15 minut od pierwszej próby.
->
-> Szybkie odblokowanie: `npm run db:studio`, tabela `RateLimit`, usuń wiersz z kluczem `pin:…` albo `login:…`. Blokady nie omija telefon na danych komórkowych, bo ma inny adres IP.
-
-**Wariant ze stroną w pracowni.** Jeśli każdy komputer ma mieć własny limit, uruchom aplikację na komputerze w pracowni, połączoną z tą samą bazą w chmurze. Postaw ją za reverse proxy, które przekazuje nagłówek `X-Forwarded-For` z lokalnym adresem każdego stanowiska. Aplikację wystaw tylko na `127.0.0.1`, żeby nikt nie ominął proxy.
-
-```bash
-npm ci && npm run build
-npm start -- -H 127.0.0.1 -p 3000
-```
-
-Caddyfile, Caddy sam dodaje `X-Forwarded-For`:
-
-```
-:80 {
-  reverse_proxy 127.0.0.1:3000
-}
-```
-
-W `.env` ustaw `NEXT_PUBLIC_SITE_URL` na adres komputera w sieci, np. `http://192.168.1.10`. W zaporze Windows otwórz port 80.
+> Limit nieudanych logowań do panelu jest liczony na adres IP. Szkolna sieć zwykle wychodzi do internetu przez jeden publiczny adres, więc po 8 błędnych hasłach z pracowni logowanie jest zablokowane dla całej sieci do 15 minut. Szybkie odblokowanie: `npm run db:studio`, tabela `RateLimit`, usuń wiersz z kluczem `login:…`. Blokady nie ma telefon na danych komórkowych, bo ma inny adres IP.
 
 ## Przebieg meczu krok po kroku
 
 **Przed meczem**
 
-1. W panelu, w zakładce **Drabinka i PIN-y**, ustaw godzinę meczu. Wszystkie mecze są BO1.
-2. Drużyny siadają przy stanowiskach. Drużyna nieobecna 10 minut po wyznaczonej godzinie przegrywa walkowerem.
-3. Sprawdź składy z listą w panelu. W grze muszą być te same nicki co w zgłoszeniu.
+1. W panelu, w zakładce **Drabinka**, ustaw godzinę meczu. Wszystkie mecze są BO1.
+2. Drużyny siadają przy stanowiskach i logują się na własne konta Riot. Drużyna nieobecna 10 minut po wyznaczonej godzinie przegrywa walkowerem.
+3. Sprawdź składy z listą w panelu. Riot ID w grze muszą się zgadzać ze zgłoszeniem.
 
-**Veto map na stronie**
+**Lobby meczu**
 
-1. Przy meczu kliknij **Wydaj PIN-y**. Każdy kapitan dostaje swój 6-cyfrowy PIN, najlepiej na kartce. Drużyna A to górna drużyna w parze i zawsze zaczyna veto.
-2. Kapitanowie otwierają `/cs2`, zakładkę **Map veto**, pokój swojego meczu, i wpisują PIN. Zegar tury rusza, gdy obaj są w pokoju.
-3. Na każdy ruch jest 45 sekund. Po tym czasie system sam banuje albo wybiera losową mapę.
+1. Kapitan drużyny A (górna drużyna w parze) albo sędzia tworzy grę: **Graj → Utwórz własną grę**.
+2. Ustawienia: mapa **Summoner's Rift**, tryb **Tournament Draft**, drużyny po 5 graczy, widzowie **tylko z lobby**. Nazwa gry np. `PZS QF1`, hasło własne, podane tylko obu drużynom i sędziemu.
+3. Drużyna A wybiera stronę, niebieską albo czerwoną, i obie drużyny przechodzą na swoje strony w lobby. Sędzia dołącza jako widz.
+4. Start gry, draft w kliencie: najpierw bany, potem wybory bohaterów. Strona turnieju w tym nie uczestniczy.
 
-Kolejność banów: A, B, A, B, A, B. Z 7 map zostaje jedna, decider, i na niej gracie.
+**W trakcie gry**
 
-Gdy PIN wycieknie, kliknij **Nowe PIN-y**. Unieważnia to stare sesje kapitanów. Gdy veto pójdzie źle, **Reset veto** czyści wszystkie ruchy.
-
-**Strony CT i T**
-
-Na każdym meczu stronę startową wyłania runda nożowa. Strona turnieju tego nie rozstrzyga, robi to sędzia na serwerze.
-
-**Mecz na serwerze**
-
-1. W konsoli serwera zmień mapę, np. `changelevel de_mirage`, a potem wpisz `exec turniej`.
-2. Gracze łączą się przez konsolę gry: `connect 192.168.1.10:27015; password HASLO`.
-3. Ustaw nazwy drużyn. `mp_teamname_1` to drużyna, która zaczyna jako CT, a `mp_teamname_2` jako T.
-4. Wpisz `exec noze`, żeby zacząć rundę nożową. Zwycięzcy wybierają stronę. Jeśli chcą ją zmienić, obie drużyny przechodzą na drugą stronę klawiszem M. Potem wpisz `exec live`.
-5. Pauza techniczna, maks. 10 minut na mecz: `mp_pause_match` i `mp_unpause_match`. Pauza zaczyna się od najbliższego freezetime. Każda drużyna ma też 4 pauzy taktyczne po 30 sekund, które bierze sama przez głosowanie w grze.
+- Pauzę techniczną zgłasza się sędziemu, który pauzuje grę komendą `/pause` na czacie (wznowienie: `/unpause`). Łączny limit to 10 minut na drużynę w meczu.
+- Remake jest dozwolony, jeśli zawodnik rozłączył się przed 3. minutą i przed pierwszym zabójstwem. Wtedy grę zamyka się i zakłada od nowa, z tym samym draftem, jeśli obie drużyny się zgodzą.
 
 **Po meczu**
 
-Wpisz wynik w panelu w rundach, np. 13:9. Remisów nie ma, a zwycięzca sam przechodzi do następnej rundy.
+Wpisz wynik w panelu jako 1:0 dla zwycięzcy. Remisów nie ma, a zwycięzca sam przechodzi do następnej rundy.
 
-## Serwer CS2
+## Klient LoL na komputerach szkolnych
 
-**Instalacja** przez SteamCMD, ok. 60 GB:
-
-```
-steamcmd +force_install_dir C:\cs2-server +login anonymous +app_update 730 validate +quit
-```
-
-**Uruchomienie** w trybie competitive i trybie LAN:
-
-```
-C:\cs2-server\game\bin\win64\cs2.exe -dedicated -port 27015 +game_type 0 +game_mode 1 +sv_lan 1 +map de_mirage
-```
-
-Drugi serwer uruchamiasz tak samo, z `-port 27016`.
-
-**Kody map** do `changelevel`:
-
-| Mapa | Kod |
-| --- | --- |
-| Ancient | `de_ancient` |
-| Anubis | `de_anubis` |
-| Cache | `de_cache` |
-| Dust II | `de_dust2` |
-| Inferno | `de_inferno` |
-| Mirage | `de_mirage` |
-| Nuke | `de_nuke` |
-
-**Konfiguracje** wrzuć do `C:\cs2-server\game\csgo\cfg\`. Hasło serwera ustaw własne i nie wrzucaj go do repo.
-
-`turniej.cfg`, wpisywany po każdej zmianie mapy:
-
-```
-// regulamin: MR12, dogrywka MR3 z budżetem 10 000 $
-mp_maxrounds 24
-mp_overtime_enable 1
-mp_overtime_maxrounds 6
-mp_overtime_startmoney 10000
-// 4 pauzy taktyczne po 30 s na drużynę
-mp_team_timeout_max 4
-mp_team_timeout_time 30
-// składy pilnuje sędzia
-mp_autoteambalance 0
-mp_limitteams 0
-// rozgrzewka trwa, dopóki sędzia jej nie zakończy
-mp_warmup_pausetimer 1
-sv_lan 1
-sv_password "HASLO"
-```
-
-`noze.cfg`, runda nożowa:
-
-```
-mp_ct_default_secondary ""
-mp_t_default_secondary ""
-mp_give_player_c4 0
-mp_startmoney 0
-mp_warmup_end
-mp_restartgame 1
-```
-
-`live.cfg`, start meczu:
-
-```
-mp_ct_default_secondary weapon_hkp2000
-mp_t_default_secondary weapon_glock
-mp_give_player_c4 1
-mp_startmoney 800
-mp_warmup_end
-mp_restartgame 1
-```
+- Klient League of Legends instaluje się razem z ochroną przed oszustwami Riot Vanguard. Instalacja wymaga uprawnień administratora i ponownego uruchomienia komputera.
+- Jeśli komputery w pracowni mają program przywracający stan po restarcie (np. Deep Freeze), zainstaluj i zaktualizuj grę w trybie odmrożonym, zanim go włączysz. Inaczej Vanguard i aktualizacje znikną po każdym restarcie.
+- Aktualizacje gry potrafią mieć kilka GB. Zaktualizuj klienta na wszystkich stanowiskach dzień wcześniej, a rano tylko sprawdź, czy nie ma nowej łatki.
 
 > [!IMPORTANT]
-> Zmienne CS2 zmieniają się z aktualizacjami gry. Przetestuj cały przebieg, z veto, nożem, pauzą i dogrywką, kilka dni przed turniejem.
+> Rozegraj mecz testowy z dwiema pełnymi drużynami kilka dni przed turniejem: logowanie na konta uczniów, lobby z hasłem, Tournament Draft, pauza i remake. Sprawdź też, czy szkolna sieć nie blokuje klienta Riot.
 
 ## Checklista
 
@@ -197,20 +96,17 @@ mp_restartgame 1
 
 - [ ] Uzupełnić pola w `src/content/event.ts`: salę i IOD.
 - [ ] Założyć konta nauczycielom w panelu.
-- [ ] Zainstalować i zaktualizować CS2 na wszystkich stanowiskach.
-- [ ] Sprawdzić, czy szkolna sieć nie blokuje Steama.
-- [ ] Rozegrać mecz testowy na serwerze z configami.
+- [ ] Zainstalować i zaktualizować klienta LoL z Riot Vanguard na wszystkich stanowiskach.
+- [ ] Sprawdzić, czy szkolna sieć nie blokuje klienta Riot.
+- [ ] Rozegrać mecz testowy w lobby Tournament Draft.
 - [ ] Rozstawić drabinkę i ustawić godziny meczów.
-- [ ] Przypomnieć kapitanom: zawodnicy poniżej 18 lat składają podpisaną zgodę rodzica na portierni najpóźniej dzień przed turniejem (wzór: `/zgoda-rodzica-cs2.pdf`), a pełnoletni przychodzą z dowodem osobistym.
-- [ ] Dzień przed turniejem odebrać zgody z portierni i odhaczyć je na liście uczniów z **Eksportu CSV**.
+- [ ] Przypomnieć kapitanom, że każdy gra na własnym koncie Riot i musi znać do niego hasło.
 
 **Rano w dniu turnieju**
 
-- [ ] Zaktualizować serwer, czyli powtórzyć `app_update 730`, i klienty CS2. Różne wersje nie połączą się ze sobą.
-- [ ] Uruchomić serwer, a przy dwóch meczach naraz także drugi, na porcie 27016. Sprawdzić `connect` z jednego stanowiska.
+- [ ] Uruchomić klienta na wszystkich stanowiskach i pobrać ewentualną łatkę.
 - [ ] Włączyć rzutnik z drabinką.
-- [ ] Przygotować kartki na PIN-y.
-- [ ] Przy wejściu sprawdzić dowody osobiste pełnoletnich zawodników i listę złożonych zgód. Zawodnik poniżej 18 lat bez zgody nie gra.
+- [ ] Przygotować kartki z nazwą i hasłem lobby dla każdego meczu.
 
 **Po turnieju**
 

@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentProps } from "react";
-import { openTab } from "@/components/vgui/tab-store";
+import { openTab } from "@/components/hx/tab-store";
 
 export function TabLink({ tab, onClick, ...props }: ComponentProps<"a"> & { tab: string }) {
   return (

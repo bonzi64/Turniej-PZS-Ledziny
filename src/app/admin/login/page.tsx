@@ -2,8 +2,7 @@ import { redirect } from "next/navigation";
 import { signIn } from "@/actions/staff-auth";
 import { ActionForm, Submit } from "@/components/admin/ActionForm";
 import { SchoolLogo } from "@/components/brand/SchoolLogo";
-import { PixelText } from "@/components/vgui/pixel";
-import { Window } from "@/components/vgui/Window";
+import { Window } from "@/components/hx/frame";
 import { currentStaff } from "@/lib/auth/session";
 
 export const metadata = { title: "Logowanie" };
@@ -12,35 +11,33 @@ export default async function LoginPage() {
   if (await currentStaff()) redirect("/admin");
 
   return (
-    <div className="grid min-h-dvh place-items-center px-3">
+    <div className="grid min-h-dvh place-items-center px-3 py-10">
       <div className="w-full max-w-sm">
-        <div className="mb-6 flex items-center gap-4 text-vg-gold">
-          <SchoolLogo height={72} priority />
-          <div>
-            <PixelText text="PZS" dot={6} className="drop-shadow-[0_0_6px_rgb(196_181_80/0.45)]" />
-            <p className="mt-2 text-[11px] tracking-[0.3em] text-vg-muted uppercase">Panel organizatora</p>
-          </div>
+        <div className="mb-8 flex flex-col items-center text-center">
+          <span className="hx-ring size-28">
+            <SchoolLogo height={72} priority />
+          </span>
+          <h1 className="mt-5 font-display text-[28px] tracking-[0.06em] text-parchment">Panel organizatora</h1>
+          <p className="mt-1 text-[14px] text-ui-muted">Turniej PZS Lędziny · League of Legends</p>
         </div>
-        <Window title="Logowanie – konto organizatora" closeHref="/">
-          <p className="mb-3 text-[12px] text-vg-muted">Dostęp tylko dla nauczycieli-organizatorów. W panelu widać pełne dane uczniów.</p>
-          <ActionForm action={signIn} className="space-y-3">
+        <Window title="Logowanie" closeHref="/">
+          <p className="mb-4 text-[14px] text-ui-muted">Dostęp tylko dla nauczycieli-organizatorów. W panelu widać pełne dane uczniów.</p>
+          <ActionForm action={signIn} className="space-y-4">
             <div>
-              <label className="vg-label" htmlFor="login">
+              <label className="ui-label" htmlFor="login">
                 Login
               </label>
-              <input id="login" name="login" className="vg-field" autoComplete="username" required autoFocus />
+              <input id="login" name="login" className="ui-field" autoComplete="username" autoCapitalize="off" required autoFocus />
             </div>
             <div>
-              <label className="vg-label" htmlFor="password">
+              <label className="ui-label" htmlFor="password">
                 Hasło
               </label>
-              <input id="password" name="password" type="password" className="vg-field" autoComplete="current-password" required />
+              <input id="password" name="password" type="password" className="ui-field" autoComplete="current-password" required />
             </div>
-            <div className="flex justify-end">
-              <Submit className="min-w-24" data-default="">
-                Zaloguj
-              </Submit>
-            </div>
+            <Submit tone="gold" className="w-full">
+              Zaloguj
+            </Submit>
           </ActionForm>
         </Window>
       </div>

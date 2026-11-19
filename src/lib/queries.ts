@@ -1,7 +1,8 @@
 import "server-only";
 import { connection } from "next/server";
+import { cache } from "react";
 import type { Prisma } from "@/generated/prisma/client";
-import type { Game, MatchFormat, Side, TeamStatus, VetoAction } from "@/generated/prisma/enums";
+import type { Game, MatchFormat, Side, TeamStatus } from "@/generated/prisma/enums";
 import { db } from "@/lib/db";
 import { GAMES, type GameSlug } from "@/lib/games";
 import { MAX_TEAMS, ROUNDS } from "@/lib/tournament";
@@ -57,7 +58,8 @@ function toPublicTeam(row: PublicTeamRow): PublicTeam {
   return { id: row.id, name: row.name, tag: row.tag, classes, roster };
 }
 
-export async function getSlotStats(): Promise<SlotStat[]> {
+// cache – layout (panel drużyn) i strona pytają o to samo w jednym żądaniu
+export const getSlotStats = cache(async (): Promise<SlotStat[]> => {
   await connection();
   const grouped = await db.team.groupBy({ by: ["game", "status"], _count: { _all: true } });
 
@@ -68,9 +70,9 @@ export async function getSlotStats(): Promise<SlotStat[]> {
     const pending = count("PENDING");
     return { slug: game.slug, approved, pending, taken: approved + pending, max: MAX_TEAMS };
   });
-}
+});
 
-export async function getPublicTeams(game: Game) {
+export const getPublicTeams = cache(async (game: Game) => {
   await connection();
   const rows = await db.team.findMany({
     where: { game, status: "APPROVED" },
@@ -78,13 +80,9 @@ export async function getPublicTeams(game: Game) {
     orderBy: [{ reviewedAt: "asc" }, { createdAt: "asc" }],
   });
   return rows.map(toPublicTeam);
-}
+});
 
 // --- DRABINKA ---
-
-export type BracketPick = { map: string; action: VetoAction; side: Side | null };
-
-export type VetoStage = "off" | "lobby" | "live" | "done";
 
 export type BracketMatch = {
   id: string | null;
@@ -97,8 +95,6 @@ export type BracketMatch = {
   scoreA: number | null;
   scoreB: number | null;
   winner: Side | null;
-  picks: BracketPick[];
-  veto: VetoStage;
 };
 
 export async function getPublicBracket(game: Game): Promise<BracketMatch[][]> {
@@ -116,15 +112,6 @@ export async function getPublicBracket(game: Game): Promise<BracketMatch[][]> {
       scoreA: true,
       scoreB: true,
       winnerSide: true,
-      pinA: true,
-      readyA: true,
-      readyB: true,
-      vetoDoneAt: true,
-      vetoSteps: {
-        where: { action: { in: ["PICK", "DECIDER"] } },
-        select: { map: true, action: true, side: true },
-        orderBy: { order: "asc" },
-      },
     },
   });
 
@@ -149,19 +136,9 @@ export async function getPublicBracket(game: Game): Promise<BracketMatch[][]> {
           scoreA: null,
           scoreB: null,
           winner: null,
-          picks: [],
-          veto: "off",
         };
       }
 
-      // pinA służy tylko do wyliczenia etapu – nie wychodzi poza serwer
-      const veto: VetoStage = row.vetoDoneAt
-        ? "done"
-        : !row.pinA
-          ? "off"
-          : row.readyA && row.readyB
-            ? "live"
-            : "lobby";
 
       return {
         id: row.id,
@@ -174,8 +151,6 @@ export async function getPublicBracket(game: Game): Promise<BracketMatch[][]> {
         scoreA: row.scoreA,
         scoreB: row.scoreB,
         winner: row.winnerSide,
-        picks: row.vetoSteps,
-        veto,
       };
     }),
   );

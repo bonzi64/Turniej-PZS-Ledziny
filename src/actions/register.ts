@@ -99,7 +99,6 @@ export async function registerTeam(_prev: RegisterState, form: FormData): Promis
     throw error;
   }
 
-  revalidatePath(`/${game.slug}`);
-  revalidatePath("/");
+  revalidatePath("/", "layout");
   return { status: "ok", teamName: entry.teamName };
 }

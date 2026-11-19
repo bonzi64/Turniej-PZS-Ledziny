@@ -1,38 +1,33 @@
 import type { Game } from "@/generated/prisma/enums";
 
-export type GameSlug = "cs2";
+export type GameSlug = "lol";
 
 export type GameModule = {
   slug: GameSlug;
   code: Game;
-  no: string;
   name: string;
   short: string;
-  accent: string;
-  onAccent: string;
   mode: string[];
   blurb: string;
   nickLabel: string;
   nickPlaceholder: string;
-  vetoEnabled: boolean;
 };
 
 export const GAMES: readonly GameModule[] = [
   {
-    slug: "cs2",
-    code: "CS2",
-    no: "01",
-    name: "Counter-Strike 2",
-    short: "CS2",
-    accent: "#ffae00",
-    onAccent: "#0b0b0e",
-    mode: ["5v5", "MR12", "Wszystkie mecze BO1", "Map veto online"],
-    blurb: "Bomba, ekonomia i zero miejsca na błąd. Mapy wybieracie w panelu veto na żywo – jak na FACEIT.",
-    nickLabel: "Nick Steam",
-    nickPlaceholder: "np. zeus_z_3ti",
-    vetoEnabled: true,
+    slug: "lol",
+    code: "LOL",
+    name: "League of Legends",
+    short: "LoL",
+    mode: ["5v5", "Summoner's Rift", "Tournament Draft", "Wszystkie mecze BO1"],
+    blurb: "Summoner's Rift, draft i makro. Bany i picki robicie w kliencie gry, a my pilnujemy drabinki.",
+    nickLabel: "Riot ID",
+    nickPlaceholder: "nick#EUNE",
   },
 ];
+
+// turniej obejmuje jedną grę – wybraną w głosowaniu i zmienioną po odwołaniu turnieju CS2
+export const GAME = GAMES[0];
 
 export const gameBySlug = (slug: string) => GAMES.find((g) => g.slug === slug);
 

@@ -6,8 +6,6 @@ export const sha256 = (value: string) => createHash("sha256").update(value).dige
 
 export const randomToken = (bytes = 32) => randomBytes(bytes).toString("base64url");
 
-export const makePin = () => String(randomInt(0, 1_000_000)).padStart(6, "0");
-
 function mac(payload: string) {
   return createHmac("sha256", env.authSecret).update(payload).digest("base64url");
 }

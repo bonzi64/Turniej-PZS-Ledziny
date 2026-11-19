@@ -64,8 +64,9 @@ export function useBoot({ ticks, leaveMs }: { ticks: number; leaveMs: number }) 
     }
     play("boot");
     setLeaving(true);
+    // właściwy koniec wywołuje intro po przylocie rdzenia (finish); ten zegar to tylko zabezpieczenie
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setTimeout(store.finish, reduce ? 0 : leaveMs);
+    setTimeout(store.finish, reduce ? 0 : leaveMs + 600);
   }, [leaveMs, leaving, play, ready, total, unlock]);
 
   const skip = useCallback(() => {
@@ -85,17 +86,17 @@ export function useBoot({ ticks, leaveMs }: { ticks: number; leaveMs: number }) 
     return () => window.removeEventListener("keydown", onKey);
   }, [booted, proceed, skip]);
 
-  return { booted, tick, progress, ready, leaving, proceed, skip, sfx: sound.sfx, music: sound.music };
+  return { booted, tick, progress, ready, leaving, proceed, skip, finish: store.finish, sfx: sound.sfx, music: sound.music };
 }
 
 export const BOOT_STEPS = [
-  "Inicjalizacja systemu PZS E-SPORTS...",
-  "Weryfikacja plików gry...",
-  "Pobieranie: regulamin.txt",
-  "Wczytywanie drabinek turniejowych...",
+  "Uruchamianie klienta PZS E-SPORTS...",
+  "Sprawdzanie plików gry...",
+  "Wczytywanie Summoner's Rift...",
+  "Pobieranie regulaminu turnieju...",
   "Szyfrowanie danych osobowych (RODO)...",
-  "Synchronizacja z serwerem...",
-  "Połączono.",
+  "Synchronizacja drabinki...",
+  "Gotowe.",
 ];
 
 export const stepFor = (progress: number) => BOOT_STEPS[Math.min(BOOT_STEPS.length - 1, Math.floor(progress * (BOOT_STEPS.length - 1)))];

@@ -1,24 +1,24 @@
 // Cała warstwa audio jest syntezowana – zero plików, zero licencji
 
-export type Cue = "hover" | "click" | "boot" | "ban" | "pick" | "deny" | "unlock" | "success" | "tick";
+export type Cue = "hover" | "click" | "boot" | "deny" | "unlock" | "success" | "tick";
 
 type Voice = { osc: OscillatorNode; gain: GainNode };
 
 const midi = (note: number) => 440 * 2 ** ((note - 69) / 12);
 
-// --- MUZYKA: Am – F – C – G, 104 BPM, 16 kroków na takt ---
+// --- MUZYKA: Dm – B♭ – F – C, 84 BPM, 16 kroków na takt – spokojny „hextech”: pad, sub i dzwonki ---
 
-const BPM = 104;
+const BPM = 84;
 const STEP = 60 / BPM / 4;
 const PROGRESSION = [
-  { root: 45, chord: [57, 60, 64] },
-  { root: 41, chord: [53, 57, 60] },
-  { root: 48, chord: [55, 60, 64] },
-  { root: 43, chord: [55, 59, 62] },
+  { root: 38, chord: [62, 65, 69] },
+  { root: 34, chord: [58, 62, 65] },
+  { root: 41, chord: [60, 65, 69] },
+  { root: 36, chord: [60, 64, 67] },
 ];
-const BASS_STEPS = [0, 3, 6, 8, 10, 11, 14];
-const BASS_OCTAVE_UP = new Set([6, 14]);
-const ARP_ORDER = [0, 1, 2, 1, 0, 2, 1, 2];
+const BASS_STEPS = [0, 6, 8, 14];
+const BASS_OCTAVE_UP = new Set([14]);
+const ARP_ORDER = [0, 1, 2, 3, 2, 1, 2, 3];
 
 class Sequencer {
   private timer: ReturnType<typeof setInterval> | null = null;
@@ -56,23 +56,25 @@ class Sequencer {
     const { root, chord } = PROGRESSION[bar % 4];
     const section = Math.floor(bar / 8);
 
-    if (step % 4 === 0) this.kick(at);
-    if (section > 0 && step % 4 === 2) this.hat(at, 0.05);
-    if (section > 1 && step % 2 === 1) this.hat(at, 0.02);
-    if (step === 4 || step === 12) this.snare(at, section > 0 ? 0.09 : 0.05);
+    // miękkie bicie serca na 1 i 3, cichy szelest od drugiej części
+    if (step === 0 || step === 8) this.kick(at);
+    if (section > 0 && step % 4 === 2) this.hat(at, 0.018);
 
     if (BASS_STEPS.includes(step)) this.bass(midi(root + (BASS_OCTAVE_UP.has(step) ? 12 : 0)), at);
     if (step === 0) this.pad(chord.map(midi), at, STEP * 16);
-    if (section >= 2 && step % 2 === 0) this.arp(midi(chord[ARP_ORDER[(step / 2) % 8]] + 12), at);
+    // dzwonki: najpierw na ćwierćnutach, w trzeciej części gęściej
+    const bellNotes = [...chord, chord[0] + 12];
+    if (section >= 1 && step % 4 === 0) this.arp(midi(bellNotes[ARP_ORDER[(step / 2) % 8]] + 12), at);
+    if (section >= 2 && step % 4 === 2) this.arp(midi(bellNotes[ARP_ORDER[(step / 2 + 3) % 8]] + 12), at);
   }
 
   private kick(at: number) {
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.frequency.setValueAtTime(140, at);
-    osc.frequency.exponentialRampToValueAtTime(42, at + 0.22);
-    gain.gain.setValueAtTime(0.55, at);
-    gain.gain.exponentialRampToValueAtTime(0.001, at + 0.3);
+    osc.frequency.setValueAtTime(95, at);
+    osc.frequency.exponentialRampToValueAtTime(38, at + 0.28);
+    gain.gain.setValueAtTime(0.32, at);
+    gain.gain.exponentialRampToValueAtTime(0.001, at + 0.38);
     osc.connect(gain).connect(this.out);
     osc.start(at);
     osc.stop(at + 0.32);
@@ -91,32 +93,17 @@ class Sequencer {
     src.start(at, Math.random() * 0.5, 0.06);
   }
 
-  private snare(at: number, level: number) {
-    const src = this.ctx.createBufferSource();
-    const filter = this.ctx.createBiquadFilter();
-    const gain = this.ctx.createGain();
-    src.buffer = this.noise;
-    filter.type = "bandpass";
-    filter.frequency.value = 1800;
-    filter.Q.value = 0.8;
-    gain.gain.setValueAtTime(level, at);
-    gain.gain.exponentialRampToValueAtTime(0.0001, at + 0.18);
-    src.connect(filter).connect(gain).connect(this.out);
-    src.start(at, Math.random() * 0.5, 0.2);
-  }
-
   private bass(freq: number, at: number) {
     const osc = this.ctx.createOscillator();
     const filter = this.ctx.createBiquadFilter();
     const gain = this.ctx.createGain();
-    osc.type = "sawtooth";
+    osc.type = "triangle";
     osc.frequency.value = freq;
     filter.type = "lowpass";
-    filter.Q.value = 7;
-    filter.frequency.setValueAtTime(900, at);
-    filter.frequency.exponentialRampToValueAtTime(180, at + STEP * 1.6);
+    filter.Q.value = 1;
+    filter.frequency.setValueAtTime(420, at);
     gain.gain.setValueAtTime(0.0001, at);
-    gain.gain.exponentialRampToValueAtTime(0.16, at + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.2, at + 0.04);
     gain.gain.exponentialRampToValueAtTime(0.0001, at + STEP * 1.8);
     osc.connect(filter).connect(gain).connect(this.out);
     osc.start(at);
@@ -127,9 +114,9 @@ class Sequencer {
     const filter = this.ctx.createBiquadFilter();
     const gain = this.ctx.createGain();
     filter.type = "lowpass";
-    filter.frequency.value = 1100;
+    filter.frequency.value = 760;
     gain.gain.setValueAtTime(0.0001, at);
-    gain.gain.linearRampToValueAtTime(0.045, at + length * 0.35);
+    gain.gain.linearRampToValueAtTime(0.05, at + length * 0.4);
     gain.gain.linearRampToValueAtTime(0.0001, at + length);
     filter.connect(gain).connect(this.out);
 
@@ -146,16 +133,23 @@ class Sequencer {
     }
   }
 
+  // dzwonek: sinus i nieharmoniczny alikwot, długie wybrzmienie
   private arp(freq: number, at: number) {
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.type = "square";
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.018, at);
-    gain.gain.exponentialRampToValueAtTime(0.0001, at + STEP * 1.5);
-    osc.connect(gain).connect(this.out);
-    osc.start(at);
-    osc.stop(at + STEP * 1.6);
+    for (const [ratio, level] of [
+      [1, 0.03],
+      [2.76, 0.008],
+    ] as const) {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq * ratio;
+      gain.gain.setValueAtTime(0.0001, at);
+      gain.gain.exponentialRampToValueAtTime(level, at + 0.006);
+      gain.gain.exponentialRampToValueAtTime(0.0001, at + STEP * 5);
+      osc.connect(gain).connect(this.out);
+      osc.start(at);
+      osc.stop(at + STEP * 5.2);
+    }
   }
 }
 
@@ -253,39 +247,59 @@ export class SoundDeck {
       case "hover": {
         if (performance.now() - this.lastHover < 45) return;
         this.lastHover = performance.now();
-        this.burst(t, 0.018, 0.05, 5200);
+        this.bell(2637, t, 0.08, 0.025);
         break;
       }
       case "click":
-        this.blip("triangle", 520, 160, t, 0.09, 0.22);
-        this.burst(t, 0.03, 0.12, 3200);
+        this.bell(midi(81), t, 0.22, 0.07);
+        this.bell(midi(88), t + 0.025, 0.18, 0.035);
+        this.burst(t, 0.04, 0.06, 4200);
         break;
       case "tick":
-        this.blip("square", 2400, 2400, t, 0.02, 0.05);
+        this.bell(1760, t, 0.05, 0.04);
         break;
       case "boot":
-        this.blip("sawtooth", 70, 880, t, 0.7, 0.12);
-        [0, 0.12, 0.24].forEach((d, i) => this.blip("square", midi(69 + [0, 7, 12][i]), midi(69 + [0, 7, 12][i]), t + 0.55 + d, 0.18, 0.08));
-        break;
-      case "ban":
-        this.blip("sawtooth", 190, 45, t, 0.4, 0.35);
-        this.burst(t, 0.35, 0.3, 900);
-        break;
-      case "pick":
-        [72, 76, 79, 84].forEach((n, i) => this.blip("square", midi(n), midi(n), t + i * 0.06, 0.09, 0.1));
+        // narastający szum jak otwierana brama hextech, potem akord dzwonków D–F–A–D–F
+        this.swell(t, 0.7);
+        [62, 65, 69, 74, 77].forEach((n, i) => this.bell(midi(n + 12), t + 0.55 + i * 0.09, 1.6, 0.07));
+        this.blip("sine", midi(38), midi(38), t + 0.55, 1.4, 0.18);
         break;
       case "deny":
-        this.blip("square", 150, 140, t, 0.09, 0.14);
-        this.blip("square", 150, 110, t + 0.12, 0.12, 0.14);
+        this.blip("triangle", 220, 200, t, 0.12, 0.16);
+        this.blip("triangle", 196, 160, t + 0.13, 0.18, 0.16);
         break;
       case "unlock":
-        this.blip("triangle", midi(76), midi(76), t, 0.1, 0.2);
-        this.blip("triangle", midi(83), midi(83), t + 0.09, 0.22, 0.2);
+        this.bell(midi(81), t, 0.6, 0.08);
+        this.bell(midi(88), t + 0.1, 0.9, 0.08);
         break;
       case "success":
-        [60, 64, 67, 72, 76].forEach((n, i) => this.blip("triangle", midi(n), midi(n), t + i * 0.07, 0.4, 0.12));
+        [62, 65, 69, 74, 77, 81].forEach((n, i) => this.bell(midi(n + 12), t + i * 0.075, 1.2, 0.075));
         break;
     }
+  }
+
+  // dzwonek: czysty sinus i nieharmoniczny alikwot, jak metal hextech
+  private bell(freq: number, at: number, length: number, level: number) {
+    this.blip("sine", freq, freq, at, length, level);
+    this.blip("sine", freq * 2.76, freq * 2.76, at, length * 0.45, level * 0.3);
+  }
+
+  private swell(at: number, length: number) {
+    const { ctx, sfxBus, noise } = this;
+    if (!ctx || !sfxBus || !noise) return;
+    const src = ctx.createBufferSource();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+    src.buffer = noise;
+    filter.type = "bandpass";
+    filter.Q.value = 3;
+    filter.frequency.setValueAtTime(300, at);
+    filter.frequency.exponentialRampToValueAtTime(3200, at + length);
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.exponentialRampToValueAtTime(0.22, at + length * 0.85);
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + length + 0.15);
+    src.connect(filter).connect(gain).connect(sfxBus);
+    src.start(at, 0, length + 0.2);
   }
 
   private blip(type: OscillatorType, from: number, to: number, at: number, length: number, level: number): Voice | null {

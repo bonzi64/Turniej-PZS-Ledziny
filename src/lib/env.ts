@@ -16,9 +16,6 @@ export const env = {
     }
     return DEV_SECRET;
   },
-  get vetoTurnSeconds() {
-    return int("VETO_TURN_SECONDS", 45);
-  },
   get rulesMinSeconds() {
     return int("RULES_MIN_SECONDS", 60);
   },

@@ -9,7 +9,7 @@ export async function overview() {
   const [grouped, recent] = await Promise.all([
     db.team.groupBy({ by: ["game", "status"], _count: { _all: true } }),
     db.team.findMany({
-      // stare zgłoszenia z usuniętych gier (VALORANT, LOL) pomijamy
+      // stare zgłoszenia z gier spoza turnieju (CS2, VALORANT) pomijamy
       where: { status: "PENDING", game: { in: GAMES.map((g) => g.code) } },
       orderBy: { createdAt: "asc" },
       take: 8,
@@ -44,7 +44,6 @@ export async function bracketBoard(game: Game) {
     db.match.findMany({
       where: { game },
       orderBy: [{ round: "asc" }, { slot: "asc" }],
-      include: { _count: { select: { vetoSteps: true } } },
     }),
     db.team.findMany({
       where: { game, status: "APPROVED" },

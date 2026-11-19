@@ -12,32 +12,34 @@ function GithubMark() {
 
 export function LegalNote() {
   return (
-    <div className="flex flex-col gap-3 text-[11px] leading-relaxed text-ui-faint sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-      <div>
-        <p>
-          {EVENT.school}, {EVENT.address} ·{" "}
-          <Link href="/rodo" className="underline hover:text-ui-accent">
-            Dane osobowe
-          </Link>{" "}
-          ·{" "}
-          <Link href="/admin" className="underline hover:text-ui-accent">
-            Panel organizatora
-          </Link>
-        </p>
-        <p className="mt-1">Counter-Strike 2 jest znakiem towarowym Valve Corporation. Turniej szkolny, niepowiązany z tą firmą.</p>
-      </div>
+    <div className="border-t border-hull pt-5">
+      <div className="flex flex-col gap-3 text-[13px] leading-relaxed text-ui-faint sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+        <div>
+          <p>
+            {EVENT.school}, {EVENT.address} ·{" "}
+            <Link href="/rodo" className="underline transition-colors hover:text-gold">
+              Dane osobowe
+            </Link>{" "}
+            ·{" "}
+            <Link href="/admin" className="underline transition-colors hover:text-gold">
+              Panel organizatora
+            </Link>
+          </p>
+          <p className="mt-1">League of Legends jest znakiem towarowym Riot Games, Inc. Turniej szkolny, niepowiązany z Riot Games.</p>
+        </div>
 
-      <a
-        href={EVENT.author.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group inline-flex shrink-0 items-center gap-1.5 self-start hover:text-ui-accent"
-      >
-        <GithubMark />
-        <span>
-          Autor strony: <span className="text-ui-muted group-hover:text-ui-accent">{EVENT.author.name}</span>
-        </span>
-      </a>
+        <a
+          href={EVENT.author.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex shrink-0 items-center gap-1.5 self-start transition-colors hover:text-gold"
+        >
+          <GithubMark />
+          <span>
+            Autor strony: <span className="text-ui-muted group-hover:text-gold">{EVENT.author.name}</span>
+          </span>
+        </a>
+      </div>
     </div>
   );
 }

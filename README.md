@@ -10,33 +10,34 @@
 </p>
 
 <p align="center">
-  <b>Counter-Strike 2</b> · 8 drużyn · <b>piątek, 4 grudnia 2026</b> · zbiórka 8:00, start 8:30, koniec do 14:30
+  <b>League of Legends</b> · 8 drużyn · <b>piątek, 4 grudnia 2026</b> · zbiórka 8:00, start 8:30, koniec do 14:30
 </p>
 
 ---
 
-Strona prowadzi turniej od zapisów aż do finału. Uczniowie zgłaszają drużyny przez formularz, nauczyciele sprawdzają zgłoszenia w zabezpieczonym panelu, a w dniu turnieju na stronie widać drabinkę i wybór map na żywo. Wygląd nawiązuje do klasycznego Counter-Strike 1.6 i Steama.
+Strona prowadzi turniej od zapisów aż do finału. Uczniowie zgłaszają drużyny przez formularz, nauczyciele sprawdzają zgłoszenia w zabezpieczonym panelu, a w dniu turnieju na stronie widać drabinkę i wyniki na żywo. Wygląd nawiązuje do menu głównego klienta League of Legends: granat, metalowe złote ramki, rdzeń hextech z kryształem, kapitaliki Marcellus SC i przycisk „Zapisz drużynę” w miejscu przycisku „Graj”.
 
-Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w głosowaniu. Żeby strona była gotowa niezależnie od wyniku, powstała w trzech wersjach: dla Counter-Strike 2, Valoranta i League of Legends. Głosowanie wygrało CS2, więc dwie pozostałe wersje zostały usunięte.
+Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w głosowaniu. Głosowanie wygrało Counter-Strike 2, ale turniej CS2 się nie odbędzie, więc strona wróciła do League of Legends. Wersja CS2 jest zachowana w tagu `cs2-final` i w kopii `turniejpzs-kopia-cs2-2026-11-18`.
 
 ## Co potrafi strona
 
 ### Dla uczniów
 
+- **Intro jak start klienta.** Rdzeń hextech składa się w takt ładowania, a po kliknięciu przelatuje na baner strony startowej. Kliknięcie włącza pełny ekran, `Esc` pomija intro.
 - **Regulamin z blokadą.** Formularz zapisów odblokowuje się dopiero wtedy, gdy regulamin zostanie przewinięty do końca i minie minimalny czas lektury, domyślnie 60 sekund. Zegar liczy tylko wtedy, gdy regulamin jest widoczny na ekranie.
-- **Zgłoszenie drużyny.** Pięciu graczy i jeden rezerwowy. Dla każdego nick Steam, imię, nazwisko i klasa, a dla kapitana także e-mail.
-- **Licznik zapisów na żywo.** Na stronie widać, ile z 8 miejsc jest już zajętych.
+- **Zgłoszenie drużyny.** Pięciu graczy i jeden rezerwowy. Dla każdego Riot ID, imię, nazwisko i klasa, a dla kapitana także e-mail. Na telefonie każdy zawodnik ma własną kartę z polami zamiast szerokiej tabeli.
+- **Licznik zapisów na żywo** na banerze i w panelu drużyn po prawej, który wygląda jak lista znajomych w kliencie.
 - **Lista drużyn i drabinka.** Zatwierdzone składy, pary meczowe, godziny meczów i wyniki.
-- **Wybór map jak na FACEIT.** Kapitanowie na zmianę odrzucają mapy w pokoju meczu, a widzowie oglądają to na żywo, bez logowania.
+- **Dźwięk.** Efekty i muzyka są syntezowane w przeglądarce (bez plików), z osobną głośnością.
 
 ### Dla nauczycieli
 
 - **Panel organizatora** pod adresem `/admin`, dostępny tylko po zalogowaniu.
 - **Weryfikacja zgłoszeń** z pełnymi danymi uczniów i przyciskami „Zatwierdź” oraz „Odrzuć”.
 - **Drabinka** rozstawiana ręcznie albo losowo. Po wpisaniu wyniku zwycięzca sam przechodzi do następnej rundy.
-- **PIN-y dla kapitanów** do pokoju wyboru map, wydawane jednym kliknięciem przy każdym meczu.
 - **Eksport do Excela** z listą wszystkich zgłoszonych uczniów.
 - **Osobne konta dla nauczycieli** z dwiema rolami: Organizator i Administrator.
+- **Zdjęcia z turnieju** dodawane w panelu i pokazywane na stronie `/zdjecia`.
 - **Anonimizacja danych** po turnieju jednym przyciskiem.
 
 ## Ochrona danych uczniów (RODO)
@@ -47,11 +48,11 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 | Widoczne publicznie | Widoczne tylko w panelu organizatora |
 | --- | --- |
 | nazwa i tag drużyny | imię i nazwisko |
-| nicki graczy | e-mail kapitana |
+| Riot ID graczy | e-mail kapitana |
 | klasa | Discord kapitana |
 
-- Klauzula informacyjna jest na stronie `/rodo`. Przy zgłoszeniu kapitan akceptuje regulamin i zgodę na przetwarzanie danych, oświadcza, że wszyscy zawodnicy ukończyli 17 lat, i potwierdza, że zawodnicy poniżej 18 lat złożą podpisaną zgodę rodzica na portierni najpóźniej dzień przed turniejem, a pełnoletni przyjdą z dowodem osobistym.
-- Wzór zgody rodzica leży w `public/zgoda-rodzica-cs2.pdf`. Strona daje go do pobrania w regulaminie, w formularzu i po wysłaniu zgłoszenia.
+- Klauzula informacyjna jest na stronie `/rodo`. Przy zgłoszeniu kapitan akceptuje regulamin i zgodę na przetwarzanie danych.
+- W turnieju LoL nie ma limitu wieku ani papierowych zgód rodziców. Może grać każdy uczeń PZS Lędziny.
 - Publiczna część strony korzysta z osobnych zapytań do bazy, które w ogóle nie pobierają imion, nazwisk ani kontaktów.
 - Dane są przechowywane do 31.12.2026. Potem administrator anonimizuje je w panelu. Imiona, nazwiska, e-maile i Discordy znikają, a nicki, klasy, nazwy drużyn i wyniki zostają w archiwum turnieju.
 
@@ -63,23 +64,24 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 2. W zakładce **Zgłoszenia** sprawdzacie każdą drużynę z listą uczniów i klikacie **Zatwierdź** albo **Odrzuć**. Odrzucenie zwalnia miejsce dla kolejnej drużyny. Przy każdym zgłoszeniu widać e-mail i Discord kapitana.
 3. Link **Eksport CSV** w zakładce Zgłoszenia pobiera listę uczniów. Excel otwiera ten plik bez żadnej konwersji.
 
+Zgłoszenia złożone wcześniej na turniej CS2 zostały w bazie, ale nie pojawiają się na stronie ani w panelu. Drużyny z CS2, które chcą zagrać w LoL, muszą zgłosić się od nowa. Stare linki `/cs2` prowadzą na stronę główną.
+
 **W dniu turnieju**
 
-1. W zakładce **Drabinka i PIN-y** utwórz drabinkę. Drużyny rozstawisz ręcznie albo przyciskiem **Losuj rozstawienie**.
-2. Przy meczu kliknij **Wydaj PIN-y** i przekaż każdemu kapitanowi jego 6-cyfrowy PIN.
-3. Kapitanowie otwierają pokój meczu, wpisują PIN-y i na zmianę odrzucają mapy. Jeśli kapitan nie zdąży w wyznaczonym czasie, domyślnie 45 sekund, system wybierze za niego.
-4. Po meczu wpisz wynik. Zwycięzca automatycznie trafia do następnej rundy.
+1. W zakładce **Drabinka** utwórz drabinkę. Drużyny rozstawisz ręcznie albo przyciskiem **Losuj rozstawienie**.
+2. Mecze rozgrywacie w kliencie gry jako gry niestandardowe w trybie Tournament Draft. Strona nie bierze udziału w draftcie.
+3. Po meczu wpisz wynik, np. 1:0. Zwycięzca automatycznie trafia do następnej rundy.
 
-Szczegółowy przebieg meczu na LANie, z rundą nożową i konfiguracją serwera CS2, jest w pliku [LAN.md](LAN.md).
+Szczegółowy przebieg meczu w pracowni, z harmonogramem i ustawieniami lobby, jest w pliku [LAN.md](LAN.md).
 
 **Po turnieju**
 
-1. W zakładce **Zdjęcia** dodajesz zdjęcia z turnieju. Pojawiają się na publicznej stronie `/zdjecia`. Dopóki nie ma żadnego, strona pokazuje „Zdjęcia pojawią się po zakończeniu turnieju”. Przeglądarka zmniejsza zdjęcia i usuwa z nich dane z aparatu, np. lokalizację GPS. Publikuj tylko osoby, które mają zgodę szkoły na publikację wizerunku.
+1. W zakładce **Zdjęcia** dodajesz zdjęcia z turnieju. Przeglądarka zmniejsza je i usuwa dane z aparatu, np. lokalizację GPS. Publikuj tylko osoby, które mają zgodę szkoły na publikację wizerunku.
 2. Po 31.12.2026 administrator klika **Anonimizuj dane** na pulpicie panelu.
 
 | Rola | Uprawnienia |
 | --- | --- |
-| Organizator | zgłoszenia, eksport CSV, drabinka, wyniki, PIN-y, zdjęcia, zmiana własnego hasła |
+| Organizator | zgłoszenia, eksport CSV, drabinka, wyniki, zdjęcia, zmiana własnego hasła |
 | Administrator | wszystko powyżej oraz konta nauczycieli, trwałe usuwanie zgłoszeń i anonimizacja danych |
 
 ## Do uzupełnienia przed startem zapisów
@@ -87,8 +89,6 @@ Szczegółowy przebieg meczu na LANie, z rundą nożową i konfiguracją serwera
 W pliku [src/content/event.ts](src/content/event.ts) zostały pola w nawiasach kwadratowych:
 
 - `venue`: sala lub pracownie,
-- `organizers`: opiekunowie turnieju,
-- `contactEmail`: e-mail organizatora,
 - `dpoContact`: dane Inspektora Ochrony Danych szkoły.
 
 Warto też sprawdzić godziny, termin zapisów (obecnie 27.11.2026, 23:59) i treść regulaminu w [src/content/rules.ts](src/content/rules.ts). Klauzulę RODO najlepiej skonsultować z Inspektorem Ochrony Danych szkoły.
@@ -99,6 +99,6 @@ Kod jest udostępniony wyłącznie do wglądu. Wszelkie prawa zastrzeżone: bez 
 
 ## Znaki towarowe
 
-Counter-Strike 2 jest znakiem towarowym Valve Corporation. Turniej jest wydarzeniem szkolnym i nie jest powiązany z Valve.
+League of Legends jest znakiem towarowym Riot Games, Inc. Turniej jest wydarzeniem szkolnym i nie jest powiązany z Riot Games. Strona nie używa grafik ani logotypów Riot Games.
 
-Font DejaVu Sans, używany w miniaturkach do udostępniania, jest dostępny na licencji Bitstream Vera / DejaVu ([src/assets/og/LICENSE-DejaVu.txt](src/assets/og/LICENSE-DejaVu.txt)).
+Fonty: Marcellus SC i Barlow Semi Condensed, oba na licencji SIL Open Font License 1.1 (hostowane z `public/fonts`).

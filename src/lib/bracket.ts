@@ -31,11 +31,6 @@ function feedOf(match: Pick<Match, "round" | "slot">) {
 
 const teamOn = (match: Match, side: Side) => (side === "A" ? match.teamAId : match.teamBId);
 
-async function vetoTouched(match: Match) {
-  if (match.readyA || match.readyB || match.vetoDoneAt) return true;
-  return (await db.vetoStep.count({ where: { matchId: match.id } })) > 0;
-}
-
 async function mustFind(matchId: string) {
   const match = await db.match.findUnique({ where: { id: matchId } });
   if (!match) throw new UserFacingError("Nie znaleziono meczu.");
@@ -44,7 +39,6 @@ async function mustFind(matchId: string) {
 
 async function assertEditable(match: Match, what: string) {
   if (match.winnerSide) throw new UserFacingError(`${what}: najpierw wyczyść wynik tego meczu.`);
-  if (await vetoTouched(match)) throw new UserFacingError(`${what}: najpierw zresetuj veto tego meczu.`);
 }
 
 // --- ROZSTAWIENIE ---

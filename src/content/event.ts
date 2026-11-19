@@ -18,7 +18,6 @@ export const EVENT = {
   contactEmail: "kontakt@bonzidev.pl",
   dpoContact: "[dane kontaktowe Inspektora Ochrony Danych szkoły]",
   dataRetention: "31.12.2026",
-  consentForm: "/zgoda-rodzica-cs2.pdf",
   author: { name: "bonzi64", url: "https://github.com/bonzi64" },
 } as const;
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { TeamStatus } from "@/generated/prisma/enums";
-import { Tag } from "@/components/vgui/Window";
+import { Tag } from "@/components/hx/frame";
 import type { GameModule } from "@/lib/games";
 
 export const dateTime = new Intl.DateTimeFormat("pl-PL", {
@@ -19,9 +19,9 @@ export function pickGame(raw: string | string[] | undefined, games: readonly Gam
 export function GameTabs({ base, active, games }: { base: string; active: GameModule; games: readonly GameModule[] }) {
   if (games.length < 2) return null;
   return (
-    <nav className="vg-tabs mb-[-1px] px-0" aria-label="Gra">
+    <nav className="mb-4 flex h-11 border-b border-hull" aria-label="Gra">
       {games.map((g) => (
-        <Link key={g.slug} href={`${base}?gra=${g.slug}`} data-sfx="" aria-selected={g.slug === active.slug} className="vg-tab">
+        <Link key={g.slug} href={`${base}?gra=${g.slug}`} data-sfx="" aria-current={g.slug === active.slug ? "page" : undefined} className="hx-tab">
           {g.name}
         </Link>
       ))}

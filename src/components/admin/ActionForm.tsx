@@ -2,6 +2,7 @@
 
 import { type ComponentProps, type ReactNode, useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { CheckIcon, CloseIcon } from "@/components/hx/icons";
 import type { ActionResult } from "@/lib/action-result";
 
 type ServerAction = (prev: ActionResult | null, form: FormData) => Promise<ActionResult>;
@@ -23,8 +24,9 @@ export function ActionForm({
     <form action={formAction} className={className}>
       {children}
       {state && !(quiet && state.ok) && (
-        <p key={state.at} role="status" className={`basis-full text-[11px] ${state.ok ? "text-vg-green" : "animate-shake text-[#ff9f8a]"}`}>
-          {state.ok ? "✓" : "✕"} {state.message}
+        <p key={state.at} role="status" className={`flex basis-full items-center gap-1.5 text-[13px] ${state.ok ? "text-ui-ok" : "animate-shake text-ui-danger"}`}>
+          {state.ok ? <CheckIcon size={13} /> : <CloseIcon size={13} />}
+          {state.message}
         </p>
       )}
     </form>
@@ -58,7 +60,7 @@ export function Submit({
         setArmed(true);
         timer.current = setTimeout(() => setArmed(false), 4000);
       }}
-      className={`vg-btn ${armed ? "animate-blink" : ""} ${className}`}
+      className={`ui-btn ${armed ? "animate-blink" : ""} ${className}`}
       {...rest}
     >
       {pending ? "..." : armed ? confirm : children}

@@ -1,14 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
+import { CheckIcon, CloseIcon } from "@/components/hx/icons";
 import { uploadPhoto } from "@/actions/admin-photos";
 import { PHOTO } from "@/lib/photo-limits";
 
 type Line = { name: string; state: "wait" | "work" | "ok" | "error"; note?: string };
 
-const MARK: Record<Line["state"], string> = { wait: "·", work: "…", ok: "✓", error: "✕" };
-const TONE: Record<Line["state"], string> = { wait: "text-vg-faint", work: "text-vg-gold", ok: "text-vg-green", error: "text-[#ff9f8a]" };
+const MARK: Record<Line["state"], ReactNode> = {
+  wait: <span className="block size-1.5 rotate-45 bg-current" />,
+  work: <span className="block size-2 animate-spin border border-current border-t-transparent" />,
+  ok: <CheckIcon size={12} />,
+  error: <CloseIcon size={12} />,
+};
+const TONE: Record<Line["state"], string> = { wait: "text-ui-faint", work: "text-gold", ok: "text-ui-ok", error: "text-ui-danger" };
 
 // Ponowne zakodowanie przez canvas: obraca zdjęcie według EXIF, zmniejsza i wycina metadane (np. GPS z telefonu)
 async function encode(bitmap: ImageBitmap, edge: number, quality: number) {
@@ -84,8 +90,8 @@ export function PhotoUploader({ count }: { count: number }) {
   return (
     <div className="space-y-3">
       <div>
-        <span className="vg-label">Pliki ({room} wolnych miejsc z {PHOTO.limit})</span>
-        <label className="vg-btn w-full" data-sfx="">
+        <span className="ui-label">Pliki ({room} wolnych miejsc z {PHOTO.limit})</span>
+        <label className="ui-btn w-full" data-sfx="">
           <input
             ref={input}
             type="file"
@@ -100,31 +106,31 @@ export function PhotoUploader({ count }: { count: number }) {
       </div>
 
       <div>
-        <label className="vg-label" htmlFor="photo-caption">
+        <label className="ui-label" htmlFor="photo-caption">
           Podpis (opcjonalnie, dla wszystkich wybranych)
         </label>
-        <input id="photo-caption" value={caption} onChange={(e) => setCaption(e.target.value)} maxLength={PHOTO.captionMax} disabled={busy} className="vg-field" placeholder="np. Finał: Psi Patrol vs ..." />
+        <input id="photo-caption" value={caption} onChange={(e) => setCaption(e.target.value)} maxLength={PHOTO.captionMax} disabled={busy} className="ui-field" placeholder="np. Finał: Psi Patrol vs ..." />
       </div>
 
-      <button type="button" data-sfx="" data-tone="gold" disabled={!picked || busy} onClick={send} className="vg-btn min-h-8 w-full">
+      <button type="button" data-sfx="" data-tone="gold" disabled={!picked || busy} onClick={send} className="ui-btn min-h-8 w-full">
         {busy ? `Wysyłanie ${finished}/${lines.length}...` : picked ? `Dodaj zdjęcia (${picked})` : "Dodaj zdjęcia"}
       </button>
 
       {lines.length > 0 && (
-        <ul className="vg-deep vg-scroll max-h-56 space-y-0.5 overflow-y-auto px-2 py-1.5 text-[11px]" aria-live="polite">
+        <ul className="ui-inset ui-scroll max-h-56 space-y-0.5 overflow-y-auto px-2 py-1.5 text-[12px]" aria-live="polite">
           {lines.map((line, i) => (
             <li key={`${line.name}-${i}`} className="flex gap-1.5">
-              <span className={`w-3 shrink-0 ${TONE[line.state]}`}>{MARK[line.state]}</span>
+              <span className={`grid h-4 w-3 shrink-0 place-items-center ${TONE[line.state]}`}>{MARK[line.state]}</span>
               <span className="min-w-0">
                 <span className="block truncate">{line.name}</span>
-                {line.note && <span className="text-[#ff9f8a]">{line.note}</span>}
+                {line.note && <span className="text-ui-danger">{line.note}</span>}
               </span>
             </li>
           ))}
         </ul>
       )}
 
-      <p className="text-[11px] text-vg-muted">
+      <p className="text-[12px] text-ui-muted">
         Zdjęcia są zmniejszane w przeglądarce do {PHOTO.maxEdge} px. Dane z aparatu, np. lokalizacja GPS, są usuwane przed wysłaniem.
       </p>
     </div>

@@ -1,44 +1,54 @@
+import Link from "next/link";
 import { signOut } from "@/actions/staff-auth";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { SchoolLogo } from "@/components/brand/SchoolLogo";
-import { PixelText } from "@/components/vgui/pixel";
+import { ArrowOutIcon } from "@/components/hx/icons";
 import { requireStaff } from "@/lib/auth/session";
 
 export default async function PanelLayout({ children }: LayoutProps<"/admin">) {
   const staff = await requireStaff();
 
   return (
-    <div className="min-h-dvh lg:pl-[17rem]">
-      <aside className="fixed bottom-10 left-10 z-30 hidden w-56 lg:block">
-        <nav aria-label="Panel organizatora">
+    <div className="min-h-dvh">
+      <header className="relative z-30 border-b border-umber bg-[linear-gradient(180deg,#0f1b2b_0%,#020b14_100%)] lg:sticky lg:top-0">
+        <div className="flex h-16 items-center gap-4 px-3 sm:px-5">
+          <Link href="/admin" data-sfx="" className="flex shrink-0 items-center gap-3" aria-label="Pulpit organizatora">
+            <span className="hx-ring size-11">
+              <SchoolLogo height={30} />
+            </span>
+            <span className="hidden font-display text-[16px] leading-tight tracking-[0.05em] text-parchment sm:block">
+              Panel
+              <br />
+              <span className="text-gold">organizatora</span>
+            </span>
+          </Link>
+
+          <nav aria-label="Panel organizatora" className="ui-scroll hidden h-full min-w-0 flex-1 items-stretch overflow-x-auto pl-2 md:flex">
+            <AdminNav />
+          </nav>
+
+          <div className="ml-auto flex shrink-0 items-center gap-3">
+            <p className="hidden text-right text-[13px] leading-tight lg:block">
+              <span className="block text-parchment">{staff.displayName}</span>
+              <span className="text-ui-muted">{staff.role === "ADMIN" ? "administrator" : "organizator"}</span>
+            </p>
+            <Link href="/" data-sfx="" className="hx-icon-btn" aria-label="Strona turnieju" title="Strona turnieju">
+              <ArrowOutIcon size={15} />
+            </Link>
+            <form action={signOut}>
+              <button data-sfx="" data-size="sm" className="ui-btn">
+                Wyloguj
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <nav aria-label="Panel organizatora" className="ui-scroll flex h-12 items-stretch overflow-x-auto border-t border-hull md:hidden">
           <AdminNav />
         </nav>
-        <div className="mt-8 text-vg-gold">
-          <div className="flex items-center gap-3">
-            <SchoolLogo height={48} />
-            <PixelText text="PZS" dot={5} className="drop-shadow-[0_0_6px_rgb(196_181_80/0.45)]" />
-          </div>
-          <p className="mt-2 text-[11px] text-vg-muted">
-            {staff.displayName} · {staff.role === "ADMIN" ? "administrator" : "organizator"}
-          </p>
-          <form action={signOut} className="mt-2">
-            <button data-sfx="" className="vg-btn">
-              Wyloguj
-            </button>
-          </form>
-        </div>
-      </aside>
-
-      <header className="vg-window sticky top-0 z-30 flex flex-wrap items-center gap-2 px-2 py-1.5 shadow-none lg:hidden">
-        <AdminNav compact />
-        <form action={signOut} className="ml-auto">
-          <button data-sfx="" className="vg-btn">
-            Wyloguj
-          </button>
-        </form>
       </header>
 
-      <main className="mx-auto max-w-[1180px] space-y-4 px-2 py-4 sm:px-4 lg:py-10 lg:pr-6">{children}</main>
+      <main className="mx-auto max-w-[1280px] space-y-5 px-3 py-5 sm:px-5 lg:py-8">{children}</main>
     </div>
   );
 }

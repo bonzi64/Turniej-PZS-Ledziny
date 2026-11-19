@@ -1,20 +1,17 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import type { Game } from "@/generated/prisma/enums";
 import { type ActionResult, done, explain, fail, UserFacingError } from "@/lib/action-result";
 import { requireStaff } from "@/lib/auth/session";
 import { db } from "@/lib/db";
-import { GAMES, gameByCode } from "@/lib/games";
+import { GAMES } from "@/lib/games";
 import { MAX_TEAMS } from "@/lib/tournament";
 
 const text = (form: FormData, key: string) => String(form.get(key) ?? "").trim();
 
-function refresh(game: Game) {
-  const slug = gameByCode(game).slug;
+function refresh() {
   revalidatePath("/admin", "layout");
-  revalidatePath(`/${slug}`);
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 }
 
 async function findTeam(form: FormData) {
@@ -26,8 +23,8 @@ async function findTeam(form: FormData) {
 // drużyna w drabince blokuje zmianę statusu, dopóki organizator jej nie zdejmie
 async function releaseFromBracket(teamId: string) {
   const seated = await db.match.findMany({ where: { OR: [{ teamAId: teamId }, { teamBId: teamId }] } });
-  if (seated.some((m) => m.winnerSide || m.readyA || m.readyB || m.vetoDoneAt || m.round > 1)) {
-    throw new UserFacingError("Drużyna gra już w drabince – najpierw wyczyść jej wyniki i veto.");
+  if (seated.some((m) => m.winnerSide || m.round > 1)) {
+    throw new UserFacingError("Drużyna gra już w drabince – najpierw wyczyść jej wyniki.");
   }
   await db.$transaction(
     seated.map((m) =>
@@ -53,7 +50,7 @@ export async function approveTeam(_prev: ActionResult | null, form: FormData): P
       where: { id: team.id },
       data: { status: "APPROVED", reviewedBy: staff.displayName, reviewedAt: new Date(), reviewNote: null },
     });
-    refresh(team.game);
+    refresh();
     return done(`Zatwierdzono: ${team.name}`);
   } catch (error) {
     return explain(error);
@@ -74,7 +71,7 @@ export async function rejectTeam(_prev: ActionResult | null, form: FormData): Pr
         reviewNote: text(form, "note").slice(0, 300) || null,
       },
     });
-    refresh(team.game);
+    refresh();
     return done(`Odrzucono: ${team.name}`);
   } catch (error) {
     return explain(error);
@@ -94,7 +91,7 @@ export async function reopenTeam(_prev: ActionResult | null, form: FormData): Pr
       where: { id: team.id },
       data: { status: "PENDING", reviewedBy: staff.displayName, reviewedAt: new Date() },
     });
-    refresh(team.game);
+    refresh();
     return done(`Cofnięto do weryfikacji: ${team.name}`);
   } catch (error) {
     return explain(error);
@@ -107,7 +104,7 @@ export async function deleteTeam(_prev: ActionResult | null, form: FormData): Pr
     const team = await findTeam(form);
     await releaseFromBracket(team.id);
     await db.team.delete({ where: { id: team.id } });
-    refresh(team.game);
+    refresh();
     return done(`Usunięto zgłoszenie: ${team.name}`);
   } catch (error) {
     return explain(error);
@@ -131,6 +128,6 @@ export async function anonymizeGame(_prev: ActionResult | null, form: FormData):
     }),
   ]);
 
-  refresh(game.code);
+  refresh();
   return done(`${game.short}: zanonimizowano ${teams.count} drużyn / ${players.count} zawodników.`);
 }

@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { type FormEvent, useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { registerTeam, type RegisterState } from "@/actions/register";
+import { CrownIcon } from "@/components/hx/icons";
 import { formatClock, useRulesGate } from "@/components/module/RulesGate";
 import { TabLink } from "@/components/module/TabLink";
 import { Chip, Dialog, Panel, Readout } from "@/components/skin/parts";
 import { useSound } from "@/components/sound/SoundProvider";
-import { EVENT } from "@/content/event";
 import { RESERVE_SLOT } from "@/lib/tournament";
 
 type Props = {
@@ -20,9 +20,13 @@ type Props = {
 
 const SLOTS = Array.from({ length: RESERVE_SLOT + 1 }, (_, slot) => slot);
 
+// jedna siatka dla wiersza zawodnika: na telefonie karta (nagłówek + pola 2×2), od md wiersz tabeli
+const ROW =
+  "grid-cols-[1fr_auto] gap-x-3 gap-y-2.5 [grid-template-areas:'head_cap'_'fields_fields'] md:grid-cols-[6.5rem_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_5.5rem_4.5rem] md:gap-x-2 md:[grid-template-areas:'head_nick_first_last_class_cap']";
+
 function Hint({ message }: { message?: string }) {
   if (!message) return null;
-  return <p className="mt-0.5 text-[12px] text-ui-danger">{message}</p>;
+  return <p className="mt-1 text-[13px] text-ui-danger">{message}</p>;
 }
 
 export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, closedReason }: Props) {
@@ -44,7 +48,7 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
   useEffect(() => {
     if (!errorStamp) return;
     play("deny");
-    topRef.current?.scrollIntoView({ block: "nearest" });
+    topRef.current?.scrollIntoView({ block: "start", behavior: "smooth" });
   }, [errorStamp, play]);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
@@ -60,8 +64,8 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
         title="Zapisy zamknięte"
         tone="error"
         actions={
-          <TabLink tab="druzyny" className="ui-btn min-w-20" data-default="">
-            OK
+          <TabLink tab="druzyny" className="ui-btn min-w-32">
+            Zobacz drużyny
           </TabLink>
         }
       >
@@ -75,24 +79,14 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
       <Dialog
         title="Zgłoszenie wysłane"
         actions={
-          <>
-            <a href={EVENT.consentForm} download className="ui-btn">
-              Pobierz zgodę (PDF)
-            </a>
-            <TabLink tab="druzyny" className="ui-btn min-w-20" data-tone="gold" data-default="">
-              OK
-            </TabLink>
-          </>
+          <TabLink tab="druzyny" className="ui-btn min-w-32" data-tone="gold">
+            Zobacz drużyny
+          </TabLink>
         }
       >
-        <p className="ui-name text-[18px]">{state.teamName}</p>
-        <p className="mt-2">
-          Drużyna czeka na weryfikację przez organizatora ({gameName}). Po zatwierdzeniu pojawi się na liście drużyn.
-        </p>
-        <p className="mt-2">
-          Zawodnicy, którzy nie mają 18 lat, muszą najpóźniej dzień przed turniejem złożyć na portierni szkoły wydrukowaną zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zagrają. Pełnoletni przychodzą na turniej z dowodem osobistym.
-        </p>
-        <p className="mt-2 text-[12px] text-ui-faint">Publicznie widoczne będą wyłącznie nicki, nazwa drużyny i klasa.</p>
+        <p className="ui-name text-[19px]">{state.teamName}</p>
+        <p className="mt-3">Drużyna czeka na weryfikację przez organizatora ({gameName}). Po zatwierdzeniu pojawi się na liście drużyn i w panelu po prawej.</p>
+        <p className="mt-3 text-[13px] text-ui-faint">Publicznie widoczne będą wyłącznie nicki, nazwa drużyny i klasa.</p>
       </Dialog>
     );
   }
@@ -102,16 +96,16 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
       <Dialog
         title="Formularz zablokowany"
         actions={
-          <TabLink tab="regulamin" className="ui-btn min-w-32" data-tone="gold" data-default="">
+          <TabLink tab="regulamin" className="ui-btn min-w-40" data-tone="gold">
             Otwórz regulamin
           </TabLink>
         }
       >
         <p>Zanim zgłosisz drużynę, przeczytaj regulamin do końca.</p>
-        <div className="mt-4 flex justify-center">
+        <div className="mt-5 flex justify-center">
           <Readout text={formatClock(Math.max(0, gate.minSeconds - gate.elapsed))} />
         </div>
-        <p className="mt-3 text-[12px] text-ui-faint">
+        <p className="mt-3 text-[13px] text-ui-faint">
           {gate.scrolled ? "Regulamin przewinięty – jeszcze chwila lektury." : "Zegar liczy tylko przy otwartym regulaminie."}
         </p>
       </Dialog>
@@ -119,8 +113,8 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
   }
 
   return (
-    <div ref={topRef} className="scroll-mt-24">
-      <form onSubmit={submit} noValidate className="space-y-6">
+    <div ref={topRef} className="scroll-mt-28">
+      <form onSubmit={submit} noValidate className="space-y-5">
         <input type="hidden" name="game" value={slug} />
         <input type="hidden" name="ticket" value={gate.ticket} />
         <div aria-hidden className="absolute left-[-9999px] h-px w-px overflow-hidden">
@@ -131,14 +125,14 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
         </div>
 
         {state.status === "error" && (
-          <div key={state.at} role="alert" className="ui-inset flex animate-shake items-center gap-3 px-3 py-2 text-ui-danger">
+          <div key={state.at} role="alert" className="hx-frame flex animate-shake items-center gap-3 px-4 py-3 text-ui-danger">
             <Chip tone="red">Błąd</Chip>
             {state.message}
           </div>
         )}
 
         <Panel title="Drużyna">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_10rem]">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-[1fr_11rem]">
             <div>
               <label className="ui-label" htmlFor="teamName">
                 Nazwa drużyny
@@ -156,119 +150,117 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
           </div>
         </Panel>
 
-        <Panel title="Skład">
-          {/* relative: ukryte radia kapitana (sr-only, absolute) muszą być przycinane przez ten scroll, inaczej rozpychają stronę na telefonie */}
-          <div className="ui-scroll ui-inset relative overflow-x-auto">
-            <table className="w-full min-w-[42rem] border-collapse text-[12px]">
-              <thead>
-                <tr className="ui-subhead text-left">
-                  <th className="w-[4.5rem] px-2 py-1.5 font-normal">#</th>
-                  <th className="px-2 py-1.5 font-normal">{nickLabel}</th>
-                  <th className="px-2 py-1.5 font-normal">Imię</th>
-                  <th className="px-2 py-1.5 font-normal">Nazwisko</th>
-                  <th className="w-20 px-2 py-1.5 font-normal">Klasa</th>
-                  <th className="w-16 px-2 py-1.5 text-center font-normal">Kapitan</th>
-                </tr>
-              </thead>
-              <tbody>
-                {SLOTS.map((slot) => {
-                  const reserve = slot === RESERVE_SLOT;
-                  const p = (key: string) => `p${slot}.${key}`;
-                  const rowError = err(p("nick")) ?? err(p("first")) ?? err(p("last")) ?? err(p("class"));
-                  return (
-                    <tr key={slot} className={`align-top ${reserve ? "border-t border-dashed border-ui-faint/60" : ""}`}>
-                      <td className="px-2 py-2 whitespace-nowrap text-ui-muted">
-                        {reserve ? "Rez." : `Gracz ${slot + 1}`}
-                        {reserve && <span className="block text-[10px] text-ui-faint">opcja</span>}
-                      </td>
-                      <td className="px-1 py-1">
-                        <input name={p("nick")} aria-label={`${nickLabel}, ${reserve ? "rezerwowy" : `gracz ${slot + 1}`}`} className="ui-field" maxLength={32} placeholder={nickPlaceholder} aria-invalid={Boolean(err(p("nick")))} required={!reserve} />
-                        {rowError && <Hint message={rowError} />}
-                      </td>
-                      <td className="px-1 py-1">
-                        <input name={p("first")} aria-label="Imię" className="ui-field" maxLength={40} autoComplete="off" aria-invalid={Boolean(err(p("first")))} required={!reserve} />
-                      </td>
-                      <td className="px-1 py-1">
-                        <input name={p("last")} aria-label="Nazwisko" className="ui-field" maxLength={40} autoComplete="off" aria-invalid={Boolean(err(p("last")))} required={!reserve} />
-                      </td>
-                      <td className="px-1 py-1">
-                        <input name={p("class")} aria-label="Klasa" className="ui-field uppercase" maxLength={6} placeholder="2TI" aria-invalid={Boolean(err(p("class")))} required={!reserve} />
-                      </td>
-                      <td className="px-2 py-2 text-center">
-                        {!reserve && (
-                          <label className="inline-flex cursor-pointer items-center justify-center p-1.5" data-sfx="tick">
-                            <input type="radio" name="captainSlot" value={slot} checked={captain === slot} onChange={() => setCaptain(slot)} className="peer sr-only" aria-label={`Kapitan: gracz ${slot + 1}`} />
-                            <span className="ui-check ui-radio" />
-                          </label>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+        <Panel title="Skład" aside={<span className="text-[13px] text-ui-muted">Kapitan jest osobą kontaktową</span>}>
+          <div className={`hidden md:grid ${ROW} ui-subhead px-3 py-2`} aria-hidden>
+            <span>Zawodnik</span>
+            <span>{nickLabel}</span>
+            <span>Imię</span>
+            <span>Nazwisko</span>
+            <span>Klasa</span>
+            <span className="text-center">Kapitan</span>
           </div>
-          <p className="mt-2 text-[12px] text-ui-faint">Klasa w formacie np. 2TI, 3A. Imiona i nazwiska zobaczy tylko organizator.</p>
+
+          <div className="divide-y divide-hull border-b border-hull">
+            {SLOTS.map((slot) => {
+              const reserve = slot === RESERVE_SLOT;
+              const p = (key: string) => `p${slot}.${key}`;
+              const who = reserve ? "rezerwowy" : `gracz ${slot + 1}`;
+              const rowError = err(p("nick")) ?? err(p("first")) ?? err(p("last")) ?? err(p("class"));
+              return (
+                <div key={slot} role="group" aria-label={reserve ? "Rezerwowy" : `Gracz ${slot + 1}`} className={`grid ${ROW} px-3 py-4 md:py-2.5 ${reserve ? "bg-void/40" : ""}`}>
+                  <div className="flex items-center gap-2 [grid-area:head] md:flex-col md:items-start md:gap-0 md:pt-2.5">
+                    <span className={`font-display text-[16px] tracking-[0.06em] ${reserve ? "text-ui-muted" : "text-parchment"}`}>
+                      {reserve ? "Rezerwowy" : `Gracz ${slot + 1}`}
+                    </span>
+                    {reserve && <span className="text-[12px] text-ui-faint">opcjonalnie</span>}
+                    {captain === slot && <CrownIcon size={16} className="md:hidden" />}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5 [grid-area:fields] md:contents">
+                    <div className="col-span-2 md:[grid-area:nick]">
+                      <label className="ui-label md:sr-only" htmlFor={p("nick")}>
+                        {nickLabel}
+                      </label>
+                      <input id={p("nick")} name={p("nick")} aria-label={`${nickLabel}, ${who}`} className="ui-field" maxLength={32} placeholder={nickPlaceholder} aria-invalid={Boolean(err(p("nick")))} required={!reserve} />
+                      <Hint message={rowError} />
+                    </div>
+                    <div className="md:[grid-area:first]">
+                      <label className="ui-label md:sr-only" htmlFor={p("first")}>
+                        Imię
+                      </label>
+                      <input id={p("first")} name={p("first")} aria-label={`Imię, ${who}`} className="ui-field" maxLength={40} autoComplete="off" aria-invalid={Boolean(err(p("first")))} required={!reserve} />
+                    </div>
+                    <div className="md:[grid-area:last]">
+                      <label className="ui-label md:sr-only" htmlFor={p("last")}>
+                        Nazwisko
+                      </label>
+                      <input id={p("last")} name={p("last")} aria-label={`Nazwisko, ${who}`} className="ui-field" maxLength={40} autoComplete="off" aria-invalid={Boolean(err(p("last")))} required={!reserve} />
+                    </div>
+                    <div className="col-span-2 sm:col-span-1 md:[grid-area:class]">
+                      <label className="ui-label md:sr-only" htmlFor={p("class")}>
+                        Klasa
+                      </label>
+                      <input id={p("class")} name={p("class")} aria-label={`Klasa, ${who}`} className="ui-field uppercase" maxLength={6} placeholder="2TI" aria-invalid={Boolean(err(p("class")))} required={!reserve} />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-end [grid-area:cap] md:justify-center md:pt-1">
+                    {!reserve && (
+                      <label className="inline-flex cursor-pointer items-center gap-2 p-1.5" data-sfx="tick">
+                        <input type="radio" name="captainSlot" value={slot} checked={captain === slot} onChange={() => setCaptain(slot)} className="peer sr-only" aria-label={`Kapitan: gracz ${slot + 1}`} />
+                        <span className="ui-check ui-radio" aria-hidden />
+                        <span className="text-[13px] text-ui-muted md:hidden">Kapitan</span>
+                      </label>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-3 text-[13px] text-ui-faint">Klasa w formacie np. 2TI, 3A. Imiona i nazwiska zobaczy tylko organizator.</p>
         </Panel>
 
         <Panel title="Kontakt kapitana">
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="ui-label" htmlFor="captainEmail">
                 E-mail
               </label>
-              <input id="captainEmail" name="captainEmail" type="email" className="ui-field" maxLength={120} placeholder="kapitan@example.com" aria-invalid={Boolean(err("captainEmail"))} required />
+              <input id="captainEmail" name="captainEmail" type="email" inputMode="email" autoComplete="email" className="ui-field" maxLength={120} placeholder="kapitan@example.com" aria-invalid={Boolean(err("captainEmail"))} required />
               <Hint message={err("captainEmail")} />
             </div>
             <div>
               <label className="ui-label" htmlFor="captainDiscord">
                 Discord (opcjonalnie)
               </label>
-              <input id="captainDiscord" name="captainDiscord" className="ui-field" maxLength={32} placeholder="nazwa_uzytkownika" aria-invalid={Boolean(err("captainDiscord"))} />
+              <input id="captainDiscord" name="captainDiscord" className="ui-field" maxLength={32} placeholder="nazwa_uzytkownika" autoCapitalize="off" aria-invalid={Boolean(err("captainDiscord"))} />
               <Hint message={err("captainDiscord")} />
             </div>
           </div>
         </Panel>
 
         <Panel title="Oświadczenia">
-          <div className="space-y-3 text-[12px]">
+          <div className="space-y-3.5 text-[14px]">
             {[
-              { name: "acceptRules", text: <>Akceptuję regulamin turnieju, w tym zasady fair play i rygor szkolny.</> },
+              { name: "acceptRules", text: <>Akceptuję regulamin turnieju, w tym zasady fair play i regulamin pracowni.</> },
               {
                 name: "acceptPrivacy",
                 text: (
                   <>
                     Wyrażam zgodę na przetwarzanie danych osobowych członków drużyny w celu organizacji turnieju zgodnie z{" "}
-                    <Link href="/rodo" target="_blank" className="text-ui-accent underline">
+                    <Link href="/rodo" target="_blank" className="text-gold underline hover:text-parchment">
                       klauzulą informacyjną
                     </Link>
                     .
                   </>
                 ),
               },
-              {
-                name: "ageConfirm",
-                text: <>Oświadczam, że wszyscy zgłoszeni zawodnicy ukończyli 17 lat i wiedzą o zgłoszeniu.</>,
-              },
-              {
-                name: "guardianConsent",
-                text: (
-                  <>
-                    Zawodnicy, którzy nie mają 18 lat, złożą najpóźniej dzień przed turniejem na portierni szkoły zgodę podpisaną przez rodzica lub opiekuna prawnego. Bez niej nie zostaną dopuszczeni do gry. Pełnoletni przyjdą na turniej z dowodem osobistym.{" "}
-                    <a href={EVENT.consentForm} download className="whitespace-nowrap text-ui-accent underline">
-                      Pobierz wzór zgody (PDF)
-                    </a>
-                  </>
-                ),
-              },
             ].map((item) => (
               <div key={item.name}>
-                <label className="flex cursor-pointer items-start gap-2.5" data-sfx="tick">
+                <label className="flex cursor-pointer items-start gap-3" data-sfx="tick">
                   <input type="checkbox" name={item.name} className="peer sr-only" required />
-                  <span className="ui-check mt-0.5" aria-hidden>
-                    ✓
-                  </span>
-                  <span>{item.text}</span>
+                  <span className="ui-check mt-0.5" aria-hidden />
+                  <span className="text-parchment/90">{item.text}</span>
                 </label>
                 <Hint message={err(item.name)} />
               </div>
@@ -276,9 +268,9 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
           </div>
         </Panel>
 
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-ui-muted">Zgłoszenie zajmuje slot do decyzji organizatora.</p>
-          <button type="submit" data-sfx="" data-tone="gold" disabled={pending} className="ui-btn min-h-8 min-w-44 text-[13px]">
+        <div className="hx-frame flex flex-wrap items-center justify-between gap-4 px-5 py-4">
+          <p className="text-[14px] text-ui-muted">Zgłoszenie zajmuje miejsce do decyzji organizatora.</p>
+          <button type="submit" data-sfx="" data-tone="gold" data-size="lg" disabled={pending} className="ui-btn w-full sm:w-auto sm:min-w-56">
             {pending ? "Wysyłanie..." : "Wyślij zgłoszenie"}
           </button>
         </div>

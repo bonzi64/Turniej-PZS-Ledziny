@@ -2,8 +2,9 @@ import Link from "next/link";
 import { approveTeam, deleteTeam, rejectTeam, reopenTeam } from "@/actions/admin-teams";
 import { ActionForm, Submit } from "@/components/admin/ActionForm";
 import { dateTime, GameTabs, pickGame, StatusBadge } from "@/components/admin/bits";
-import { Identicon } from "@/components/vgui/pixel";
-import { Group, Tag, Window } from "@/components/vgui/Window";
+import { CheckIcon, ChevronIcon, CloseIcon } from "@/components/hx/icons";
+import { Avatar } from "@/components/skin/parts";
+import { Group, Tag, Window } from "@/components/hx/frame";
 import type { TeamStatus } from "@/generated/prisma/enums";
 import { statusCounts, teamsForReview } from "@/lib/admin-queries";
 import { requireStaff } from "@/lib/auth/session";
@@ -35,7 +36,7 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
         status={
           <>
             <span>Pełne dane osobowe – nie udostępniaj zrzutów ekranu.</span>
-            <a href={`/admin/eksport?gra=${game.slug}`} className="text-vg-gold underline">
+            <a href={`/admin/eksport?gra=${game.slug}`} className="text-gold underline">
               Eksport CSV
             </a>
           </>
@@ -51,7 +52,7 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
                 href={`/admin/druzyny?gra=${game.slug}${f.value ? `&status=${f.value}` : ""}`}
                 aria-current={active ? "page" : undefined}
                 data-sfx=""
-                className="vg-btn"
+                className="ui-btn"
               >
                 {f.label} ({count})
               </Link>
@@ -59,39 +60,39 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
           })}
         </div>
 
-        {teams.length === 0 && <p className="vg-deep px-3 py-4 text-vg-muted">Brak zgłoszeń w tym widoku.</p>}
+        {teams.length === 0 && <p className="ui-inset px-3 py-4 text-ui-muted">Brak zgłoszeń w tym widoku.</p>}
 
         <div className="space-y-2">
           {teams.map((team) => (
-            <details key={team.id} id={`t-${team.id}`} open={team.status === "PENDING"} className="group vg-panel">
-              <summary className="flex cursor-default list-none flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2 hover:bg-vg-window">
-                <span className="text-vg-muted transition-transform group-open:rotate-90">▸</span>
-                <Identicon seed={team.name} size={20} />
-                <span className="font-bold text-vg-gold">{team.name}</span>
-                {team.tag && <span className="text-vg-muted">[{team.tag}]</span>}
-                <span className="text-[11px] text-vg-muted">{[...new Set(team.players.map((p) => p.schoolClass))].join(" / ")}</span>
-                <span className="ml-auto text-[11px] text-vg-muted">{dateTime.format(team.createdAt)}</span>
+            <details key={team.id} id={`t-${team.id}`} open={team.status === "PENDING"} className="group ui-card">
+              <summary className="flex list-none flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2 hover:bg-navy/60">
+                <ChevronIcon size={13} className="text-ui-muted transition-transform group-open:rotate-90" />
+                <Avatar seed={team.name} size={20} />
+                <span className="font-bold text-parchment">{team.name}</span>
+                {team.tag && <span className="text-ui-muted">[{team.tag}]</span>}
+                <span className="text-[12px] text-ui-muted">{[...new Set(team.players.map((p) => p.schoolClass))].join(" / ")}</span>
+                <span className="ml-auto text-[12px] text-ui-muted">{dateTime.format(team.createdAt)}</span>
                 <StatusBadge status={team.status} />
               </summary>
 
-              <div className="grid grid-cols-1 gap-4 border-t border-vg-ink p-3 xl:grid-cols-[minmax(0,1fr)_16rem]">
+              <div className="grid grid-cols-1 gap-4 border-t border-hull p-3 xl:grid-cols-[minmax(0,1fr)_16rem]">
                 <div className="space-y-3">
-                  <div className="vg-deep vg-scroll overflow-x-auto">
-                    <table className="w-full min-w-[34rem] border-collapse text-left text-[12px]">
+                  <div className="ui-inset ui-scroll overflow-x-auto">
+                    <table className="w-full min-w-[34rem] border-collapse text-left text-[13px]">
                       <thead>
-                        <tr className="bg-vg-panel text-vg-muted">
-                          <th className="px-2 py-1 font-normal">#</th>
-                          <th className="px-2 py-1 font-normal">Nick</th>
-                          <th className="px-2 py-1 font-normal">Imię</th>
-                          <th className="px-2 py-1 font-normal">Nazwisko</th>
-                          <th className="px-2 py-1 font-normal">Klasa</th>
-                          <th className="px-2 py-1 font-normal">Rola</th>
+                        <tr className="ui-subhead">
+                          <th className="px-2 py-1 font-bold">#</th>
+                          <th className="px-2 py-1 font-bold">Nick</th>
+                          <th className="px-2 py-1 font-bold">Imię</th>
+                          <th className="px-2 py-1 font-bold">Nazwisko</th>
+                          <th className="px-2 py-1 font-bold">Klasa</th>
+                          <th className="px-2 py-1 font-bold">Rola</th>
                         </tr>
                       </thead>
                       <tbody>
                         {team.players.map((p) => (
-                          <tr key={p.id} className="vg-row border-b border-vg-ink/70 last:border-b-0">
-                            <td className="px-2 py-1 text-vg-muted">{p.isReserve ? "R" : p.slot + 1}</td>
+                          <tr key={p.id} className="ui-row border-b border-hull last:border-b-0">
+                            <td className="px-2 py-1 text-ui-muted">{p.isReserve ? "R" : p.slot + 1}</td>
                             <td className="px-2 py-1">{p.nickname}</td>
                             <td className="px-2 py-1">{p.firstName}</td>
                             <td className="px-2 py-1">{p.lastName}</td>
@@ -105,37 +106,37 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
                     </table>
                   </div>
 
-                  <dl className="grid grid-cols-1 gap-x-4 gap-y-1.5 text-[12px] sm:grid-cols-2">
+                  <dl className="grid grid-cols-1 gap-x-4 gap-y-1.5 text-[13px] sm:grid-cols-2">
                     <div>
-                      <dt className="text-vg-muted">E-mail kapitana</dt>
+                      <dt className="text-ui-muted">E-mail kapitana</dt>
                       <dd>
-                        <a href={`mailto:${team.captainEmail}`} className="text-vg-gold underline">
+                        <a href={`mailto:${team.captainEmail}`} className="text-gold underline">
                           {team.captainEmail}
                         </a>
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-vg-muted">Discord</dt>
+                      <dt className="text-ui-muted">Discord</dt>
                       <dd>{team.captainDiscord ?? "—"}</dd>
                     </div>
                     <div>
-                      <dt className="text-vg-muted">Regulamin / zgoda</dt>
+                      <dt className="text-ui-muted">Regulamin / zgoda</dt>
                       <dd>
                         {team.rulesSeconds < 600 ? `${team.rulesSeconds} s` : `${Math.round(team.rulesSeconds / 60)} min`} od otwarcia · zgoda{" "}
                         {dateTime.format(team.consentAt)}
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-vg-muted">Weryfikacja</dt>
+                      <dt className="text-ui-muted">Weryfikacja</dt>
                       <dd>{team.reviewedBy ? `${team.reviewedBy}, ${team.reviewedAt ? dateTime.format(team.reviewedAt) : ""}` : "—"}</dd>
                     </div>
                     {team.reviewNote && (
                       <div className="sm:col-span-2">
-                        <dt className="text-vg-muted">Notatka</dt>
-                        <dd className="text-[#ff9f8a]">{team.reviewNote}</dd>
+                        <dt className="text-ui-muted">Notatka</dt>
+                        <dd className="text-ui-danger">{team.reviewNote}</dd>
                       </div>
                     )}
-                    {team.anonymizedAt && <div className="text-[#ff9f8a] sm:col-span-2">Zanonimizowano {dateTime.format(team.anonymizedAt)}</div>}
+                    {team.anonymizedAt && <div className="text-ui-danger sm:col-span-2">Zanonimizowano {dateTime.format(team.anonymizedAt)}</div>}
                   </dl>
                 </div>
 
@@ -145,16 +146,18 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
                       <ActionForm action={approveTeam} className="flex flex-col gap-1">
                         <input type="hidden" name="teamId" value={team.id} />
                         <Submit tone="gold" className="w-full">
-                          ✓ Zatwierdź
+                          <CheckIcon size={14} />
+                          Zatwierdź
                         </Submit>
                       </ActionForm>
                     )}
                     {team.status !== "REJECTED" && (
                       <ActionForm action={rejectTeam} className="flex flex-col gap-1">
                         <input type="hidden" name="teamId" value={team.id} />
-                        <input name="note" className="vg-field" placeholder="Powód (opcjonalnie)" maxLength={300} />
+                        <input name="note" className="ui-field" placeholder="Powód (opcjonalnie)" maxLength={300} />
                         <Submit confirm="Potwierdź odrzucenie" className="w-full">
-                          ✕ Odrzuć
+                          <CloseIcon size={14} />
+                          Odrzuć
                         </Submit>
                       </ActionForm>
                     )}
@@ -165,7 +168,7 @@ export default async function TeamsReview(props: PageProps<"/admin/druzyny">) {
                       </ActionForm>
                     )}
                     {staff.role === "ADMIN" && (
-                      <ActionForm action={deleteTeam} className="flex flex-col gap-1 border-t border-vg-ink pt-2">
+                      <ActionForm action={deleteTeam} className="flex flex-col gap-1 border-t border-hull pt-2">
                         <input type="hidden" name="teamId" value={team.id} />
                         <Submit tone="danger" confirm="Usunąć na zawsze?" className="w-full">
                           Usuń zgłoszenie

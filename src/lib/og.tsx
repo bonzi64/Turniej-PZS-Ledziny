@@ -2,45 +2,38 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { pixelRows } from "@/components/vgui/pixel";
-import { EVENT, TAGLINE } from "@/content/event";
-import { GAMES, type GameModule } from "@/lib/games";
+import { EVENT } from "@/content/event";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 
 const font = (file: string) => readFile(join(process.cwd(), "src/assets/og", file));
 
-const logo = async () => `data:image/png;base64,${(await readFile(join(process.cwd(), "public/brand/pzs-logo.png"))).toString("base64")}`;
-const LOGO_RATIO = 419 / 512;
-
-const C = {
-  window: "#4c5844",
-  panel: "#3e4637",
-  deep: "#2a2e22",
-  ink: "#1c1f17",
-  hi: "#889180",
-  text: "#dedfd6",
-  muted: "#a8b09c",
-  gold: "#c4b550",
-};
-
-function Dots({ text, dot, color }: { text: string; dot: number; color: string }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      {pixelRows(text).map((row, y) => (
-        <div key={y} style={{ display: "flex", gap: 2 }}>
-          {[...row].map((cell, x) => (
-            <div key={x} style={{ width: dot, height: dot, background: cell === "#" ? color : "rgba(196,181,80,0.08)" }} />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+// rdzeń hextech z HextechCore, spłaszczony do jednego pliku SVG
+function coreSvg() {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" width="400" height="400">
+<defs>
+<linearGradient id="m" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0e6d2"/><stop offset=".45" stop-color="#c8aa6e"/><stop offset="1" stop-color="#785a28"/></linearGradient>
+<linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cdfafa"/><stop offset="1" stop-color="#0397ab"/></linearGradient>
+<linearGradient id="b" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0ac8b9"/><stop offset="1" stop-color="#005a82"/></linearGradient>
+</defs>
+<circle r="86" fill="none" stroke="url(#m)" stroke-width="5"/>
+<circle r="78" fill="none" stroke="#463714" stroke-width="1.2"/>
+<path d="M0 -96 L10 -84 L0 -76 L-10 -84 Z M0 96 L10 84 L0 76 L-10 84 Z M-96 0 L-84 10 L-76 0 L-84 -10 Z M96 0 L84 10 L76 0 L84 -10 Z" fill="#010a13" stroke="url(#m)" stroke-width="2"/>
+<path d="M-52 -40 A66 66 0 0 1 -14 -64 M52 -40 A66 66 0 0 0 14 -64 M-52 44 A66 66 0 0 0 -14 66 M52 44 A66 66 0 0 1 14 66" fill="none" stroke="url(#m)" stroke-width="3" stroke-linecap="round"/>
+<g transform="rotate(-8)">
+<polygon points="0,-62 22,-30 0,-14 -22,-30" fill="url(#a)"/>
+<polygon points="22,-30 0,-14 0,10 26,-6" fill="url(#b)"/>
+<polygon points="-22,-30 0,-14 0,10 -26,-6" fill="#0a323c"/>
+<polygon points="0,10 26,-6 14,40 0,52" fill="#005a82"/>
+<polygon points="0,10 -26,-6 -14,40 0,52" fill="#062a33"/>
+<polyline points="0,-62 22,-30 26,-6 14,40 0,52 -14,40 -26,-6 -22,-30 0,-62" fill="none" stroke="#cdfafa" stroke-opacity=".7" stroke-width=".8"/>
+</g>
+</svg>`;
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 }
 
-export async function renderOgCard(game?: GameModule) {
-  const [shield, regular, bold] = await Promise.all([logo(), font("dejavu-sans-latin-400-normal.woff"), font("dejavu-sans-latin-700-normal.woff")]);
-  const mark = game?.short ?? "PZS";
+export async function renderOgCard() {
+  const [marcellus, barlow] = await Promise.all([font("marcellus-sc-400.ttf"), font("barlow-semi-condensed-600.ttf")]);
 
   return new ImageResponse(
     (
@@ -49,64 +42,33 @@ export async function renderOgCard(game?: GameModule) {
           width: "100%",
           height: "100%",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           position: "relative",
-          fontFamily: "DejaVu",
-          color: C.text,
-          background: "radial-gradient(110% 90% at 70% 35%, #1a2f52 0%, #050b14 60%, #010205 100%)",
+          fontFamily: "Barlow",
+          color: "#f0e6d2",
+          background: "linear-gradient(180deg, #10233a 0%, #0a1626 40%, #030b15 100%)",
         }}
       >
-        <div style={{ position: "absolute", left: 0, top: 176, width: 900, height: 2, background: "linear-gradient(90deg, rgba(217,192,79,0) 0%, #d9c04f 20%, rgba(217,192,79,0) 100%)" }} />
-        <div style={{ position: "absolute", left: 0, top: 196, width: 700, height: 1, background: "linear-gradient(90deg, rgba(217,192,79,0) 0%, rgba(217,192,79,0.6) 25%, rgba(217,192,79,0) 100%)" }} />
+        <div style={{ position: "absolute", left: 24, top: 24, right: 24, bottom: 24, display: "flex", border: "4px solid #c8aa6e" }} />
+        <div style={{ position: "absolute", left: 30, top: 30, right: 30, bottom: 30, display: "flex", border: "1px solid rgba(120,90,40,0.6)" }} />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: 1060,
-            background: C.window,
-            border: "2px solid #262b1f",
-            boxShadow: "0 18px 50px rgba(0,0,0,0.75)",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 22px", fontSize: 26, fontWeight: 700 }}>
-            <div style={{ width: 22, height: 22, background: C.gold, display: "flex" }} />
-            <span style={{ display: "flex" }}>{TAGLINE}</span>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 60, padding: "0 90px", width: "100%" }}>
+          <img src={coreSvg()} width={380} height={380} alt="" style={{ flexShrink: 0 }} />
 
-          <div style={{ display: "flex", gap: 36, margin: "0 22px 22px", padding: 30, background: C.panel, border: `2px solid ${C.ink}` }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 24, padding: 20, background: C.deep, border: `2px solid ${C.ink}` }}>
-              <img src={shield} width={Math.round(150 * LOGO_RATIO)} height={150} alt="" />
-              <Dots text={mark} dot={game ? 11 : 13} color={C.gold} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", fontSize: 26, letterSpacing: 5, color: "#c8aa6e" }}>{`LEAGUE OF LEGENDS · ${EVENT.dateLabel}`}</div>
+            <div style={{ display: "flex", flexDirection: "column", marginTop: 14, fontFamily: "Marcellus SC", fontSize: 88, lineHeight: 1, color: "#f0e6d2" }}>
+              <span style={{ display: "flex" }}>Turniej</span>
+              <span style={{ display: "flex", marginTop: 4 }}>PZS Lędziny</span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: 12 }}>
-              <div style={{ display: "flex", fontSize: 44, fontWeight: 700, color: C.gold }}>{game ? game.name : "Turniej E-sportowy"}</div>
-              <div style={{ display: "flex", fontSize: 32 }}>{`PZS Lędziny · ${EVENT.dateLabel}`}</div>
-              <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
-                {(game ? game.mode.slice(0, 3) : GAMES.map((g) => g.short)).map((label) => (
-                  <div key={label} style={{ display: "flex", padding: "4px 12px", fontSize: 20, fontWeight: 700, background: C.gold, color: C.ink }}>
-                    {label}
-                  </div>
-                ))}
-              </div>
+            <div style={{ display: "flex", width: 420, height: 1, marginTop: 28, background: "linear-gradient(90deg, #785a28, rgba(70,55,20,0))" }} />
+            <div style={{ display: "flex", gap: 12, marginTop: 26 }}>
+              {["5 na 5", "Tournament Draft", "BO1", "8 drużyn"].map((label) => (
+                <div key={label} style={{ display: "flex", padding: "6px 14px", fontSize: 22, color: "#cdbe91", border: "2px solid #463714", background: "rgba(1,10,19,0.7)" }}>
+                  {label}
+                </div>
+              ))}
             </div>
-          </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              margin: "0 12px 12px",
-              padding: "8px 14px",
-              fontSize: 20,
-              color: C.muted,
-              background: C.panel,
-              border: `2px solid ${C.ink}`,
-            }}
-          >
-            <span style={{ display: "flex" }}>{EVENT.address}</span>
-            <span style={{ display: "flex" }}>{`Zapisy do ${EVENT.registrationClosesLabel}`}</span>
+            <div style={{ display: "flex", marginTop: 30, fontSize: 24, color: "#a09b8c" }}>{`Zapisy do ${EVENT.registrationClosesLabel} · ${EVENT.schoolShort}`}</div>
           </div>
         </div>
       </div>
@@ -114,8 +76,8 @@ export async function renderOgCard(game?: GameModule) {
     {
       ...OG_SIZE,
       fonts: [
-        { name: "DejaVu", data: regular, weight: 400 },
-        { name: "DejaVu", data: bold, weight: 700 },
+        { name: "Barlow", data: barlow, weight: 600 },
+        { name: "Marcellus SC", data: marcellus, weight: 400 },
       ],
     },
   );

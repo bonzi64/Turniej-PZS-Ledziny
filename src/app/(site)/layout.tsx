@@ -1,24 +1,42 @@
 import { Backdrop } from "@/components/shell/Backdrop";
-import { BootSplash } from "@/components/shell/BootSplash";
+import { Intro } from "@/components/shell/Intro";
 import { LegalNote } from "@/components/shell/LegalNote";
-import { SideMenu } from "@/components/shell/SideMenu";
-import { GAMES } from "@/lib/games";
+import { SocialPanel } from "@/components/shell/SocialPanel";
+import { TopBar } from "@/components/shell/TopBar";
+import { GAME } from "@/lib/games";
+import { getPublicTeams, getSlotStats, type PublicTeam, type SlotStat } from "@/lib/queries";
+import { registrationWindow } from "@/lib/registration";
 
-export default function SiteLayout({ children }: LayoutProps<"/">) {
-  const games = GAMES.map(({ slug, name, short, vetoEnabled }) => ({ slug, name, short, vetoEnabled }));
+// panel drużyn jest dodatkiem – gdy baza nie odpowie, strona i tak się wyświetli, a błąd pokaże sama treść
+async function socialData(): Promise<{ teams: PublicTeam[]; stats: SlotStat[] }> {
+  try {
+    const [stats, teams] = await Promise.all([getSlotStats(), getPublicTeams(GAME.code)]);
+    return { stats, teams };
+  } catch {
+    return { stats: [], teams: [] };
+  }
+}
+
+export default async function SiteLayout({ children }: LayoutProps<"/">) {
+  const { teams, stats } = await socialData();
 
   return (
-    <div data-skin="vgui">
-      <BootSplash host="pzs-ledziny.lan:27015" />
+    <>
+      <Intro />
       <Backdrop />
-      <SideMenu games={games} />
+      <TopBar />
 
-      <div className="relative min-h-dvh pt-14 lg:pt-14 lg:pl-[19rem] xl:pl-[20rem]">
-        <main className="mx-auto w-full max-w-[1100px] px-2 pb-6 sm:px-4 lg:pr-6">{children}</main>
-        <footer className="mx-auto max-w-[1100px] px-3 pb-6 sm:px-4 lg:pr-6">
-          <LegalNote />
-        </footer>
+      <div className="flex">
+        <div className="min-w-0 flex-1">
+          <main id="okno" className="mx-auto w-full max-w-[1180px] scroll-mt-24 px-3 pt-5 pb-10 sm:px-6 lg:pt-8">
+            {children}
+          </main>
+          <footer className="mx-auto max-w-[1180px] px-3 pb-8 sm:px-6">
+            <LegalNote />
+          </footer>
+        </div>
+        <SocialPanel teams={teams} initial={stats} signupOpen={registrationWindow().open} />
       </div>
-    </div>
+    </>
   );
 }

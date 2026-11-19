@@ -4,7 +4,7 @@ import { deletePhoto, updatePhotoCaption } from "@/actions/admin-photos";
 import { ActionForm, Submit } from "@/components/admin/ActionForm";
 import { PhotoUploader } from "@/components/admin/PhotoUploader";
 import { dateTime } from "@/components/admin/bits";
-import { Group, Window } from "@/components/vgui/Window";
+import { Group, Window } from "@/components/hx/frame";
 import { requireStaff } from "@/lib/auth/session";
 import { PHOTO, photoUrl } from "@/lib/photo-limits";
 import { listPhotosForStaff } from "@/lib/photos";
@@ -21,9 +21,9 @@ export default async function AdminPhotos() {
     <div className="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_20rem]">
       <Window title={`Zdjęcia z turnieju (${photos.length})`}>
         {photos.length === 0 ? (
-          <p className="vg-deep px-3 py-4 text-vg-muted">
+          <p className="ui-inset px-3 py-4 text-ui-muted">
             Brak zdjęć. Publiczna strona{" "}
-            <Link href="/zdjecia" className="text-vg-gold underline">
+            <Link href="/zdjecia" className="text-gold underline">
               /zdjecia
             </Link>{" "}
             pokazuje teraz: „Zdjęcia pojawią się po zakończeniu turnieju.”
@@ -31,7 +31,7 @@ export default async function AdminPhotos() {
         ) : (
           <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 2xl:grid-cols-3">
             {photos.map((photo, i) => (
-              <li key={photo.id} className="vg-panel space-y-1.5 p-1.5">
+              <li key={photo.id} className="ui-card space-y-1.5 p-1.5">
                 <a href={photoUrl(photo.id)} target="_blank" rel="noreferrer" className="block">
                   <Image
                     unoptimized
@@ -39,7 +39,7 @@ export default async function AdminPhotos() {
                     width={photo.thumbWidth}
                     height={photo.thumbHeight}
                     alt={photo.caption ?? `Zdjęcie ${i + 1}`}
-                    className="vg-deep aspect-4/3 w-full object-cover"
+                    className="ui-inset aspect-4/3 w-full object-cover"
                   />
                 </a>
                 <ActionForm action={updatePhotoCaption} className="flex flex-wrap gap-1">
@@ -50,11 +50,11 @@ export default async function AdminPhotos() {
                     maxLength={PHOTO.captionMax}
                     placeholder="Podpis (opcjonalnie)"
                     aria-label={`Podpis zdjęcia ${i + 1}`}
-                    className="vg-field min-w-0 flex-1"
+                    className="ui-field min-w-0 flex-1"
                   />
                   <Submit>Zapisz</Submit>
                 </ActionForm>
-                <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] text-vg-muted">
+                <div className="flex flex-wrap items-center justify-between gap-1 text-[12px] text-ui-muted">
                   <span>
                     #{i + 1} · {photo.uploadedBy} · {dateTime.format(photo.createdAt)} · {kb(photo.size)}
                   </span>
@@ -75,7 +75,7 @@ export default async function AdminPhotos() {
         <Window title="Dodaj zdjęcia">
           <PhotoUploader count={photos.length} />
         </Window>
-        <Group legend="Zanim dodasz" className="text-[12px] text-vg-muted">
+        <Group legend="Zanim dodasz" className="text-[13px] text-ui-muted">
           <p>Publikuj tylko zdjęcia osób, które mają zgodę szkoły na publikację wizerunku.</p>
           <p className="mt-2">Jeśli ktoś poprosi o usunięcie zdjęcia ze swoim wizerunkiem, kliknij przy nim „Usuń”.</p>
         </Group>

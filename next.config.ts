@@ -8,6 +8,13 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "4mb",
     },
   },
+  // turniej CS2 został odwołany – stare linki z plakatów i Discorda prowadzą na stronę LoL
+  async redirects() {
+    return [
+      { source: "/cs2/:path*", destination: "/", permanent: false },
+      { source: "/lol", destination: "/", permanent: false },
+    ];
+  },
   async headers() {
     return [
       {
