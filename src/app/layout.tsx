@@ -36,13 +36,13 @@ export const viewport: Viewport = {
 };
 
 // ustawia flagę przed pierwszym malowaniem, żeby intro nie mignęło przy powrocie w tej samej sesji
-const BOOT_FLAG = `try{if(sessionStorage.getItem("pzs.boot")==="1")document.documentElement.setAttribute("data-booted","")}catch(e){}`;
+const BOOT_FLAG = `document.documentElement.setAttribute("data-js","");try{if(sessionStorage.getItem("pzs.boot")==="1")document.documentElement.setAttribute("data-booted","")}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/fonts/marcellus-sc-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/big-shoulders-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/barlow-sc-400-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <script dangerouslySetInnerHTML={{ __html: BOOT_FLAG }} />
       </head>

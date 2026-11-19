@@ -33,7 +33,7 @@ function coreSvg() {
 }
 
 export async function renderOgCard() {
-  const [marcellus, barlow] = await Promise.all([font("marcellus-sc-400.ttf"), font("barlow-semi-condensed-600.ttf")]);
+  const [shoulders, barlow] = await Promise.all([font("big-shoulders-display-800.ttf"), font("barlow-semi-condensed-600.ttf")]);
 
   return new ImageResponse(
     (
@@ -56,9 +56,9 @@ export async function renderOgCard() {
 
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ display: "flex", fontSize: 26, letterSpacing: 5, color: "#c8aa6e" }}>{`LEAGUE OF LEGENDS · ${EVENT.dateLabel}`}</div>
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 14, fontFamily: "Marcellus SC", fontSize: 88, lineHeight: 1, color: "#f0e6d2" }}>
-              <span style={{ display: "flex" }}>Turniej</span>
-              <span style={{ display: "flex", marginTop: 4 }}>PZS Lędziny</span>
+            <div style={{ display: "flex", flexDirection: "column", marginTop: 14, fontFamily: "Big Shoulders", fontSize: 112, lineHeight: 0.88, color: "#f0e6d2" }}>
+              <span style={{ display: "flex" }}>TURNIEJ</span>
+              <span style={{ display: "flex", marginTop: 6 }}>PZS LĘDZINY</span>
             </div>
             <div style={{ display: "flex", width: 420, height: 1, marginTop: 28, background: "linear-gradient(90deg, #785a28, rgba(70,55,20,0))" }} />
             <div style={{ display: "flex", gap: 12, marginTop: 26 }}>
@@ -77,7 +77,7 @@ export async function renderOgCard() {
       ...OG_SIZE,
       fonts: [
         { name: "Barlow", data: barlow, weight: 600 },
-        { name: "Marcellus SC", data: marcellus, weight: 400 },
+        { name: "Big Shoulders", data: shoulders, weight: 800 },
       ],
     },
   );

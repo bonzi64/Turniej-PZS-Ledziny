@@ -45,6 +45,13 @@ export function HowToSteps({ closed }: { closed: boolean }) {
           </li>
         ))}
       </ol>
+      <TabLink
+        tab={closed ? "druzyny" : "zapisy"}
+        className="group mt-auto inline-flex items-center gap-1.5 self-start pt-4 font-display text-[17px] font-bold tracking-[0.03em] text-gold transition-colors hover:text-parchment"
+      >
+        {closed ? "Zobacz drużyny" : "Zapisz drużynę"}
+        <ChevronIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
+      </TabLink>
     </section>
   );
 }

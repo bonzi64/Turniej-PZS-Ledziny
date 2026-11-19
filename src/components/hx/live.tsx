@@ -52,8 +52,11 @@ export function useSlotStat(initial: SlotStat[]): LiveStat {
 export function LiveSlotCount({ initial, className = "" }: { initial: SlotStat[]; className?: string }) {
   const stat = useSlotStat(initial);
   return (
-    <span className={`tabular ${className}`} aria-live="polite">
-      {stat.taken}/{stat.max}
+    <span className={`tabular inline-flex overflow-hidden ${className}`} aria-live="polite">
+      <span key={stat.taken} className="inline-block animate-count-in">
+        {stat.taken}
+      </span>
+      /{stat.max}
     </span>
   );
 }

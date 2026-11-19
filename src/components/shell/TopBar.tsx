@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { MouseEvent } from "react";
+import { type MouseEvent, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { SchoolLogo } from "@/components/brand/SchoolLogo";
 import { ExpandIcon, NoteIcon, SpeakerIcon } from "@/components/hx/icons";
 import { openTab, useHash } from "@/components/hx/tab-store";
@@ -55,6 +55,57 @@ function NavItems() {
   );
 }
 
+// pasek zakładek z jedną złotą kreską przesuwaną pod aktywną pozycję (transform, bez animowania szerokości)
+function NavStrip({ className }: { className: string }) {
+  const { pathname, tab } = useActive();
+  const nav = useRef<HTMLElement>(null);
+  const bar = useRef<HTMLSpanElement>(null);
+  const placed = useRef(false);
+  const key = `${pathname}#${tab ?? ""}`;
+
+  const place = useCallback(() => {
+    const root = nav.current;
+    const line = bar.current;
+    if (!root || !line) return;
+    const active = root.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!active) {
+      line.style.opacity = "0";
+      return;
+    }
+    const inset = 12;
+    const width = Math.max(0, active.offsetWidth - inset * 2);
+    // pierwsze ustawienie bez przejazdu – kreska nie wyjeżdża z lewej krawędzi przy wejściu na stronę
+    if (!placed.current) line.style.transition = "none";
+    line.style.opacity = "1";
+    line.style.transform = `translateX(${active.offsetLeft + inset}px) scaleX(${width / 100})`;
+    if (!placed.current) {
+      void line.offsetWidth;
+      line.style.transition = "";
+      placed.current = true;
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    place();
+  }, [key, place]);
+
+  useEffect(() => {
+    const root = nav.current;
+    if (!root) return;
+    const observer = new ResizeObserver(() => place());
+    observer.observe(root);
+    document.fonts?.ready.then(() => place()).catch(() => {});
+    return () => observer.disconnect();
+  }, [place]);
+
+  return (
+    <nav ref={nav} aria-label="Menu turnieju" className={`relative ${className}`}>
+      <NavItems />
+      <span ref={bar} aria-hidden className="hx-tab-indicator" style={{ opacity: 0 }} />
+    </nav>
+  );
+}
+
 function SoundControls() {
   const { sfx, music, sfxVolume, musicVolume, toggleSfx, toggleMusic, setVolume, play } = useSound();
   const fullscreen = useFullscreen();
@@ -95,7 +146,7 @@ function SoundControls() {
           </svg>
         </summary>
         <div className="hx-frame absolute top-11 right-0 z-50 w-60 px-4 py-3.5" data-rule="">
-          <p className="hx-head text-[16px]">Głośność</p>
+          <p className="hx-head text-[20px]">Głośność</p>
           {(
             [
               ["sfx", "Efekty", sfxVolume],
@@ -150,26 +201,19 @@ export function TopBar() {
           <Link href="/" data-sfx="" className="hx-ring relative z-10 -mr-3 size-12 lg:size-[60px]" aria-label="PZS E-sports – strona startowa">
             <SchoolLogo height={34} priority className="lg:h-10 lg:w-auto" />
           </Link>
-          <Link href="/#zapisy" data-sfx="" onClick={go("zapisy")} aria-current={tab === "zapisy" ? "true" : undefined} className="hx-play h-10 pr-8 pl-7 text-[14px] sm:text-[15px] lg:h-[46px] lg:pr-10 lg:pl-10 lg:text-[18px]">
+          <Link href="/#zapisy" data-sfx="" onClick={go("zapisy")} aria-current={tab === "zapisy" ? "true" : undefined} className="hx-play h-10 pr-8 pl-7 text-[17px] sm:text-[19px] lg:h-[46px] lg:pr-10 lg:pl-10 lg:text-[22px]">
             Zapisz drużynę
           </Link>
         </div>
 
-        <nav aria-label="Menu turnieju" className="ui-scroll hidden h-full min-w-0 flex-1 items-stretch overflow-x-auto pl-4 lg:flex">
-          <NavItems />
-        </nav>
+        <NavStrip className="ui-scroll hidden h-full min-w-0 flex-1 items-stretch overflow-x-auto pl-4 lg:flex" />
 
         <div className="ml-auto shrink-0">
           <SoundControls />
         </div>
       </div>
 
-      <nav
-        aria-label="Menu turnieju"
-        className="ui-scroll flex h-12 snap-x snap-mandatory items-stretch overflow-x-auto border-t border-hull pr-8 [mask-image:linear-gradient(90deg,#000_82%,transparent)] lg:hidden [&>a]:snap-start [&>a]:px-3 [&>a]:text-[14px] [&>a]:tracking-[0.05em]"
-      >
-        <NavItems />
-      </nav>
+      <NavStrip className="ui-scroll flex h-12 snap-x snap-mandatory items-stretch overflow-x-auto border-t border-hull pr-8 [mask-image:linear-gradient(90deg,#000_82%,transparent)] lg:hidden [&>a]:snap-start [&>a]:px-3 [&>a]:text-[17px] [&>a]:tracking-[0.03em]" />
     </header>
   );
 }

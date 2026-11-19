@@ -42,7 +42,7 @@ export function Window({ title, children, closeHref, status, className = "", bod
 export function Group({ legend, children, className = "" }: { legend?: string; children: ReactNode; className?: string }) {
   return (
     <div className={`ui-card p-4 ${className}`}>
-      {legend && <p className="mb-3 font-display text-[15px] tracking-[0.05em] text-gold">{legend}</p>}
+      {legend && <p className="mb-3 font-display text-[19px] tracking-[0.03em] text-gold">{legend}</p>}
       {children}
     </div>
   );
@@ -62,7 +62,7 @@ export function PageHead({ title, children, aside }: { title: string; children?:
     <header className="mb-6">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="font-display text-[34px] leading-[1.05] tracking-[0.03em] text-parchment text-balance sm:text-[44px]">{title}</h1>
+          <h1 className="font-display text-[46px] leading-[0.92] tracking-[0.01em] text-parchment text-balance sm:text-[60px]">{title}</h1>
           {children && <div className="mt-2 max-w-2xl text-[15px] text-ui-muted">{children}</div>}
         </div>
         {aside}

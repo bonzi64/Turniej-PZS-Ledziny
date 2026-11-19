@@ -6,7 +6,7 @@ import { registerTeam, type RegisterState } from "@/actions/register";
 import { CrownIcon } from "@/components/hx/icons";
 import { formatClock, useRulesGate } from "@/components/module/RulesGate";
 import { TabLink } from "@/components/module/TabLink";
-import { Chip, Dialog, Panel, Readout } from "@/components/skin/parts";
+import { Avatar, Chip, Dialog, Panel, Readout } from "@/components/skin/parts";
 import { useSound } from "@/components/sound/SoundProvider";
 import { RESERVE_SLOT } from "@/lib/tournament";
 
@@ -22,7 +22,7 @@ const SLOTS = Array.from({ length: RESERVE_SLOT + 1 }, (_, slot) => slot);
 
 // jedna siatka dla wiersza zawodnika: na telefonie karta (nagłówek + pola 2×2), od md wiersz tabeli
 const ROW =
-  "grid-cols-[1fr_auto] gap-x-3 gap-y-2.5 [grid-template-areas:'head_cap'_'fields_fields'] md:grid-cols-[6.5rem_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_5.5rem_4.5rem] md:gap-x-2 md:[grid-template-areas:'head_nick_first_last_class_cap']";
+  "grid-cols-[1fr_auto] gap-x-3 gap-y-2.5 [grid-template-areas:'head_cap'_'fields_fields'] md:grid-cols-[10rem_minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_5.5rem_4.5rem] md:gap-x-2 md:[grid-template-areas:'head_nick_first_last_class_cap']";
 
 function Hint({ message }: { message?: string }) {
   if (!message) return null;
@@ -34,6 +34,8 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
   const [state, dispatch] = useActionState<RegisterState, FormData>(registerTeam, { status: "idle" });
   const [pending, startTransition] = useTransition();
   const [captain, setCaptain] = useState(0);
+  // nicki wpisywane na żywo – portrety w składzie wypełniają się jak w lobby gry
+  const [nicks, setNicks] = useState<string[]>(() => SLOTS.map(() => ""));
   const { play } = useSound();
   const topRef = useRef<HTMLDivElement>(null);
 
@@ -168,12 +170,23 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
               const rowError = err(p("nick")) ?? err(p("first")) ?? err(p("last")) ?? err(p("class"));
               return (
                 <div key={slot} role="group" aria-label={reserve ? "Rezerwowy" : `Gracz ${slot + 1}`} className={`grid ${ROW} px-3 py-4 md:py-2.5 ${reserve ? "bg-void/40" : ""}`}>
-                  <div className="flex items-center gap-2 [grid-area:head] md:flex-col md:items-start md:gap-0 md:pt-2.5">
-                    <span className={`font-display text-[16px] tracking-[0.06em] ${reserve ? "text-ui-muted" : "text-parchment"}`}>
-                      {reserve ? "Rezerwowy" : `Gracz ${slot + 1}`}
+                  <div className="flex items-center gap-3 [grid-area:head] md:pt-0.5">
+                    <span className="relative shrink-0">
+                      {captain === slot && <CrownIcon size={18} className="absolute -top-3 left-1/2 z-10 -translate-x-1/2" />}
+                      {nicks[slot].trim() ? (
+                        <span key={nicks[slot].trim().slice(0, 2)} className="hx-ring size-10 animate-count-in">
+                          <Avatar seed={nicks[slot].trim()} size={34} />
+                        </span>
+                      ) : (
+                        <span className={`block size-10 rounded-full border border-dashed ${reserve ? "border-steel" : "border-bronze"}`} />
+                      )}
                     </span>
-                    {reserve && <span className="text-[12px] text-ui-faint">opcjonalnie</span>}
-                    {captain === slot && <CrownIcon size={16} className="md:hidden" />}
+                    <span className="flex min-w-0 flex-col">
+                      <span className={`font-display text-[20px] leading-none tracking-[0.03em] ${reserve ? "text-ui-muted" : "text-parchment"}`}>
+                        {reserve ? "Rezerwowy" : `Gracz ${slot + 1}`}
+                      </span>
+                      {reserve && <span className="mt-1 text-[12px] text-ui-faint">opcjonalnie</span>}
+                    </span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2.5 [grid-area:fields] md:contents">
@@ -181,7 +194,10 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
                       <label className="ui-label md:sr-only" htmlFor={p("nick")}>
                         {nickLabel}
                       </label>
-                      <input id={p("nick")} name={p("nick")} aria-label={`${nickLabel}, ${who}`} className="ui-field" maxLength={32} placeholder={nickPlaceholder} aria-invalid={Boolean(err(p("nick")))} required={!reserve} />
+                      <input id={p("nick")} name={p("nick")} aria-label={`${nickLabel}, ${who}`} onChange={(e) => {
+                          const value = e.currentTarget.value;
+                          setNicks((prev) => prev.map((n, i) => (i === slot ? value : n)));
+                        }} className="ui-field" maxLength={32} placeholder={nickPlaceholder} aria-invalid={Boolean(err(p("nick")))} required={!reserve} />
                       <Hint message={rowError} />
                     </div>
                     <div className="md:[grid-area:first]">

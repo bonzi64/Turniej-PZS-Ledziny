@@ -15,7 +15,7 @@
 
 ---
 
-Strona prowadzi turniej od zapisów aż do finału. Uczniowie zgłaszają drużyny przez formularz, nauczyciele sprawdzają zgłoszenia w zabezpieczonym panelu, a w dniu turnieju na stronie widać drabinkę i wyniki na żywo. Wygląd nawiązuje do menu głównego klienta League of Legends: granat, metalowe złote ramki, rdzeń hextech z kryształem, kapitaliki Marcellus SC i przycisk „Zapisz drużynę” w miejscu przycisku „Graj”.
+Strona prowadzi turniej od zapisów aż do finału. Uczniowie zgłaszają drużyny przez formularz, nauczyciele sprawdzają zgłoszenia w zabezpieczonym panelu, a w dniu turnieju na stronie widać drabinkę i wyniki na żywo. Wygląd nawiązuje do menu głównego klienta League of Legends: granat, metalowe złote ramki, rdzeń hextech z kryształem i iskrami, esportowe wersaliki Big Shoulders Display, złoty kursor hextech i przycisk „Zapisz drużynę” w miejscu przycisku „Graj”.
 
 Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w głosowaniu. Głosowanie wygrało Counter-Strike 2, ale turniej CS2 się nie odbędzie, więc strona wróciła do League of Legends. Wersja CS2 jest zachowana w tagu `cs2-final` i w kopii `turniejpzs-kopia-cs2-2026-11-18`.
 
@@ -25,7 +25,7 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 
 - **Intro jak start klienta.** Rdzeń hextech składa się w takt ładowania, a po kliknięciu przelatuje na baner strony startowej. Kliknięcie włącza pełny ekran, `Esc` pomija intro.
 - **Regulamin z blokadą.** Formularz zapisów odblokowuje się dopiero wtedy, gdy regulamin zostanie przewinięty do końca i minie minimalny czas lektury, domyślnie 60 sekund. Zegar liczy tylko wtedy, gdy regulamin jest widoczny na ekranie.
-- **Zgłoszenie drużyny.** Pięciu graczy i jeden rezerwowy. Dla każdego Riot ID, imię, nazwisko i klasa, a dla kapitana także e-mail. Na telefonie każdy zawodnik ma własną kartę z polami zamiast szerokiej tabeli.
+- **Zgłoszenie drużyny.** Pięciu graczy i jeden rezerwowy. Dla każdego Riot ID, imię, nazwisko i klasa, a dla kapitana także e-mail. Na telefonie każdy zawodnik ma własną kartę z polami zamiast szerokiej tabeli, a portret gracza wypełnia się inicjałami w trakcie wpisywania Riot ID, jak w lobby gry.
 - **Licznik zapisów na żywo** na banerze i w panelu drużyn po prawej, który wygląda jak lista znajomych w kliencie.
 - **Lista drużyn i drabinka.** Zatwierdzone składy, pary meczowe, godziny meczów i wyniki.
 - **Dźwięk.** Efekty i muzyka są syntezowane w przeglądarce (bez plików), z osobną głośnością.
@@ -101,4 +101,4 @@ Kod jest udostępniony wyłącznie do wglądu. Wszelkie prawa zastrzeżone: bez 
 
 League of Legends jest znakiem towarowym Riot Games, Inc. Turniej jest wydarzeniem szkolnym i nie jest powiązany z Riot Games. Strona nie używa grafik ani logotypów Riot Games.
 
-Fonty: Marcellus SC i Barlow Semi Condensed, oba na licencji SIL Open Font License 1.1 (hostowane z `public/fonts`).
+Fonty: Big Shoulders Display i Barlow Semi Condensed, oba na licencji SIL Open Font License 1.1 (hostowane z `public/fonts`).

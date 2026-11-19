@@ -17,7 +17,7 @@ export default async function LoginPage() {
           <span className="hx-ring size-28">
             <SchoolLogo height={72} priority />
           </span>
-          <h1 className="mt-5 font-display text-[28px] tracking-[0.06em] text-parchment">Panel organizatora</h1>
+          <h1 className="mt-5 font-display text-[38px] tracking-[0.02em] text-parchment">Panel organizatora</h1>
           <p className="mt-1 text-[14px] text-ui-muted">Turniej PZS Lędziny · League of Legends</p>
         </div>
         <Window title="Logowanie" closeHref="/">

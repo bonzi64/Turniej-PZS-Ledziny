@@ -31,14 +31,14 @@ export function SocialPanel({ teams, initial, signupOpen }: { teams: PublicTeam[
       </div>
 
       <div className="flex items-baseline justify-between px-4 pt-4 pb-2">
-        <p className="font-display text-[16px] tracking-[0.05em] text-gold">Drużyny</p>
+        <p className="font-display text-[21px] tracking-[0.03em] text-gold">Drużyny</p>
         <p className="hx-digits text-[17px]">
           {stat.taken}
           <span className="text-ui-muted">/{stat.max}</span>
         </p>
       </div>
 
-      <ol className="ui-scroll flex-1 overflow-y-auto px-1.5 pb-4">
+      <ol className="hx-enter ui-scroll flex-1 overflow-y-auto px-1.5 pb-4">
         {teams.map((team) => (
           <li key={team.id}>
             <details open className="group">

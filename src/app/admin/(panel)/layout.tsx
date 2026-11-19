@@ -16,7 +16,7 @@ export default async function PanelLayout({ children }: LayoutProps<"/admin">) {
             <span className="hx-ring size-11">
               <SchoolLogo height={30} />
             </span>
-            <span className="hidden font-display text-[16px] leading-tight tracking-[0.05em] text-parchment sm:block">
+            <span className="hidden font-display text-[19px] leading-[0.95] tracking-[0.03em] text-parchment sm:block">
               Panel
               <br />
               <span className="text-gold">organizatora</span>

@@ -60,7 +60,7 @@ function EmptySlot({ seat, pending }: { seat: number; pending: boolean }) {
       <span aria-hidden className={`grid size-10 rotate-45 place-items-center border ${pending ? "border-gold" : "border-umber border-dashed"}`}>
         <span className="-rotate-45 font-display text-[15px] text-gold tabular">{seat}</span>
       </span>
-      <p className={`mt-4 font-display text-[17px] tracking-[0.06em] ${pending ? "text-parchment" : "text-ui-muted"}`}>
+      <p className={`mt-4 font-display text-[23px] tracking-[0.02em] ${pending ? "text-parchment" : "text-ui-muted"}`}>
         {pending ? "W weryfikacji" : "Wolne miejsce"}
       </p>
       <p className="mt-1 text-[13px] text-ui-faint">{pending ? "czeka na decyzję organizatora" : "czeka na Waszą drużynę"}</p>

@@ -54,27 +54,27 @@ colors:
   white: "#ffffff"
 typography:
   display:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "84px"
-    fontWeight: 400
-    lineHeight: 0.95
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "104px"
+    fontWeight: 800
+    lineHeight: 0.86
     letterSpacing: "0.01em"
   headline:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "44px"
-    fontWeight: 400
-    lineHeight: 1.05
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "60px"
+    fontWeight: 800
+    lineHeight: 0.92
     letterSpacing: "0.03em"
   title:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "22px"
-    fontWeight: 400
-    lineHeight: 1.2
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "26px"
+    fontWeight: 800
+    lineHeight: 1.05
     letterSpacing: "0.04em"
   nav:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "16px"
-    fontWeight: 400
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "19px"
+    fontWeight: 700
     lineHeight: 1
     letterSpacing: "0.05em"
   body:
@@ -107,54 +107,54 @@ typography:
     letterSpacing: "0.01em"
     fontFeature: "lnum, tnum"
   display-md:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "64px"
-    fontWeight: 400
-    lineHeight: 0.95
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "80px"
+    fontWeight: 800
+    lineHeight: 0.86
   display-sm:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "46px"
-    fontWeight: 400
-    lineHeight: 0.95
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "56px"
+    fontWeight: 800
+    lineHeight: 0.86
   intro:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "52px"
-    fontWeight: 400
-    lineHeight: 1
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "76px"
+    fontWeight: 800
+    lineHeight: 0.9
   intro-sm:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "36px"
-    fontWeight: 400
-    lineHeight: 1
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "52px"
+    fontWeight: 800
+    lineHeight: 0.9
   headline-sm:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "34px"
-    fontWeight: 400
-    lineHeight: 1.05
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "46px"
+    fontWeight: 800
+    lineHeight: 0.92
   dialog:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "28px"
-    fontWeight: 400
-    lineHeight: 1.2
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "38px"
+    fontWeight: 800
+    lineHeight: 0.95
   empty:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "26px"
-    fontWeight: 400
-    lineHeight: 1.2
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "34px"
+    fontWeight: 800
+    lineHeight: 1
   fact:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "21px"
-    fontWeight: 400
-    lineHeight: 1.2
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "27px"
+    fontWeight: 800
+    lineHeight: 1.1
   section:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "20px"
-    fontWeight: 400
-    lineHeight: 1.3
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "22px"
+    fontWeight: 800
+    lineHeight: 1.15
   action-lg:
-    fontFamily: "Marcellus SC, Georgia, Times New Roman, serif"
-    fontSize: "18px"
-    fontWeight: 400
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "22px"
+    fontWeight: 800
     lineHeight: 1
   lead:
     fontFamily: "Barlow Semi Condensed, Arial Narrow, Segoe UI, system-ui, sans-serif"
@@ -197,10 +197,40 @@ typography:
     fontWeight: 700
     lineHeight: 1.2
   digits:
-    fontFamily: "Hx Digits, Marcellus SC, Georgia, serif"
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "23px"
+    fontWeight: 800
+    lineHeight: 1.1
+  button:
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "18px"
+    fontWeight: 800
+    lineHeight: 1
+  panel-head:
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
     fontSize: "21px"
+    fontWeight: 800
+    lineHeight: 1.05
+  slot-label:
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "20px"
+    fontWeight: 800
+    lineHeight: 1
+  readout-colon:
+    fontFamily: "Barlow Semi Condensed, Arial Narrow, Segoe UI, system-ui, sans-serif"
+    fontSize: "28px"
     fontWeight: 600
-    lineHeight: 1.2
+    lineHeight: 1
+  metric:
+    fontFamily: "Barlow Semi Condensed, Arial Narrow, Segoe UI, system-ui, sans-serif"
+    fontSize: "44px"
+    fontWeight: 600
+    lineHeight: 1
+  button-lg:
+    fontFamily: "Big Shoulders Display, Arial Narrow, Barlow Semi Condensed, sans-serif"
+    fontSize: "21px"
+    fontWeight: 800
+    lineHeight: 1
 rounded:
   none: "0px"
   full: "9999px"
@@ -294,7 +324,7 @@ Gęstość jest „klientowa”: dużo informacji w zwartych panelach, krótkie 
 **Key Characteristics:**
 - Ciemny granatowy grunt (void → navy) z ziarnem, bez poświat.
 - Metalowe ramki z gradientowym rantem; 3 px dla wyróżnionych, 2 px dla zwykłych paneli.
-- Marcellus SC (kapitaliki) w nagłówkach, menu i przyciskach; Barlow Semi Condensed w treści, etykietach i liczbach.
+- Big Shoulders Display (gruby, wąski krój z wersalikami jak w grafikach transmisji LEC i Worlds) w nagłówkach, menu i przyciskach; Barlow Semi Condensed w treści, etykietach i liczbach.
 - Turkus wyłącznie dla stanu aktywnego i „na żywo”.
 - Rdzeń hextech jako jedyna grafika-sygnatura; intro jako jedyny duży ruch.
 - Proste kąty; okrągłe tylko pierścienie, ikony, awatary i kropki.
@@ -336,15 +366,15 @@ Paleta klienta LoL: prawie czarny granat, pergamin, rodzina złoto–brąz jako 
 
 ## Typography
 
-**Display Font:** Marcellus SC (z Georgia, Times New Roman, serif), jedna grubość 400, hostowany lokalnie w public/fonts
+**Display Font:** Big Shoulders Display (z Arial Narrow, Barlow Semi Condensed, sans-serif), wersja zmienna 700–900, hostowana lokalnie w public/fonts
 **Body Font:** Barlow Semi Condensed 400/500/600/700 (z Arial Narrow, Segoe UI, system-ui)
 
-**Character:** Marcellus SC daje kapitaliki jak Beaufort w kliencie – uroczyste, ale czytelne. Ściśnięty Barlow niesie gęstą treść, etykiety i cyfry jak HUD gry.
+**Character:** Big Shoulders Display w wersalikach daje esportowy, transmisyjny ton – zwarte, grube tytuły jak na planszach turniejowych LEC i Worlds, zamiast „fantasy” szeryfów. Ściśnięty Barlow niesie gęstą treść, etykiety i cyfry jak HUD gry.
 
 ### Hierarchy
 - **Display** (400, 46px → 64px → 84px, lh 0.95): H1 banera „Turniej PZS Lędziny”; w intro 36–52px.
 - **Headline** (400, 34px → 44px, lh 1.05): tytuł podstrony (PageHead); tytuł komunikatu 28px.
-- **Cyfry w nagłówkach:** krój „Hx Digits” (Barlow Semi Condensed 600, tylko zakres 0–9) stoi przed Marcellus SC w `--font-display`, więc daty, liczniki i numery kroków w nagłówkach nie mylą 0 z O ani 1 z I.
+- **Cyfry w nagłówkach:** Big Shoulders ma wyraźne cyfry, więc daty i numery w nagłówkach zostają w kroju wyświetlanym; liczniki zmieniające się co sekundę idą w Barlow z cyframi tabelarycznymi.
 - **Title** (400, 22px, lh 1.2, 0.04em): nagłówek ramki i panelu; nagłówek sekcji regulaminu 20px; nagłówek kolumny drabinki 16px w złocie.
 - **Nav** (400, 16px, lh 1, 0.05em): zakładki, przyciski, linki akcji; PLAY 14px na telefonie, 15px od sm, 18px w pełnej belce od lg.
 - **Body** (400, 16px, lh 1.55): treść, lead banera 16–17px przy max ok. 34rem; pomocniczo 14px i 13px (stopki okien, opisy, statusy).
@@ -356,13 +386,13 @@ Paleta klienta LoL: prawie czarny granat, pergamin, rodzina złoto–brąz jako 
 **Pełna skala.** Oprócz ról wyżej frontmatter wymienia rozmiary responsywne (H1 banera 46/64/84, tytuł podstrony 34/44, tytuł intro 36/52), rozmiary pomocnicze treści (13, 15, 17) i liczników (24, 26, 40, 60). Nowe rozmiary dodawaj tylko jako nową rolę.
 
 ### Named Rules
-**The True Small Caps Rule.** Marcellus SC pisze się normalną wielkością liter i ma tylko 400. Nigdy text-transform: uppercase ani pogrubienie na tym kroju; `font-synthesis: none` pilnuje, żeby przeglądarka nie dorobiła sztucznego bolda.
+**The Broadcast Caps Rule.** Big Shoulders Display zawsze w wersalikach (klasa `font-display` i komponenty dodają `text-transform: uppercase`), grubość 800 w tytułach i przyciskach, 700 w zakładkach, odstęp liter 0.01–0.04em. `font-synthesis: none` zostaje, choć zmienny krój ma prawdziwe grubości.
 
 **The Eleven Pixel Floor Rule.** Żaden tekst funkcjonalny nie schodzi poniżej 11px. 11px to wyłącznie etykiety w wersalikach (tag, nagłówek tabeli); mały przycisk ma 13px.
 
 **The Tabular Count Rule.** Liczby (odliczanie, sloty x/8, wyniki, godziny, procenty) piszemy Barlow z `lining-nums tabular-nums`, żeby nie skakały przy zmianie.
 
-**The Barlow Caps Only Rule.** Wersaliki z rozstrzeleniem są dozwolone tylko w Barlow, dla krótkich etykiet danych i statusów – nigdy w Marcellus SC.
+**The Two Caps Rule.** Wersaliki mają dwie role: duże i zwarte w Big Shoulders (tytuły, menu, przyciski) oraz małe z rozstrzeleniem w Barlow (etykiety danych i statusów). Nie mieszaj ich w jednej linii.
 
 ## Layout
 
@@ -393,8 +423,8 @@ Linie: rozdzielacz to 1px umbra wygaszana na końcach (albo od lewej w nagłówk
 ### Buttons
 Metalowe, ciężkie, z rantem zamiast cienia.
 - **Shape:** prostokąt bez zaokrągleń, rant 2px gradientem złoto → brąz.
-- **Default:** gradient #1e2328 → #11161c, tekst piasek, Marcellus SC 16px, wysokość 38px, padding 0 20px.
-- **Gold (CTA):** gradient pergamin → złoto → brąz, tekst void; wariant lg 54px, padding 0 34px, 18px, 0.06em.
+- **Default:** gradient #1e2328 → #11161c, tekst piasek, Big Shoulders 800 18px w wersalikach, wysokość 38px, padding 0 20px.
+- **Gold (CTA):** gradient pergamin → złoto → brąz, tekst void; wariant lg 56px, padding 0 36px, 21px, 0.06em.
 - **Hover / Focus:** jaśniejszy tekst (pergamin) i jaśniejszy rant; gold rozjaśnia się (brightness 1.1). Wciśnięcie: scale(0.97). Fokus: 1px turkus z odsunięciem 3px.
 - **Pressed / bieżący:** tekst teal-hi i turkusowy rant.
 - **Danger:** tekst różowo-rubinowy, rant rubin → ciemne wino; hover wypełnia ciemnym winem.
@@ -406,7 +436,7 @@ Metalowe, ciężkie, z rantem zamiast cienia.
 
 ### Chips (tagi i fakty)
 - **Tag:** 11px, 700, wersaliki, tło void 70%, 1px obwódka umbra; tony gold (pełne złoto), green (turkus – zatwierdzone), orange (w weryfikacji), red (odrzucone), dark (wygaszone).
-- **Fakt banera:** obwódka umbra, tło void 70%, etykieta Barlow 12px w wersalikach, wartość 21px; fakt „na żywo” ma pulsującą turkusową kropkę.
+- **Fakt banera:** obwódka umbra, tło void 70%, etykieta Barlow 12px w wersalikach, wartość 27px w Big Shoulders; fakt „na żywo” ma pulsującą turkusową kropkę, a nowa liczba drużyn wjeżdża od dołu w 220ms.
 
 ### Cards / Containers
 - **Corner Style:** proste kąty.
@@ -414,7 +444,7 @@ Metalowe, ciężkie, z rantem zamiast cienia.
 - **Border:** rant 2px (panel, okno) lub 3px z nitką (wyróżniona ramka: baner, kafle, komunikaty).
 - **Internal Padding:** 20px; okna 16/24px poziomo.
 - **Wkładki:** ui-inset (void 72%, 1px hull) i ui-card (gradient granat → void, rant umbra → hull) dla grup wewnątrz paneli.
-- **Nagłówek:** Marcellus SC 22px + rozdzielacz od lewej.
+- **Nagłówek:** Big Shoulders 26px w wersalikach + rozdzielacz od lewej.
 
 ### Inputs / Fields
 - **Style:** prostokąt, tło void 88%, 1px stal, min. 40px, 16px tekst (bez przybliżania na iOS), karetka złota.
@@ -424,7 +454,7 @@ Metalowe, ciężkie, z rantem zamiast cienia.
 - **Checkbox:** kwadrat 17px, rant brąz, złoty ptaszek wskakuje skalą. **Radio:** romb 14px.
 
 ### Navigation
-- **Zakładki:** Marcellus SC 16px, mgła; hover i aktywna – pergamin; aktywna dostaje 2px podkreślenie złoto–pergamin–złoto wygaszone na końcach, rysowane od środka w 220ms.
+- **Zakładki:** Big Shoulders 700 19px w wersalikach, mgła; hover i aktywna – pergamin. Pod paskiem jedna kreska 3px złoto–pergamin–złoto przesuwa się pod aktywną zakładkę (transform, 280ms, ease-out); pierwsze ustawienie bez przejazdu.
 - **Przyciski ikon:** koło 34px, rant brąz, hover złoto; wyłączony dźwięk – stal.
 - **Mobile:** drugi pasek 48px z przewijaniem i snapem, 12px.
 
@@ -440,12 +470,19 @@ Metalowy pierścień (gradient pergamin → złoto → brąz) z wewnętrzną nit
 ### Ruch i dźwięk
 Easing: ease-out cubic-bezier(0.23, 1, 0.32, 1). Mikroreakcje 120–220ms; wejście treści rise 0.5s; kropki „na żywo” pulsują 2.4s; zachęta w intro mruga 1.6s. Przy prefers-reduced-motion wszystkie animacje i przejścia są praktycznie zerowe. Kursory: złota strzałka i dłoń z public/cursors. Dźwięki z Web Audio (dzwonki z alikwotem 2.76×, podkład 84 BPM), z wyciszeniem i suwakami głośności.
 
+
+**Ruch (19.11.2026).** Przycisk PLAY ma krążące po rancie światło hextech (conic-gradient po zarejestrowanym `--hx-angle`, 5s liniowo), które po najechaniu rozjaśnia się z 0.3 do 0.95. Nad rdzeniem banera unosi się 10 drobnych, przygaszonych iskier (CSS, maks. 3px i krycie 0.5, 7–14s liniowo, stałe pozycje), łuki rdzenia krążą raz na 60s, a kryształ unosi się o 4px w cyklu 6s. Panel drużyn wchodzi kolejno co 60ms po zakończeniu intro (tylko raz), panele zakładek wchodzą w 240ms; bez JS nic nie jest ukryte. Przy `prefers-reduced-motion` iskry znikają, a pozostałe animacje skracają się do zera.
+
+**Kursor.** Fasetowana złota strzałka hextech 32px (jasna faseta po lewej, ciemna po prawej, cień), z turkusowym klejnotem: przygaszonym w kursorze domyślnym, jasnym i większym nad linkami i przyciskami, gdzie czubek dostaje dodatkowo turkusową obwódkę (`/cursors/arrow.svg`, `/cursors/pointer.svg`, punkt aktywny 3 3); cień rozmyty, nie twardy.
+
+**Portrety w składzie.** W formularzu każdy gracz ma okrągły portret jak w lobby: przerywany pierścień, który po wpisaniu Riot ID wypełnia się inicjałami; kapitan ma koronę.
+
 ## Do's and Don'ts
 
 ### Do:
 - **Do** stawiać każdą nową sekcję w ramce z metalowym rantem: 3px z nitką dla wyróżnionych, 2px dla zwykłych.
 - **Do** używać turkusu tylko dla stanu aktywnego, fokusu i danych na żywo.
-- **Do** pisać nagłówki, menu i przyciski w Marcellus SC normalną wielkością liter, grubość 400.
+- **Do** pisać nagłówki, menu i przyciski w Big Shoulders Display wersalikami, grubość 800 (zakładki 700).
 - **Do** pisać liczby Barlow z cyframi tabelarycznymi (hx-digits albo tabular).
 - **Do** trzymać tekst funkcjonalny na min. 11px, treść na 16px, pola formularzy na 16px.
 - **Do** oddzielać treść cienkim rozdzielaczem umbra wygaszanym na końcach.
@@ -456,6 +493,6 @@ Easing: ease-out cubic-bezier(0.23, 1, 0.32, 1). Mikroreakcje 120–220ms; wejś
 - **Don't** używać tekstur z heksagonalnej siatki.
 - **Don't** wstawiać rombu na każdy rozdzielacz; romb ma swoje stałe miejsca (rdzeń, radio, kroki, suwak).
 - **Don't** używać Cinzel ani Lato.
-- **Don't** wymuszać wersalików ani pogrubienia na Marcellus SC.
+- **Don't** pisać tytułów małymi literami ani rozstrzeliwać Big Shoulders szerzej niż 0.04em.
 - **Don't** używać grafik, logotypów ani splash artów Riot Games.
 - **Don't** zaokrąglać prostokątów; okrągłe są tylko pierścienie, przyciski ikon, awatary i kropki.

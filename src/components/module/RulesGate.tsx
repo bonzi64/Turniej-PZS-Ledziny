@@ -181,7 +181,7 @@ export function RulesGate({ children }: { children: ReactNode }) {
         </Panel>
 
         <div className="hx-frame px-5 py-4">
-          <p className={`flex items-center gap-2 font-display text-[16px] tracking-[0.05em] ${gate.unlocked ? "text-teal" : "text-ui-muted"}`}>
+          <p className={`flex items-center gap-2 font-display text-[19px] tracking-[0.03em] ${gate.unlocked ? "text-teal" : "text-ui-muted"}`}>
             <LockIcon open={gate.unlocked} size={15} />
             {gate.unlocked ? "Formularz odblokowany" : "Formularz zablokowany"}
           </p>

@@ -529,19 +529,19 @@
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "H1 banera (46/64/84px) i intro (36/52px). Marcellus SC 400, normalna wielkość liter."
+        "purpose": "H1 banera: 56 / 80 / 104px, Big Shoulders Display 800 w wersalikach."
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Tytuły podstron (34/44px) i komunikatów (28px)."
+        "purpose": "Tytuł podstrony od sm (60px)."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Nagłówki ramek i paneli; warianty 20px (regulamin) i 16px złoty (kolumny drabinki)."
+        "purpose": "Nagłówek ramki i panelu (26px, Big Shoulders 800, wersaliki)."
       },
       "nav": {
         "displayName": "Nav",
-        "purpose": "Zakładki, przyciski i linki akcji."
+        "purpose": "Zakładki w belce (19px, Big Shoulders 700)."
       },
       "body": {
         "displayName": "Body",
@@ -565,43 +565,43 @@
       },
       "display-md": {
         "displayName": "Display Md",
-        "purpose": "H1 banera od sm (64px)."
+        "purpose": "H1 banera od sm (80px)."
       },
       "display-sm": {
         "displayName": "Display Sm",
-        "purpose": "H1 banera na telefonie (46px)."
+        "purpose": "H1 banera na telefonie (56px)."
       },
       "intro": {
         "displayName": "Intro",
-        "purpose": "Tytuł intro od sm (52px)."
+        "purpose": "Tytuł intro od sm (76px)."
       },
       "intro-sm": {
         "displayName": "Intro Sm",
-        "purpose": "Tytuł intro na telefonie (36px)."
+        "purpose": "Tytuł intro na telefonie (52px)."
       },
       "headline-sm": {
         "displayName": "Headline Sm",
-        "purpose": "Tytuł podstrony na telefonie (34px)."
+        "purpose": "Tytuł podstrony na telefonie (46px)."
       },
       "dialog": {
         "displayName": "Dialog",
-        "purpose": "Tytuł okna komunikatu i strony logowania (28px)."
+        "purpose": "Tytuł okna komunikatu i strony logowania (38px)."
       },
       "empty": {
         "displayName": "Empty",
-        "purpose": "Pusty stan galerii, znak zapytania w drabince (26px)."
+        "purpose": "Pusty stan galerii (34px)."
       },
       "fact": {
         "displayName": "Fact",
-        "purpose": "Wartość faktu na banerze (21px); cyfry przez Hx Digits."
+        "purpose": "Wartość faktu na banerze (27px)."
       },
       "section": {
         "displayName": "Section",
-        "purpose": "Nagłówek rozdziału regulaminu (20px)."
+        "purpose": "Nagłówek rozdziału regulaminu (22px)."
       },
       "action-lg": {
         "displayName": "Action Lg",
-        "purpose": "Duży przycisk CTA i PLAY w pełnej belce (18px)."
+        "purpose": "Przycisk PLAY w pełnej belce (22px)."
       },
       "lead": {
         "displayName": "Lead",
@@ -637,7 +637,31 @@
       },
       "digits": {
         "displayName": "Digits",
-        "purpose": "Cyfry 0–9 w kontekstach Marcellus SC renderowane krojem Hx Digits (Barlow 600)."
+        "purpose": "Cyfry w nagłówkach zostają w Big Shoulders (wyraźne 0 i 1)."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Przyciski (18px, Big Shoulders 800, wersaliki)."
+      },
+      "panel-head": {
+        "displayName": "Panel Head",
+        "purpose": "Nagłówek panelu drużyn i podglądu zdjęcia (21px)."
+      },
+      "slot-label": {
+        "displayName": "Slot Label",
+        "purpose": "Etykieta gracza w formularzu (20px)."
+      },
+      "readout-colon": {
+        "displayName": "Readout Colon",
+        "purpose": "Dwukropek w odliczaniu (28px)."
+      },
+      "metric": {
+        "displayName": "Metric",
+        "purpose": "Liczba miejsc na pulpicie panelu (44px)."
+      },
+      "button-lg": {
+        "displayName": "Button Lg",
+        "purpose": "Big Shoulders Display 800, 21px."
       }
     },
     "shadows": [
@@ -761,7 +785,7 @@
       "refersTo": "button-default",
       "description": "Metalowy przycisk drugorzędnych akcji.",
       "html": "<button class=\"ds-btn\">Wyślij ponownie</button>",
-      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; min-height:38px; padding:0 20px; font-family: 'Marcellus SC', Georgia, serif; font-size:16px; line-height:1; letter-spacing:0.05em; color:#cdbe91; background:linear-gradient(180deg,#1e2328 0%,#11161c 100%); border:2px solid transparent; border-image:linear-gradient(180deg,#c8aa6e,#785a28) 1; transition: color 150ms ease, background 150ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-btn:hover { color:#f0e6d2; background:linear-gradient(180deg,#252c33 0%,#151b22 100%); border-image:linear-gradient(180deg,#f0e6d2,#c8aa6e) 1; } .ds-btn:active { transform:scale(0.97); } .ds-btn:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
+      "css": ".ds-btn { display:inline-flex; align-items:center; justify-content:center; min-height:38px; padding:0 20px; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-size:16px; line-height:1; letter-spacing:0.05em; color:#cdbe91; background:linear-gradient(180deg,#1e2328 0%,#11161c 100%); border:2px solid transparent; border-image:linear-gradient(180deg,#c8aa6e,#785a28) 1; transition: color 150ms ease, background 150ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-btn:hover { color:#f0e6d2; background:linear-gradient(180deg,#252c33 0%,#151b22 100%); border-image:linear-gradient(180deg,#f0e6d2,#c8aa6e) 1; } .ds-btn:active { transform:scale(0.97); } .ds-btn:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
     },
     {
       "name": "Przycisk złoty (CTA)",
@@ -769,7 +793,7 @@
       "refersTo": "button-gold",
       "description": "Jedyna pełna złota powierzchnia: główna akcja banera.",
       "html": "<button class=\"ds-btn-gold\">Zapisz drużynę</button>",
-      "css": ".ds-btn-gold { display:inline-flex; align-items:center; justify-content:center; min-height:54px; padding:0 34px; font-family: 'Marcellus SC', Georgia, serif; font-size:18px; line-height:1; letter-spacing:0.06em; color:#010a13; background:linear-gradient(180deg,#f0e6d2 -30%,#c8aa6e 40%,#785a28 130%); border:2px solid transparent; border-image:linear-gradient(180deg,#f6eedd,#c89b3c) 1; transition: filter 150ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-gold:hover { filter:brightness(1.1); background:linear-gradient(180deg,#f6eedd -30%,#d2b679 40%,#8a6a32 130%); } .ds-btn-gold:active { transform:scale(0.97); } .ds-btn-gold:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
+      "css": ".ds-btn-gold { display:inline-flex; align-items:center; justify-content:center; min-height:54px; padding:0 34px; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-size:18px; line-height:1; letter-spacing:0.06em; color:#010a13; background:linear-gradient(180deg,#f0e6d2 -30%,#c8aa6e 40%,#785a28 130%); border:2px solid transparent; border-image:linear-gradient(180deg,#f6eedd,#c89b3c) 1; transition: filter 150ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-gold:hover { filter:brightness(1.1); background:linear-gradient(180deg,#f6eedd -30%,#d2b679 40%,#8a6a32 130%); } .ds-btn-gold:active { transform:scale(0.97); } .ds-btn-gold:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
     },
     {
       "name": "Przycisk niebezpieczny",
@@ -777,7 +801,7 @@
       "refersTo": "button-danger",
       "description": "Odrzucanie, usuwanie i anonimizacja w panelu organizatora.",
       "html": "<button class=\"ds-btn-danger\">Odrzuć</button>",
-      "css": ".ds-btn-danger { display:inline-flex; align-items:center; min-height:38px; padding:0 20px; font-family: 'Marcellus SC', Georgia, serif; font-size:16px; line-height:1; letter-spacing:0.05em; color:#ff9aa8; background:linear-gradient(180deg,#1e2328 0%,#11161c 100%); border:2px solid transparent; border-image:linear-gradient(180deg,#e84057,#5c1a24) 1; transition: color 150ms ease, background 150ms ease; } .ds-btn-danger:hover { color:#fff; background:linear-gradient(180deg,#5c1a24,#2d0e13); border-image:linear-gradient(180deg,#ff8a9a,#e84057) 1; } .ds-btn-danger:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
+      "css": ".ds-btn-danger { display:inline-flex; align-items:center; min-height:38px; padding:0 20px; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-size:16px; line-height:1; letter-spacing:0.05em; color:#ff9aa8; background:linear-gradient(180deg,#1e2328 0%,#11161c 100%); border:2px solid transparent; border-image:linear-gradient(180deg,#e84057,#5c1a24) 1; transition: color 150ms ease, background 150ms ease; } .ds-btn-danger:hover { color:#fff; background:linear-gradient(180deg,#5c1a24,#2d0e13); border-image:linear-gradient(180deg,#ff8a9a,#e84057) 1; } .ds-btn-danger:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
     },
     {
       "name": "PLAY",
@@ -785,7 +809,7 @@
       "refersTo": "button-play",
       "description": "Ścięty przycisk z turkusowym wnętrzem w belce; prowadzi do zapisów.",
       "html": "<a class=\"ds-play\" href=\"#\">Zapisz drużynę</a>",
-      "css": ".ds-play { position:relative; isolation:isolate; overflow:hidden; display:inline-grid; place-items:center; height:46px; padding:0 38px 0 40px; font-family: 'Marcellus SC', Georgia, serif; font-size:18px; line-height:1; letter-spacing:0.06em; color:#f0e6d2; text-decoration:none; background:linear-gradient(180deg,#f0e6d2 -20%,#c8aa6e 30%,#785a28 70%,#c89b3c 100%); clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%); transition: color 160ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-play::before { content:''; position:absolute; z-index:-1; inset:2px 2px 2px 0; clip-path:polygon(0 0,calc(100% - 17px) 0,100% 50%,calc(100% - 17px) 100%,0 100%); background:linear-gradient(180deg,#14444f 0%,#0b2730 50%,#06171f 100%); } .ds-play::after { content:''; position:absolute; z-index:-1; inset:0; background:linear-gradient(105deg,transparent 32%,rgb(205 250 250 / 0.32) 50%,transparent 68%); transform:translateX(-130%); } .ds-play:hover { color:#cdfafa; background:linear-gradient(180deg,#fffaf0 -20%,#f0e6d2 25%,#c8aa6e 100%); } .ds-play:hover::after { transform:translateX(130%); transition:transform 750ms cubic-bezier(0.23,1,0.32,1); } .ds-play:active { transform:scale(0.98); } .ds-play:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
+      "css": ".ds-play { position:relative; isolation:isolate; overflow:hidden; display:inline-grid; place-items:center; height:46px; padding:0 38px 0 40px; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-size:18px; line-height:1; letter-spacing:0.06em; color:#f0e6d2; text-decoration:none; background:linear-gradient(180deg,#f0e6d2 -20%,#c8aa6e 30%,#785a28 70%,#c89b3c 100%); clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%); transition: color 160ms ease, transform 120ms cubic-bezier(0.23,1,0.32,1); } .ds-play::before { content:''; position:absolute; z-index:-1; inset:2px 2px 2px 0; clip-path:polygon(0 0,calc(100% - 17px) 0,100% 50%,calc(100% - 17px) 100%,0 100%); background:linear-gradient(180deg,#14444f 0%,#0b2730 50%,#06171f 100%); } .ds-play::after { content:''; position:absolute; z-index:-1; inset:0; background:linear-gradient(105deg,transparent 32%,rgb(205 250 250 / 0.32) 50%,transparent 68%); transform:translateX(-130%); } .ds-play:hover { color:#cdfafa; background:linear-gradient(180deg,#fffaf0 -20%,#f0e6d2 25%,#c8aa6e 100%); } .ds-play:hover::after { transform:translateX(130%); transition:transform 750ms cubic-bezier(0.23,1,0.32,1); } .ds-play:active { transform:scale(0.98); } .ds-play:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
     },
     {
       "name": "Pole tekstowe",
@@ -801,7 +825,7 @@
       "refersTo": "tab",
       "description": "Menu w belce z aktywnym złotym podkreśleniem.",
       "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab\" aria-current=\"page\" href=\"#\">Start</a><a class=\"ds-tab\" href=\"#\">Regulamin</a><a class=\"ds-tab\" href=\"#\">Drużyny</a><a class=\"ds-tab\" href=\"#\">Drabinka</a></nav>",
-      "css": ".ds-tabs { display:flex; height:56px; background:linear-gradient(180deg,#0f1b2b 0%,#020b14 100%); border-bottom:1px solid #463714; } .ds-tab { position:relative; display:inline-flex; align-items:center; padding:0 16px; font-family: 'Marcellus SC', Georgia, serif; font-size:16px; line-height:1; letter-spacing:0.05em; color:#a09b8c; text-decoration:none; transition: color 150ms ease; } .ds-tab:hover, .ds-tab[aria-current='page'] { color:#f0e6d2; } .ds-tab[aria-current='page']::after { content:''; position:absolute; left:14px; right:14px; bottom:-1px; height:2px; background:linear-gradient(90deg,transparent,#c8aa6e 25%,#f0e6d2 50%,#c8aa6e 75%,transparent); } .ds-tab:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
+      "css": ".ds-tabs { display:flex; height:56px; background:linear-gradient(180deg,#0f1b2b 0%,#020b14 100%); border-bottom:1px solid #463714; } .ds-tab { position:relative; display:inline-flex; align-items:center; padding:0 16px; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-size:16px; line-height:1; letter-spacing:0.05em; color:#a09b8c; text-decoration:none; transition: color 150ms ease; } .ds-tab:hover, .ds-tab[aria-current='page'] { color:#f0e6d2; } .ds-tab[aria-current='page']::after { content:''; position:absolute; left:14px; right:14px; bottom:-1px; height:2px; background:linear-gradient(90deg,transparent,#c8aa6e 25%,#f0e6d2 50%,#c8aa6e 75%,transparent); } .ds-tab:focus-visible { outline:1px solid #0ac8b9; outline-offset:3px; }"
     },
     {
       "name": "Etykiety statusu",
@@ -815,9 +839,9 @@
       "name": "Ramka wyróżniona",
       "kind": "card",
       "refersTo": "frame",
-      "description": "Baner, kafle i komunikaty: rant 3px z nitką, nagłówek Marcellus SC i rozdzielacz.",
+      "description": "Baner, kafle i komunikaty: rant 3px z nitką, nagłówek Big Shoulders Display i rozdzielacz.",
       "html": "<section class=\"ds-frame\"><h3 class=\"ds-frame-head\">Zasady meczu</h3><div class=\"ds-divider\"></div><p class=\"ds-frame-body\">BO1 w każdej rundzie, także w finale.</p></section>",
-      "css": ".ds-frame { max-width:340px; padding:20px; background:linear-gradient(180deg,#0c1828 0%,#030b15 100%); border:3px solid transparent; border-image:linear-gradient(180deg,#f0e6d2 0%,#c8aa6e 18%,#785a28 55%,#c89b3c 85%,#463714 100%) 1; box-shadow: inset 0 0 0 1px #010a13, inset 0 0 0 2px rgb(200 170 110 / 0.22); } .ds-frame-head { margin:0; font-family: 'Marcellus SC', Georgia, serif; font-weight:400; font-size:22px; line-height:1.2; letter-spacing:0.04em; color:#f0e6d2; } .ds-divider { height:1px; margin-top:10px; background:linear-gradient(90deg,#463714,#463714 70%,transparent); } .ds-frame-body { margin:14px 0 0; font-family: 'Barlow Semi Condensed', 'Arial Narrow', system-ui, sans-serif; font-size:16px; line-height:1.55; color:#a09b8c; }"
+      "css": ".ds-frame { max-width:340px; padding:20px; background:linear-gradient(180deg,#0c1828 0%,#030b15 100%); border:3px solid transparent; border-image:linear-gradient(180deg,#f0e6d2 0%,#c8aa6e 18%,#785a28 55%,#c89b3c 85%,#463714 100%) 1; box-shadow: inset 0 0 0 1px #010a13, inset 0 0 0 2px rgb(200 170 110 / 0.22); } .ds-frame-head { margin:0; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight:800; text-transform:uppercase; font-weight:400; font-size:22px; line-height:1.2; letter-spacing:0.04em; color:#f0e6d2; } .ds-divider { height:1px; margin-top:10px; background:linear-gradient(90deg,#463714,#463714 70%,transparent); } .ds-frame-body { margin:14px 0 0; font-family: 'Barlow Semi Condensed', 'Arial Narrow', system-ui, sans-serif; font-size:16px; line-height:1.55; color:#a09b8c; }"
     },
     {
       "name": "Miernik slotów",
@@ -834,7 +858,7 @@
     "keyCharacteristics": [
       "Ciemny granatowy grunt (void → navy) z ziarnem, bez poświat.",
       "Metalowe ramki z gradientowym rantem; 3 px dla wyróżnionych, 2 px dla zwykłych paneli.",
-      "Marcellus SC (kapitaliki) w nagłówkach, menu i przyciskach; Barlow Semi Condensed w treści, etykietach i liczbach.",
+      "Big Shoulders Display (kapitaliki) w nagłówkach, menu i przyciskach; Barlow Semi Condensed w treści, etykietach i liczbach.",
       "Turkus wyłącznie dla stanu aktywnego i „na żywo”.",
       "Rdzeń hextech jako jedyna grafika-sygnatura; intro jako jedyny duży ruch.",
       "Proste kąty; okrągłe tylko pierścienie, ikony, awatary i kropki."
@@ -852,7 +876,7 @@
       },
       {
         "name": "The True Small Caps Rule",
-        "body": "Marcellus SC pisze się normalną wielkością liter i ma tylko 400. Nigdy text-transform: uppercase ani pogrubienie na tym kroju; `font-synthesis: none` pilnuje, żeby przeglądarka nie dorobiła sztucznego bolda.",
+        "body": "Big Shoulders Display pisze się normalną wielkością liter i ma tylko 400. Nigdy text-transform: uppercase ani pogrubienie na tym kroju; `font-synthesis: none` pilnuje, żeby przeglądarka nie dorobiła sztucznego bolda.",
         "section": "typography"
       },
       {
@@ -867,7 +891,7 @@
       },
       {
         "name": "The Barlow Caps Only Rule",
-        "body": "Wersaliki z rozstrzeleniem są dozwolone tylko w Barlow, dla krótkich etykiet danych i statusów – nigdy w Marcellus SC.",
+        "body": "Wersaliki z rozstrzeleniem są dozwolone tylko w Barlow, dla krótkich etykiet danych i statusów – nigdy w Big Shoulders Display.",
         "section": "typography"
       },
       {
@@ -879,7 +903,7 @@
     "dos": [
       "**Do** stawiać każdą nową sekcję w ramce z metalowym rantem: 3px z nitką dla wyróżnionych, 2px dla zwykłych.",
       "**Do** używać turkusu tylko dla stanu aktywnego, fokusu i danych na żywo.",
-      "**Do** pisać nagłówki, menu i przyciski w Marcellus SC normalną wielkością liter, grubość 400.",
+      "**Do** pisać nagłówki, menu i przyciski w Big Shoulders Display normalną wielkością liter, grubość 400.",
       "**Do** pisać liczby Barlow z cyframi tabelarycznymi (hx-digits albo tabular).",
       "**Do** trzymać tekst funkcjonalny na min. 11px, treść na 16px, pola formularzy na 16px.",
       "**Do** oddzielać treść cienkim rozdzielaczem umbra wygaszanym na końcach.",
@@ -890,7 +914,7 @@
       "**Don't** używać tekstur z heksagonalnej siatki.",
       "**Don't** wstawiać rombu na każdy rozdzielacz; romb ma swoje stałe miejsca (rdzeń, radio, kroki, suwak).",
       "**Don't** używać Cinzel ani Lato.",
-      "**Don't** wymuszać wersalików ani pogrubienia na Marcellus SC.",
+      "**Don't** wymuszać wersalików ani pogrubienia na Big Shoulders Display.",
       "**Don't** używać grafik, logotypów ani splash artów Riot Games.",
       "**Don't** zaokrąglać prostokątów; okrągłe są tylko pierścienie, przyciski ikon, awatary i kropki."
     ]

@@ -82,7 +82,9 @@ export function HextechCore({
       <circle r="86" fill="none" stroke={`url(#${id("metal")})`} strokeWidth="5" pathLength={1} className={drawn} style={stroke("ring")} />
       <circle r="78" fill="none" stroke="#463714" strokeWidth="1.2" pathLength={1} className={drawn} style={stroke("ring")} />
       <path d={STUDS} fill="#010a13" stroke={`url(#${id("metal")})`} strokeWidth="2" className={faded} style={fade("studs")} />
-      <path d={ARCS} fill="none" stroke={`url(#${id("metal")})`} strokeWidth="3" strokeLinecap="round" pathLength={1} className={drawn} style={stroke("arcs")} />
+      <g className={float && !timed ? "animate-arcs" : undefined}>
+        <path d={ARCS} fill="none" stroke={`url(#${id("metal")})`} strokeWidth="3" strokeLinecap="round" pathLength={1} className={drawn} style={stroke("arcs")} />
+      </g>
 
       <g className={float && !timed ? "animate-crystal" : undefined}>
         <g transform="rotate(-8)">

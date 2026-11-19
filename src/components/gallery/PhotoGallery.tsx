@@ -64,7 +64,7 @@ export function PhotoGallery({ photos }: { photos: GalleryPhoto[] }) {
         {photo && index !== null && (
           <>
             <div className="flex items-center gap-3 px-4 pt-3 pb-2.5">
-              <span className="hx-head min-w-0 truncate text-[17px]">{photo.caption ?? "Zdjęcie z turnieju"}</span>
+              <span className="hx-head min-w-0 truncate text-[21px]">{photo.caption ?? "Zdjęcie z turnieju"}</span>
               <span className="ml-auto pl-2 text-[13px] text-ui-muted tabular">
                 {index + 1} / {photos.length}
               </span>

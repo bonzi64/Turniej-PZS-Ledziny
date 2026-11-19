@@ -26,7 +26,7 @@ export default async function PhotosPage() {
           <span className="hx-ring size-24">
             <CameraIcon size={34} className="text-gold" />
           </span>
-          <p className="mt-6 font-display text-[26px] tracking-[0.04em] text-parchment text-balance">Zdjęcia pojawią się po turnieju</p>
+          <p className="mt-6 font-display text-[34px] tracking-[0.02em] text-parchment text-balance">Zdjęcia pojawią się po turnieju</p>
           <p className="mt-2 text-[15px] text-ui-muted">
             Turniej: {EVENT.weekday} {EVENT.dateLabel}, {EVENT.schoolShort}.
           </p>

@@ -33,7 +33,7 @@ export function Dialog({
   return (
     <div role={tone === "error" ? "alert" : "status"} className="hx-frame mx-auto max-w-lg animate-rise text-center" data-rule="">
       <div className="px-7 pt-8 pb-7 sm:px-9">
-        <h3 className={`font-display text-[28px] leading-tight tracking-[0.04em] text-balance ${tone === "error" ? "text-[#ff9aa8]" : "text-parchment"}`}>{title}</h3>
+        <h3 className={`font-display text-[38px] leading-[0.95] tracking-[0.04em] text-balance ${tone === "error" ? "text-[#ff9aa8]" : "text-parchment"}`}>{title}</h3>
         <div className="hx-divider mx-auto mt-3.5 max-w-56" aria-hidden />
         <div className="mt-4 text-ui-muted">{children}</div>
         {actions && <div className="mt-7 flex flex-wrap justify-center gap-3">{actions}</div>}

@@ -80,7 +80,7 @@ export function Intro() {
         </div>
 
         <div className="transition-opacity duration-200 group-data-leaving/intro:opacity-0">
-          <h1 className="mt-10 font-display text-[36px] leading-none tracking-[0.05em] text-parchment sm:text-[52px]">Turniej PZS Lędziny</h1>
+          <h1 className="mt-10 font-display text-[52px] leading-[0.9] tracking-[0.01em] text-parchment sm:text-[76px]">Turniej PZS Lędziny</h1>
           <p className="mt-3 text-[14px] font-semibold tracking-[0.2em] text-gold uppercase sm:text-[16px]">
             League of Legends · {EVENT.weekday} {EVENT.dateLabel}
           </p>
@@ -89,7 +89,7 @@ export function Intro() {
             {EVENT.school}
           </p>
 
-          <p className={`mt-12 font-display text-[17px] tracking-[0.05em] ${boot.ready ? "animate-blink text-parchment" : "text-ui-faint"}`}>
+          <p className={`mt-12 font-display text-[24px] tracking-[0.04em] ${boot.ready ? "animate-blink text-parchment" : "text-ui-faint"}`}>
             {boot.ready ? "Kliknij, aby kontynuować" : "Kliknięcie włączy pełny ekran"}
           </p>
         </div>

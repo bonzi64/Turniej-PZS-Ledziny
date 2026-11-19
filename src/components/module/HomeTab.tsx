@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { HextechCore } from "@/components/hx/HextechCore";
+import { Motes } from "@/components/hx/Motes";
 import { ChevronIcon } from "@/components/hx/icons";
 import { CountdownInline, LiveSlotCount } from "@/components/hx/live";
 import { HowToSteps } from "@/components/module/HowToSteps";
@@ -17,7 +18,7 @@ function Fact({ label, live = false, className = "", children }: { label: string
         {live && <span aria-hidden className="hx-dot size-1.5 animate-live bg-teal" />}
         {label}
       </dt>
-      <dd className={`mt-1 font-display text-[21px] leading-tight whitespace-nowrap tabular ${live ? "text-teal-hi" : "text-parchment"}`}>{children}</dd>
+      <dd className={`mt-1 font-display text-[27px] leading-tight whitespace-nowrap tabular ${live ? "text-teal-hi" : "text-parchment"}`}>{children}</dd>
     </div>
   );
 }
@@ -26,6 +27,7 @@ function Banner({ stats, closedReason }: { stats: SlotStat[]; closedReason: stri
   return (
     <section aria-labelledby="banner-title" className="hx-frame relative overflow-hidden" data-rule="">
       <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,#10233a_0%,#0a1626_38%,#030b15_100%)]" />
+      <Motes className="absolute inset-y-0 right-0 w-full lg:w-[55%]" />
 
       <div className="relative grid items-center gap-6 px-5 pt-7 pb-8 sm:px-10 sm:pt-10 sm:pb-11 lg:min-h-[470px] lg:grid-cols-[minmax(0,1fr)_minmax(300px,380px)] lg:gap-6">
         <div data-rune-target className="relative size-[132px] sm:size-[190px] lg:order-last lg:mx-auto lg:size-[min(100%,360px)]">
@@ -33,7 +35,7 @@ function Banner({ stats, closedReason }: { stats: SlotStat[]; closedReason: stri
         </div>
 
         <div className="relative max-w-[600px]">
-          <h1 id="banner-title" className="font-display text-[46px] leading-[0.95] tracking-[0.01em] text-parchment text-balance sm:text-[64px] lg:text-[84px]">
+          <h1 id="banner-title" className="font-display text-[56px] leading-[0.86] tracking-[0.01em] text-parchment text-balance sm:text-[80px] lg:text-[104px]">
             Turniej PZS Lędziny
           </h1>
           <p className="mt-5 max-w-[34rem] text-[16px] leading-relaxed text-sand sm:text-[17px]">
@@ -62,7 +64,7 @@ function Banner({ stats, closedReason }: { stats: SlotStat[]; closedReason: stri
                 Zapisz drużynę
               </TabLink>
             )}
-            <TabLink tab="regulamin" className="group inline-flex items-center gap-1.5 font-display text-[16px] tracking-[0.05em] text-gold transition-colors hover:text-parchment">
+            <TabLink tab="regulamin" className="group inline-flex items-center gap-1.5 font-display text-[17px] font-bold tracking-[0.03em] text-gold transition-colors hover:text-parchment">
               Przeczytaj regulamin
               <ChevronIcon size={14} className="transition-transform group-hover:translate-x-0.5" />
             </TabLink>
@@ -99,7 +101,7 @@ function BracketPeek({ bracket }: { bracket: BracketMatch[][] }) {
           </li>
         ))}
       </ol>
-      <TabLink tab="drabinka" className="group mt-4 inline-flex items-center gap-1.5 self-start font-display text-[15px] tracking-[0.05em] text-gold transition-colors hover:text-parchment">
+      <TabLink tab="drabinka" className="group mt-auto inline-flex items-center gap-1.5 self-start pt-4 font-display text-[17px] font-bold tracking-[0.03em] text-gold transition-colors hover:text-parchment">
         Pełna drabinka
         <ChevronIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
       </TabLink>
@@ -130,6 +132,10 @@ function MatchRules() {
           </div>
         ))}
       </dl>
+      <TabLink tab="regulamin" className="group mt-auto inline-flex items-center gap-1.5 self-start pt-4 font-display text-[17px] font-bold tracking-[0.03em] text-gold transition-colors hover:text-parchment">
+        Pełny regulamin
+        <ChevronIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
+      </TabLink>
     </section>
   );
 }

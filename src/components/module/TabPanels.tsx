@@ -13,7 +13,7 @@ export function TabPanels({ tabs, fallback }: { tabs: TabSpec[]; fallback: strin
   return (
     <>
       {tabs.map((tab) => (
-        <section key={tab.id} id={`panel-${tab.id}`} aria-label={tab.label} hidden={tab.id !== active} className={tab.id === active ? "animate-[fade_240ms_ease-out]" : undefined}>
+        <section key={tab.id} id={`panel-${tab.id}`} aria-label={tab.label} hidden={tab.id !== active} className={tab.id === active ? "animate-panel-in" : undefined}>
           {tab.content}
         </section>
       ))}
