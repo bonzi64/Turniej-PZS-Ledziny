@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { UserFacingError } from "@/lib/action-result";
 import { db } from "@/lib/db";
-import { env } from "@/lib/env";
 import { gameBySlug } from "@/lib/games";
 import { throttle } from "@/lib/rate-limit";
 import { type FieldErrors, parseRegistration, personKeyOf, readRulesTicket, registrationWindow } from "@/lib/registration";
@@ -43,7 +42,6 @@ export async function registerTeam(_prev: RegisterState, form: FormData): Promis
 
   const ticket = readRulesTicket(field(form, "ticket"), game.slug);
   if (!ticket.valid) return reject("Formularz wygasł. Odśwież stronę i przeczytaj regulamin jeszcze raz.");
-  if (!ticket.enough) return reject(`Regulamin trzeba czytać co najmniej ${env.rulesMinSeconds} s.`);
 
   const parsed = parseRegistration(form);
   if (!parsed.data) return reject("Popraw zaznaczone pola.", parsed.errors);

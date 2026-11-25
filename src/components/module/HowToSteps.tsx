@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckIcon, ChevronIcon } from "@/components/hx/icons";
-import { formatClock, useRulesGate } from "@/components/module/RulesGate";
+import { useRulesGate } from "@/components/module/RulesGate";
 import { TabLink } from "@/components/module/TabLink";
 import { EVENT } from "@/content/event";
 
@@ -11,7 +11,7 @@ export function HowToSteps({ closed }: { closed: boolean }) {
   const steps = [
     {
       title: "Przeczytaj regulamin",
-      note: gate.unlocked ? "Przeczytany – formularz jest odblokowany." : `Przewiń do końca, min. ${formatClock(gate.minSeconds)} lektury.`,
+      note: gate.unlocked ? "Przeczytany – formularz jest odblokowany." : "Przewiń do końca, żeby odblokować formularz.",
       done: gate.unlocked,
       tab: "regulamin",
     },

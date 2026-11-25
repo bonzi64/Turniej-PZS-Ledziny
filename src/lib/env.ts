@@ -2,11 +2,6 @@ import "server-only";
 
 const DEV_SECRET = "dev-only-pzs-esports-secret-do-not-deploy";
 
-function int(name: string, fallback: number) {
-  const n = Number.parseInt(process.env[name] ?? "", 10);
-  return Number.isFinite(n) && n >= 0 ? n : fallback;
-}
-
 export const env = {
   get authSecret() {
     const secret = process.env.AUTH_SECRET;
@@ -15,9 +10,6 @@ export const env = {
       throw new Error("AUTH_SECRET musi mieć co najmniej 32 znaki");
     }
     return DEV_SECRET;
-  },
-  get rulesMinSeconds() {
-    return int("RULES_MIN_SECONDS", 60);
   },
   get registrationOpen() {
     return process.env.REGISTRATION_OPEN !== "false";

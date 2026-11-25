@@ -7,7 +7,6 @@ import { TabPanels } from "@/components/module/TabPanels";
 import { TeamBoard } from "@/components/module/TeamBoard";
 import { PageHead } from "@/components/hx/frame";
 import { EVENT } from "@/content/event";
-import { env } from "@/lib/env";
 import { GAME } from "@/lib/games";
 import { getPublicBracket, getPublicTeams, getSlotStats } from "@/lib/queries";
 import { issueRulesTicket, registrationWindow } from "@/lib/registration";
@@ -33,7 +32,7 @@ export async function ModuleView() {
       label: "Regulamin",
       content: (
         <>
-          <PageHead title="Regulamin">Formularz zapisów odblokuje się, gdy przewiniesz regulamin do końca i minie minimalny czas lektury.</PageHead>
+          <PageHead title="Regulamin">Formularz zapisów odblokuje się, gdy przewiniesz regulamin do końca.</PageHead>
           <RulesGate>
             <RulesText />
           </RulesGate>
@@ -77,7 +76,7 @@ export async function ModuleView() {
   ];
 
   return (
-    <RulesProvider slug={game.slug} ticket={issueRulesTicket(game.slug)} minSeconds={env.rulesMinSeconds}>
+    <RulesProvider slug={game.slug} ticket={issueRulesTicket(game.slug)}>
       <TabPanels tabs={tabs} fallback="info" />
     </RulesProvider>
   );

@@ -7,7 +7,7 @@ import type { GameSlug } from "@/lib/games";
 import { CLASS_PATTERN, MAIN_ROSTER, RESERVE_SLOT } from "@/lib/tournament";
 
 // --- BILET REGULAMINU ---
-// Wydawany przy renderze strony; formularz przejdzie dopiero po RULES_MIN_SECONDS
+// Wydawany przy renderze strony; potwierdza, że zgłoszenie przyszło z otwartej strony z regulaminem
 
 const TICKET_MAX_AGE = 12 * 3600;
 
@@ -20,7 +20,7 @@ export function readRulesTicket(ticket: string, slug: GameSlug) {
 
   const seconds = Math.floor((Date.now() - Number(issued)) / 1000);
   if (!Number.isFinite(seconds) || seconds > TICKET_MAX_AGE) return { valid: false as const };
-  return { valid: true as const, seconds, enough: seconds >= env.rulesMinSeconds };
+  return { valid: true as const, seconds };
 }
 
 export function registrationWindow() {

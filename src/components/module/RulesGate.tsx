@@ -1,18 +1,9 @@
 "use client";
 
-import {
-  createContext,
-  type ReactNode,
-  use,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { createContext, type ReactNode, use, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { TabLink } from "@/components/module/TabLink";
 import { LockIcon } from "@/components/hx/icons";
-import { Meter, Panel, Readout } from "@/components/skin/parts";
+import { Panel, Readout } from "@/components/skin/parts";
 import { useSound } from "@/components/sound/SoundProvider";
 
 // --- STAN BRAMKI ---
@@ -20,29 +11,16 @@ import { useSound } from "@/components/sound/SoundProvider";
 type Gate = {
   unlocked: boolean;
   ticket: string;
-  elapsed: number;
-  minSeconds: number;
   scrolled: boolean;
   progress: number;
   reportScroll: (progress: number) => void;
-  setWatching: (watching: boolean) => void;
 };
 
 const GateContext = createContext<Gate | null>(null);
 
 const noopSubscribe = () => () => {};
 
-export function RulesProvider({
-  slug,
-  ticket,
-  minSeconds,
-  children,
-}: {
-  slug: string;
-  ticket: string;
-  minSeconds: number;
-  children: ReactNode;
-}) {
+export function RulesProvider({ slug, ticket, children }: { slug: string; ticket: string; children: ReactNode }) {
   const storageKey = `pzs.rules.${slug}`;
   const remembered = useSyncExternalStore(
     noopSubscribe,
@@ -56,24 +34,13 @@ export function RulesProvider({
     () => null,
   );
 
-  const [elapsed, setElapsed] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [watching, setWatching] = useState(false);
   const { play } = useSound();
 
-  const scrolled = progress >= 0.98;
-  const earned = elapsed >= minSeconds && scrolled;
+  const earned = progress >= 0.98;
   const unlocked = earned || remembered !== null;
   const announced = useRef(false);
   const reportScroll = useCallback((value: number) => setProgress((prev) => Math.max(prev, value)), []);
-
-  useEffect(() => {
-    if (unlocked || !watching) return;
-    const timer = setInterval(() => {
-      if (document.visibilityState === "visible") setElapsed((s) => s + 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [unlocked, watching]);
 
   useEffect(() => {
     if (!earned || announced.current) return;
@@ -86,14 +53,11 @@ export function RulesProvider({
 
   const gate: Gate = {
     unlocked,
-    // bilet z pierwszego czytania – po odświeżeniu nie trzeba czekać drugi raz
+    // bilet z pierwszego czytania – po odświeżeniu nie trzeba przewijać drugi raz
     ticket: remembered ?? ticket,
-    elapsed: unlocked ? Math.max(elapsed, minSeconds) : elapsed,
-    minSeconds,
-    scrolled: unlocked || scrolled,
+    scrolled: unlocked,
     progress: unlocked ? 1 : progress,
     reportScroll,
-    setWatching,
   };
 
   return <GateContext value={gate}>{children}</GateContext>;
@@ -104,9 +68,6 @@ export function useRulesGate() {
   if (!gate) throw new Error("useRulesGate poza <RulesProvider>");
   return gate;
 }
-
-export const formatClock = (seconds: number) =>
-  `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
 
 // --- WIDOK ---
 
@@ -122,7 +83,7 @@ function Check({ done, children }: { done: boolean; children: ReactNode }) {
 export function RulesGate({ children }: { children: ReactNode }) {
   const gate = useRulesGate();
   const scroller = useRef<HTMLDivElement>(null);
-  const { reportScroll, setWatching } = gate;
+  const { reportScroll } = gate;
 
   useEffect(() => {
     const node = scroller.current;
@@ -134,20 +95,16 @@ export function RulesGate({ children }: { children: ReactNode }) {
       reportScroll(room <= 8 ? 1 : node.scrollTop / room);
     };
 
-    const observer = new IntersectionObserver(([entry]) => setWatching(entry.isIntersecting), { threshold: 0.3 });
     const resize = new ResizeObserver(measure);
-    observer.observe(node);
     resize.observe(node);
     node.addEventListener("scroll", measure, { passive: true });
 
     return () => {
-      observer.disconnect();
       resize.disconnect();
       node.removeEventListener("scroll", measure);
     };
-  }, [reportScroll, setWatching]);
+  }, [reportScroll]);
 
-  const timeLeft = Math.max(0, gate.minSeconds - gate.elapsed);
   const pct = Math.round(gate.progress * 100);
 
   return (
@@ -168,16 +125,14 @@ export function RulesGate({ children }: { children: ReactNode }) {
       <div className="space-y-5 lg:sticky lg:top-28 lg:self-start">
         <Panel title="Odblokowanie zapisów">
           <div className="flex justify-center py-1">
-            <Readout text={formatClock(timeLeft)} label={`Pozostało ${timeLeft} s`} />
+            <Readout text={`${pct}%`} label={`Przeczytano ${pct}%`} />
           </div>
-          <Meter value={gate.elapsed} max={gate.minSeconds} className="mt-3" label="Czas lektury" />
 
           <ul className="mt-5 space-y-2.5 text-[14px]">
-            <Check done={gate.elapsed >= gate.minSeconds}>Czas lektury min. {formatClock(gate.minSeconds)}</Check>
             <Check done={gate.scrolled}>Regulamin przewinięty do końca</Check>
           </ul>
 
-          <p className="mt-4 text-[13px] text-ui-faint">Zegar liczy tylko wtedy, gdy regulamin jest widoczny na ekranie.</p>
+          <p className="mt-4 text-[13px] text-ui-faint">Formularz odblokuje się, gdy dojdziesz do końca regulaminu.</p>
         </Panel>
 
         <div className="hx-frame px-5 py-4">

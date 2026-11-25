@@ -14,7 +14,7 @@ web
 
 ## Product Purpose
 
-Strona zapisów i obsługi jednodniowego Szkolnego Turnieju E-sportowego Powiatowego Zespołu Szkół w Lędzinach w **League of Legends**. Prowadzi turniej od zapisów do finału: regulamin z blokadą czasową, formularz zgłoszenia, lista drużyn, drabinka na żywo, galeria zdjęć po turnieju. Sukces: 8 kompletnych, zweryfikowanych drużyn przed 27.11.2026 i płynny dzień turnieju bez papierowych list.
+Strona zapisów i obsługi jednodniowego Szkolnego Turnieju E-sportowego Powiatowego Zespołu Szkół w Lędzinach w **League of Legends**. Prowadzi turniej od zapisów do finału: regulamin z blokadą, formularz zgłoszenia, lista drużyn, drabinka na żywo, galeria zdjęć po turnieju. Sukces: 8 kompletnych, zweryfikowanych drużyn przed 02.12.2026 i płynny dzień turnieju bez papierowych list.
 
 ## Positioning
 
@@ -23,14 +23,14 @@ Szkolne wydarzenie, które wygląda i zachowuje się jak klient gry, w którą u
 ## Operating Context
 
 - Turniej: **piątek 04.12.2026**, zbiórka 8:00, start 8:30, koniec najpóźniej 14:30. 8 drużyn, pojedyncza eliminacja (4 ćwierćfinały, 2 półfinały, finał). **Wszystkie mecze BO1, także finał** (decyzja z 18.11.2026, limit czasu).
-- Zapisy do 27.11.2026, 23:59. Limit 8 drużyn; oczekujące i zatwierdzone zajmują slot.
+- Zapisy do 02.12.2026, 23:59 (przedłużone z 27.11 decyzją z 25.11.2026). Limit 8 drużyn; oczekujące i zatwierdzone zajmują slot.
 - Mecze w szkolnej pracowni komputerowej. Każdy gra na **własnym koncie Riot**. Mecz to gra niestandardowa na Summoner's Rift w trybie Tournament Draft; bany i picki odbywają się w kliencie gry, nie na stronie.
 - W dniu turnieju na rzutniku wyświetla się drabinka.
 - Wcześniej ta sama strona obsługiwała wersję CS2 (kopia: `../turniejpzs-kopia-cs2-2026-11-18`, tag `cs2-final`). Turniej CS2 się nie odbędzie.
 
 ## Capabilities and Constraints
 
-- Regulamin odblokowuje formularz po przewinięciu do końca i minimalnym czasie lektury (`RULES_MIN_SECONDS`, domyślnie 60 s); serwer sprawdza podpisany bilet.
+- Regulamin odblokowuje formularz po przewinięciu do końca, bez minimalnego czasu lektury (60-sekundowy zegar usunięty 25.11.2026); serwer sprawdza podpisany bilet.
 - **Brak limitu wieku i brak papierowych zgód rodziców** (decyzja z 18.11.2026). Uczestniczyć może każdy uczeń PZS Lędziny.
 - Pola zgłoszenia: nazwa i tag drużyny; dla każdego zawodnika Riot ID, imię, nazwisko, klasa; e-mail kapitana, Discord opcjonalnie; akceptacja regulaminu i klauzuli RODO.
 - Anty-spam: honeypot, limit zgłoszeń z IP, blokada duplikatów.

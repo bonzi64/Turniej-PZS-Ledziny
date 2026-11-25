@@ -24,7 +24,7 @@ Turniej od początku miał obejmować jedną grę, wybraną przez uczniów w gł
 ### Dla uczniów
 
 - **Intro jak start klienta.** Rdzeń hextech składa się w takt ładowania, a po kliknięciu przelatuje na baner strony startowej. Kliknięcie włącza pełny ekran, `Esc` pomija intro.
-- **Regulamin z blokadą.** Formularz zapisów odblokowuje się dopiero wtedy, gdy regulamin zostanie przewinięty do końca i minie minimalny czas lektury, domyślnie 60 sekund. Zegar liczy tylko wtedy, gdy regulamin jest widoczny na ekranie.
+- **Regulamin z blokadą.** Formularz zapisów odblokowuje się dopiero wtedy, gdy regulamin zostanie przewinięty do końca.
 - **Zgłoszenie drużyny.** Pięciu graczy i jeden rezerwowy. Dla każdego Riot ID, imię, nazwisko i klasa, a dla kapitana także e-mail. Na telefonie każdy zawodnik ma własną kartę z polami zamiast szerokiej tabeli, a portret gracza wypełnia się inicjałami w trakcie wpisywania Riot ID, jak w lobby gry.
 - **Licznik zapisów na żywo** na banerze i w panelu drużyn po prawej, który wygląda jak lista znajomych w kliencie.
 - **Lista drużyn i drabinka.** Zatwierdzone składy, pary meczowe, godziny meczów i wyniki.
@@ -91,7 +91,7 @@ W pliku [src/content/event.ts](src/content/event.ts) zostały pola w nawiasach k
 - `venue`: sala lub pracownie,
 - `dpoContact`: dane Inspektora Ochrony Danych szkoły.
 
-Warto też sprawdzić godziny, termin zapisów (obecnie 27.11.2026, 23:59) i treść regulaminu w [src/content/rules.ts](src/content/rules.ts). Klauzulę RODO najlepiej skonsultować z Inspektorem Ochrony Danych szkoły.
+Warto też sprawdzić godziny, termin zapisów (obecnie 02.12.2026, 23:59) i treść regulaminu w [src/content/rules.ts](src/content/rules.ts). Klauzulę RODO najlepiej skonsultować z Inspektorem Ochrony Danych szkoły.
 
 ## Licencja
 

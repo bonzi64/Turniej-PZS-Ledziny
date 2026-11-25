@@ -4,7 +4,7 @@ import Link from "next/link";
 import { type FormEvent, useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { registerTeam, type RegisterState } from "@/actions/register";
 import { CrownIcon } from "@/components/hx/icons";
-import { formatClock, useRulesGate } from "@/components/module/RulesGate";
+import { useRulesGate } from "@/components/module/RulesGate";
 import { TabLink } from "@/components/module/TabLink";
 import { Avatar, Chip, Dialog, Panel, Readout } from "@/components/skin/parts";
 import { useSound } from "@/components/sound/SoundProvider";
@@ -105,11 +105,9 @@ export function RegistrationForm({ slug, gameName, nickLabel, nickPlaceholder, c
       >
         <p>Zanim zgłosisz drużynę, przeczytaj regulamin do końca.</p>
         <div className="mt-5 flex justify-center">
-          <Readout text={formatClock(Math.max(0, gate.minSeconds - gate.elapsed))} />
+          <Readout text={`${Math.round(gate.progress * 100)}%`} label={`Przeczytano ${Math.round(gate.progress * 100)}%`} />
         </div>
-        <p className="mt-3 text-[13px] text-ui-faint">
-          {gate.scrolled ? "Regulamin przewinięty – jeszcze chwila lektury." : "Zegar liczy tylko przy otwartym regulaminie."}
-        </p>
+        <p className="mt-3 text-[13px] text-ui-faint">Formularz odblokuje się, gdy przewiniesz regulamin do końca.</p>
       </Dialog>
     );
   }

@@ -621,7 +621,7 @@
       },
       "readout-md": {
         "displayName": "Readout Md",
-        "purpose": "Licznik w oknie, np. zegar regulaminu (40px)."
+        "purpose": "Licznik w oknie, np. postęp lektury regulaminu (40px)."
       },
       "readout-sm": {
         "displayName": "Readout Sm",
